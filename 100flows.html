@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>100flows – Case Study | Luca Buonocore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text: #0d0d1a;
+      --muted: #6b7a99;
+      --card-bg: #f8f9fc;
+      --fl-dark: #0c0f1e;
+      --fl-darker: #080b16;
+      --fl-card-dark: #131728;
+      --fl-border: rgba(255,255,255,.07);
+      --fl-purple: #7c5bdb;
+      --fl-blue: #4f8ef7;
+      --fl-teal: #38bdf8;
+      --fl-grad: linear-gradient(135deg, #7c5bdb 0%, #4f8ef7 50%, #38bdf8 100%);
+      --fl-grad-soft: linear-gradient(135deg, rgba(124,91,219,.15) 0%, rgba(79,142,247,.1) 100%);
+      --fl-muted: rgba(255,255,255,.45);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(12,15,30,.94); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--fl-border);
+      height: 60px; display: flex; align-items: center;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+    }
+    .nav-inner {
+      max-width: 1060px; width: 100%; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: .5rem;
+      color: rgba(255,255,255,.5); text-decoration: none;
+      font-family: 'Sora', sans-serif; font-size: .84rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--fl-teal); }
+    .nav-back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .nav-brand {
+      display: flex; align-items: center; gap: .55rem;
+    }
+    .nav-logo-img { width: 26px; height: 26px; }
+    .nav-brand-name {
+      font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700;
+      background: var(--fl-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 1.5rem;
+      overflow: hidden; background: var(--fl-dark);
+    }
+    /* Ambient glow */
+    .hero-glow {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .hg1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,91,219,.18) 0%, transparent 65%); top: -150px; left: -150px; }
+    .hg2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 65%); bottom: -100px; right: -100px; }
+    .hg3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(79,142,247,.1) 0%, transparent 65%); top: 30%; right: 10%; }
+    /* Dot pattern */
+    .hero-dots {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 760px; }
+    .hero-logo-wrap {
+      width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 1.5rem;
+      background: var(--fl-grad-soft);
+      border: 1px solid rgba(124,91,219,.3);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 60px rgba(124,91,219,.2);
+    }
+    .hero-logo-wrap img { width: 46px; height: 46px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
+      padding: .35rem 1rem; border-radius: 99px;
+      background: rgba(124,91,219,.12); border: 1px solid rgba(124,91,219,.3);
+      font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 600;
+      color: #a78bfa; letter-spacing: .07em; text-transform: uppercase;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #a78bfa; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 800; color: #fff;
+      line-height: 1.08; letter-spacing: -.03em; margin-bottom: 1.1rem;
+    }
+    .hero h1 span {
+      background: var(--fl-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(.9rem, 2.2vw, 1.08rem);
+      color: rgba(255,255,255,.55); line-height: 1.75;
+      max-width: 580px; margin: 0 auto 2.5rem;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+    .hero-tag {
+      padding: .35rem .88rem; border-radius: 99px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      font-size: .73rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.65);
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip { background: #fff; padding: 2.5rem clamp(1rem, 5vw, 3rem); border-bottom: 1px solid rgba(0,0,0,.06); }
+    .stats-inner {
+      max-width: 1060px; margin: auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
+    }
+    .stat-card {
+      text-align: center; padding: 1.5rem 1rem;
+      border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
+    .stat-num {
+      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
+      background: var(--fl-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; line-height: 1.1; margin-bottom: .4rem;
+    }
+    .stat-label { font-size: .72rem; color: var(--muted); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ── SHARED ── */
+    section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 5vw, 3rem); }
+    .section-inner { max-width: 1060px; margin: auto; }
+    .section-label {
+      font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .13em;
+      background: var(--fl-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; margin-bottom: .55rem;
+    }
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700; margin-bottom: .75rem;
+      line-height: 1.12; letter-spacing: -.025em;
+    }
+    .section-desc { font-size: clamp(.88rem, 2vw, 1rem); line-height: 1.75; max-width: 640px; margin-bottom: 2.5rem; }
+    .on-light .section-title { color: var(--text); }
+    .on-light .section-desc { color: var(--muted); }
+    .on-dark .section-title { color: #fff; }
+    .on-dark .section-desc { color: var(--fl-muted); }
+
+    /* ── THE RESEARCH (dark) ── */
+    #research { background: var(--fl-dark); position: relative; overflow: hidden; }
+    #research::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .research-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(79,142,247,.1) 0%, transparent 70%); bottom: -80px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+    .domains-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px; background: var(--fl-border);
+      border: 1px solid var(--fl-border); border-radius: 12px; overflow: hidden;
+      position: relative; z-index: 1;
+    }
+    .domain-card {
+      background: var(--fl-card-dark); padding: 1.75rem;
+      transition: background .2s;
+    }
+    .domain-card:hover { background: rgba(124,91,219,.08); }
+    .domain-icon {
+      width: 42px; height: 42px; border-radius: 10px; margin-bottom: 1rem;
+      background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.2);
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .domain-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
+    .domain-card p { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.6; }
+    .domain-tag {
+      display: inline-block; margin-top: .85rem;
+      padding: .25rem .7rem; border-radius: 99px;
+      background: rgba(124,91,219,.15); border: 1px solid rgba(124,91,219,.25);
+      font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 600; color: #a78bfa;
+    }
+
+    /* ── KEY FINDINGS (light) ── */
+    #findings { background: var(--card-bg); }
+    .findings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .finding-card {
+      background: #fff; border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.06); padding: 1.75rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.05);
+      border-top: 3px solid transparent;
+      border-image: var(--fl-grad) 1;
+      border-image-slice: 0 0 0 0 / 0 0 3px 0;
+      transition: transform .25s, box-shadow .25s;
+    }
+    /* Simplified top border using box shadow trick */
+    .finding-card { border-top: 3px solid; border-image: none; }
+    .finding-card:nth-child(1) { border-top-color: #7c5bdb; }
+    .finding-card:nth-child(2) { border-top-color: #4f8ef7; }
+    .finding-card:nth-child(3) { border-top-color: #38bdf8; }
+    .finding-card:nth-child(4) { border-top-color: #7c5bdb; }
+    .finding-card:nth-child(5) { border-top-color: #4f8ef7; }
+    .finding-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
+    .finding-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .45rem; }
+    .finding-card p { font-size: .8rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── THE PARADIGM (dark) ── */
+    #paradigm { background: var(--fl-darker); position: relative; overflow: hidden; }
+    .paradigm-glow1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(124,91,219,.12) 0%, transparent 70%); top: -100px; right: -100px; pointer-events: none; }
+    .paradigm-glow2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(56,189,248,.08) 0%, transparent 70%); bottom: -80px; left: -80px; pointer-events: none; }
+    .paradigm-box {
+      background: var(--fl-card-dark); border: 1px solid rgba(124,91,219,.2);
+      border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem;
+      position: relative; z-index: 1;
+    }
+    .paradigm-quote {
+      font-family: 'Sora', sans-serif; font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700; color: #fff; line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+    .paradigm-quote span {
+      background: var(--fl-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .paradigm-box p { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.75; max-width: 700px; }
+    .shift-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; position: relative; z-index: 1; }
+    .shift-col { background: var(--fl-card-dark); border: 1px solid var(--fl-border); border-radius: 12px; padding: 1.5rem; }
+    .shift-col h4 { font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; padding-bottom: .75rem; border-bottom: 1px solid var(--fl-border); }
+    .shift-col.before h4 { color: rgba(255,255,255,.4); }
+    .shift-col.after h4 { color: #a78bfa; }
+    .shift-item { display: flex; gap: .65rem; margin-bottom: .7rem; align-items: flex-start; }
+    .shift-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: .45rem; flex-shrink: 0; }
+    .before .shift-dot { background: rgba(255,255,255,.25); }
+    .after .shift-dot { background: #a78bfa; }
+    .shift-item p { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.5; }
+    .after .shift-item p { color: rgba(255,255,255,.65); }
+    .shift-arrow {
+      font-size: 1.5rem; color: rgba(124,91,219,.5);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── MVP (light) ── */
+    #mvp { background: #fff; }
+    .mvp-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 3rem; }
+    .mvp-feature-list { display: flex; flex-direction: column; gap: 1rem; }
+    .mvp-feature { display: flex; gap: .9rem; align-items: flex-start; }
+    .mvp-feature-dot {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(124,91,219,.15), rgba(79,142,247,.1));
+      border: 1px solid rgba(124,91,219,.2);
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .mvp-feature h4 { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .2rem; }
+    .mvp-feature p { font-size: .79rem; color: var(--muted); line-height: 1.58; }
+    /* Screenshots */
+    .screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .screenshot-wrap {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(0,0,0,.07);
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .screenshot-wrap:first-child { grid-column: 1 / -1; }
+    .screenshot-wrap:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(124,91,219,.12); }
+    .screenshot-wrap img { width: 100%; display: block; }
+    .screenshot-caption {
+      padding: .65rem 1rem; background: #f8f9fc;
+      font-family: 'Sora', sans-serif; font-size: .72rem;
+      font-weight: 600; color: var(--muted); border-top: 1px solid rgba(0,0,0,.06);
+    }
+
+    /* ── MY ROLE ── */
+    #my-role { background: var(--card-bg); }
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .role-card {
+      background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
+      padding: 1.6rem; box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
+    .role-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(124,91,219,.12), rgba(79,142,247,.08));
+      border: 1px solid rgba(124,91,219,.15);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: .9rem;
+    }
+    .role-card h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .4rem; }
+    .role-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── STATUS (dark) ── */
+    #status { background: var(--fl-dark); position: relative; overflow: hidden; }
+    .status-glow { position: absolute; width: 600px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(124,91,219,.1) 0%, transparent 70%); top: -50px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+    .status-content { position: relative; z-index: 1; }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
+      padding: .4rem 1.1rem; border-radius: 99px;
+      background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.25);
+      font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700;
+      color: #38bdf8; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .status-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #38bdf8; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+    .status-desc { font-size: clamp(.9rem, 2vw, 1.05rem); color: rgba(255,255,255,.55); line-height: 1.75; max-width: 620px; margin-bottom: 2rem; }
+    .roadmap-items { display: flex; flex-direction: column; gap: .85rem; }
+    .roadmap-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .roadmap-num {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 700; color: #a78bfa;
+    }
+    .roadmap-item p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; padding-top: .3rem; }
+    .roadmap-item p strong { color: rgba(255,255,255,.82); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    .flows-footer {
+      background: var(--fl-darker); padding: 2.5rem clamp(1rem, 5vw, 3rem);
+      text-align: center; border-top: 1px solid var(--fl-border);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.4rem;
+      padding: .65rem 1.5rem; border-radius: 99px;
+      background: rgba(124,91,219,.1); border: 1px solid rgba(124,91,219,.3);
+      color: #a78bfa; text-decoration: none;
+      font-family: 'Sora', sans-serif; font-size: .85rem; font-weight: 600;
+      transition: background .2s, border-color .2s;
+    }
+    .back-btn:hover { background: rgba(124,91,219,.2); border-color: rgba(124,91,219,.5); }
+    .back-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .flows-footer p { font-size: .78rem; color: rgba(255,255,255,.25); font-family: 'Sora', sans-serif; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .mvp-intro-grid { grid-template-columns: 1fr; }
+      .shift-grid { grid-template-columns: 1fr; }
+      .shift-arrow { transform: rotate(90deg); }
+      .screenshot-grid { grid-template-columns: 1fr; }
+      .screenshot-wrap:first-child { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Portfolio
+    </a>
+    <div class="nav-brand">
+      <img src="img/100flows/logo.png" alt="100flows logo" class="nav-logo-img"/>
+      <span class="nav-brand-name">100flows</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow hg1"></div>
+  <div class="hero-glow hg2"></div>
+  <div class="hero-glow hg3"></div>
+  <div class="hero-dots"></div>
+
+  <div class="hero-content">
+    <div class="hero-logo-wrap">
+      <img src="img/100flows/logo.png" alt="100flows"/>
+    </div>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Research &amp; Development · 2024 – Now
+    </div>
+    <h1>The PM who never<br><span>needs to guess again.</span></h1>
+    <p class="hero-sub">
+      100flows is an AI-powered project management platform born from a systematic academic study into how artificial intelligence is reshaping every domain of project management — from planning to risk, resources, and stakeholder communication.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">AI Research</span>
+      <span class="hero-tag">Product Development</span>
+      <span class="hero-tag">ML Integration</span>
+      <span class="hero-tag">NLP</span>
+      <span class="hero-tag">Project Management</span>
+      <span class="hero-tag">SaaS</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-card">
+      <span class="stat-num">5</span>
+      <span class="stat-label">PM Domains Researched</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">−80%</span>
+      <span class="stat-label">Admin Overhead (target)</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">50+</span>
+      <span class="stat-label">Academic Sources</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Months of Research</span>
+    </div>
+  </div>
+</div>
+
+<!-- THE RESEARCH -->
+<section id="research" class="on-dark">
+  <div class="research-glow"></div>
+  <div class="section-inner">
+    <span class="section-label">The Research Foundation</span>
+    <h2 class="section-title">Before building anything, understand everything.</h2>
+    <p class="section-desc">
+      100flows began as a 3-month university thesis — a systematic investigation into how AI is transforming each of the five core domains of project management, drawing on 50+ academic papers, industry reports, and proprietary documentation from leading PM platforms. The platform's feature set is directly grounded in those findings.
+    </p>
+    <div class="domains-grid">
+      <div class="domain-card">
+        <div class="domain-icon">📅</div>
+        <h3>Planning &amp; Scheduling</h3>
+        <p>From static Gantt charts to ML-driven dynamic schedules. AI analyses thousands of historical projects to generate probabilistic estimates and continuously re-optimise timelines in real time.</p>
+        <span class="domain-tag">Predictive Scheduling</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">⚠️</div>
+        <h3>Risk Management</h3>
+        <p>Machine learning identifies risk patterns invisible to humans — cascading dependencies, emerging bottlenecks, and tail risks — and generates what-if simulations before they become issues.</p>
+        <span class="domain-tag">Proactive Risk Detection</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">👥</div>
+        <h3>Resource Management</h3>
+        <p>AI-powered capacity planning and real-time workload balancing prevent over-allocation and burnout. Assignments are optimised across skills, availability, and project priority simultaneously.</p>
+        <span class="domain-tag">Intelligent Allocation</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">💬</div>
+        <h3>Stakeholder Communication</h3>
+        <p>NLP-driven sentiment analysis monitors stakeholder concerns across channels. Automated executive reporting converts raw project data into polished, decision-ready communications.</p>
+        <span class="domain-tag">NLP · Automated Reporting</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🧠</div>
+        <h3>Decision-Making</h3>
+        <p>AI aggregates signals from across the project — budget, progress, risk, team performance — to surface data-driven recommendations that eliminate cognitive bias at critical decision points.</p>
+        <span class="domain-tag">Data-Driven Intelligence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FINDINGS -->
+<section id="findings" class="on-light">
+  <div class="section-inner">
+    <span class="section-label">Key Research Findings</span>
+    <h2 class="section-title">What the research actually proved.</h2>
+    <p class="section-desc">
+      The thesis synthesised academic literature, real-world case studies, and a comparative analysis of leading AI-powered SaaS tools to surface actionable insights.
+    </p>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <h3>Traditional methods are hitting a wall</h3>
+        <p>Gantt charts, PERT, CPM, and manual resource levelling were designed for simpler, more linear projects. In today's environment — multi-team, fast-changing, data-rich — they produce static snapshots that become obsolete within hours of being created.</p>
+      </div>
+      <div class="finding-card">
+        <h3>ML makes estimates measurably more accurate</h3>
+        <p>Models trained on historical project data — accounting for team size, technical complexity, past delays, and budget deviations — consistently outperform human estimation. And they improve over time with every new project they observe.</p>
+      </div>
+      <div class="finding-card">
+        <h3>Risk is predictable, not random</h3>
+        <p>The research found that most project failures follow identifiable patterns. ML models can detect early-warning signals — micro-delays, resource strain, communication gaps — weeks before they cascade into critical issues.</p>
+      </div>
+      <div class="finding-card">
+        <h3>AI eliminates administrative overhead</h3>
+        <p>A significant portion of a PM's time is consumed by status updates, scheduling adjustments, and reporting. NLP and LLM applications can automate this entire layer — freeing PMs for strategy, negotiation, and human judgment.</p>
+      </div>
+      <div class="finding-card">
+        <h3>AI Literacy is the missing piece</h3>
+        <p>Even the most powerful AI tools fail without organisational buy-in. The research identifies AI Literacy as the critical enabler — the ability to interpret, trust, and correctly act on AI recommendations at every level of the team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PARADIGM -->
+<section id="paradigm" class="on-dark">
+  <div class="paradigm-glow1"></div>
+  <div class="paradigm-glow2"></div>
+  <div class="section-inner">
+    <span class="section-label">The Core Thesis</span>
+    <div class="paradigm-box">
+      <p class="paradigm-quote">
+        "AI doesn't replace the project manager.<br>
+        It <span>elevates them.</span>"
+      </p>
+      <p>
+        The research introduces the concept of <strong style="color:rgba(255,255,255,.85);">Augmented Project Management</strong> — a paradigm shift where AI absorbs the computational, administrative, and analytical burden, allowing the PM to operate at a purely strategic, empathetic, and decisive level. The role doesn't disappear. It evolves into something more valuable.
+      </p>
+    </div>
+    <div class="shift-grid">
+      <div class="shift-col before">
+        <h4>Traditional PM</h4>
+        <div class="shift-item"><div class="shift-dot"></div><p>Manual scheduling and static Gantt charts</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Retrospective risk identification</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Spreadsheet-based resource tracking</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Estimates based on intuition and experience</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Manual status reports and stakeholder updates</p></div>
+      </div>
+      <div class="shift-arrow">→</div>
+      <div class="shift-col after">
+        <h4>Augmented PM</h4>
+        <div class="shift-item"><div class="shift-dot"></div><p>Dynamic, self-updating AI-optimised schedules</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Predictive risk detection weeks in advance</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Real-time AI-driven capacity balancing</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Probabilistic estimates from historical ML models</p></div>
+        <div class="shift-item"><div class="shift-dot"></div><p>Automated executive reporting via NLP</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MVP -->
+<section id="mvp" class="on-light">
+  <div class="section-inner">
+    <span class="section-label">The Product</span>
+    <h2 class="section-title">100flows: research turned into software.</h2>
+    <p class="section-desc">
+      The findings from the thesis are being translated directly into an MVP — a project management platform that embeds AI at every layer, not as a bolt-on feature, but as the core engine.
+    </p>
+    <div class="mvp-intro-grid">
+      <div class="mvp-feature-list">
+        <div class="mvp-feature">
+          <div class="mvp-feature-dot">📋</div>
+          <div>
+            <h4>AI-Enhanced Kanban Board</h4>
+            <p>Visual task management with intelligent workload warnings, automatic dependency detection, and AI-suggested task prioritisation based on deadline risk.</p>
+          </div>
+        </div>
+        <div class="mvp-feature">
+          <div class="mvp-feature-dot">👤</div>
+          <div>
+            <h4>Smart Onboarding &amp; Team Setup</h4>
+            <p>Guided project creation that captures team capacity, skills, and constraints — giving the AI the context it needs to generate accurate schedules from day one.</p>
+          </div>
+        </div>
+        <div class="mvp-feature">
+          <div class="mvp-feature-dot">🔔</div>
+          <div>
+            <h4>Proactive Risk Alerts</h4>
+            <p>The platform monitors project signals continuously and surfaces early warnings before bottlenecks become blockers — grounded directly in the risk management research.</p>
+          </div>
+        </div>
+        <div class="mvp-feature">
+          <div class="mvp-feature-dot">📊</div>
+          <div>
+            <h4>Automated Progress Reporting</h4>
+            <p>One-click executive summaries and stakeholder updates generated from live project data — eliminating one of the most time-consuming parts of a PM's week.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="screenshot-grid">
+          <div class="screenshot-wrap">
+            <img src="img/100flows/Kanban_board_group.png" alt="100flows Kanban Board — multiple views showing AI-enhanced task management"/>
+            <div class="screenshot-caption">Kanban Board — AI-assisted task management &amp; grouping</div>
+          </div>
+          <div class="screenshot-wrap">
+            <img src="img/100flows/Login_page.png" alt="100flows Login Page"/>
+            <div class="screenshot-caption">Platform Login &amp; Onboarding</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY ROLE -->
+<section id="my-role" class="on-light">
+  <div class="section-inner">
+    <span class="section-label">My Contribution</span>
+    <h2 class="section-title">Research that drives product decisions.</h2>
+    <p class="section-desc">
+      Every feature in 100flows traces back to a specific research finding. This is what I built before writing a single line of product specification.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-icon">📚</div>
+        <h4>Systematic Literature Review</h4>
+        <p>Investigated AI integration across all five PM knowledge domains, synthesising academic papers, industry reports, and real-world case studies into a coherent evidence base.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🔬</div>
+        <h4>ML &amp; Scheduling Deep-Dive</h4>
+        <p>Analysed predictive scheduling models, dynamic resource balancing algorithms, and the limitations of traditional methods (Gantt, PERT, CPM, CCPM, Agile) to identify where AI delivers the highest value.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">💬</div>
+        <h4>NLP Applications Research</h4>
+        <p>Evaluated NLP and LLM applications for stakeholder sentiment analysis, automated reporting, and natural language project interfaces — mapping the current state of the art.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🧩</div>
+        <h4>Comparative SaaS Analysis</h4>
+        <p>Conducted a structured comparison of leading AI-powered PM platforms and AI orchestration tools to identify market gaps, capability overlaps, and positioning opportunities for 100flows.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🏗️</div>
+        <h4>Paradigm Definition</h4>
+        <p>Synthesised all findings into the "Augmented Project Management" framework — defining the PM role of the future and the product principles that should guide 100flows's development.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">⚙️</div>
+        <h4>MVP Development</h4>
+        <p>Translating the research into working software — designing the product architecture, feature prioritisation, and user flows for the first functional prototype of the platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATUS -->
+<section id="status" class="on-dark">
+  <div class="status-glow"></div>
+  <div class="section-inner status-content">
+    <span class="section-label">Current Status</span>
+    <div class="status-badge">
+      <span class="status-badge-dot"></span>
+      Active Development
+    </div>
+    <h2 class="section-title" style="color:#fff;">Built on research. Shipping as software.</h2>
+    <p class="status-desc">
+      100flows is currently in active MVP development. The research phase is complete — the platform's feature roadmap is directly derived from the thesis findings and the comparative SaaS analysis.
+    </p>
+    <div class="roadmap-items">
+      <div class="roadmap-item">
+        <div class="roadmap-num">✓</div>
+        <p><strong>Research complete.</strong> Full academic investigation across all five PM domains, comparative SaaS analysis, and "Augmented PM" paradigm defined.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">✓</div>
+        <p><strong>MVP UI in progress.</strong> Kanban board, login flow, and team onboarding screens actively being designed and developed.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">→</div>
+        <p><strong>AI engine integration.</strong> Connecting the Kanban board to ML-powered scheduling, risk detection, and workload balancing modules.</p>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-num">→</div>
+        <p><strong>Automated reporting layer.</strong> NLP-driven executive summary generation and stakeholder update automation — the feature most directly tied to the research findings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="flows-footer">
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+  <p>100flows · AI-Powered Project Management · Research &amp; Development · Luca Buonocore · 2024–Now</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(pip install pypdf 2>&1)",
+      "PowerShell(tail -5)",
+      "Bash(python -c ' *)",
+      "Skill(docx)",
+      "Skill(docx:*)",
+      "Read(//c/Users/Luca/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/3dddb211-8a15-48d7-9e9e-96678238133f/54ac0d21-a590-4e8e-bba7-306e208dacb9/skills/docx/**)",
+      "Bash(python scripts/office/unpack.py \"C:\\\\Users\\\\Luca\\\\OneDrive\\\\Documents\\\\Uni\\\\Tesi\\\\Ricerca sull'impatto dell'AI nel project management.docx\" unpacked_100flows/)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(cd /tmp)",
+      "Bash(curl -sL \"https://github.com/G-08/Deliverables/raw/main/Deliverable%201.4.docx.pdf\" -o d1.pdf)",
+      "Bash(curl -sL \"https://github.com/G-08/Deliverables/raw/main/Deliverable%202.pdf\" -o d2.pdf)",
+      "Bash(curl -sL \"https://github.com/G-08/Deliverables/raw/main/Deliverable%203.pdf\" -o d3.pdf)",
+      "Bash(curl -sL \"https://github.com/G-08/Deliverables/raw/main/Deliverable%205.pdf\" -o d5.pdf)"
+    ]
+  }
+}

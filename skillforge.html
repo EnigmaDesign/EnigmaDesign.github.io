@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillForge – Case Study | Luca Buonocore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text: #0d0d1a;
+      --muted: #6b7a99;
+      --sf-dark: #080c14;
+      --sf-darker: #050810;
+      --sf-card-dark: #0f1520;
+      --sf-border: rgba(255,255,255,.07);
+      --sf-gold: #c9a44a;
+      --sf-gold-light: #dfc06e;
+      --sf-gold-grad: linear-gradient(135deg, #9a7830 0%, #c9a44a 50%, #dfc06e 100%);
+      --sf-teal: #1b9b8e;
+      --sf-red: #9C1D22;
+      --sf-muted-light: rgba(255,255,255,.45);
+      --sf-muted-dark: #6b7a99;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,12,20,.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--sf-border);
+      height: 60px; display: flex; align-items: center;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+    }
+    .nav-inner {
+      max-width: 1000px; width: 100%; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: .5rem;
+      color: rgba(255,255,255,.5); text-decoration: none;
+      font-family: 'Sora', sans-serif; font-size: .84rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--sf-gold); }
+    .nav-back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .nav-logo {
+      height: 22px;
+      filter: brightness(0) invert(1);
+      opacity: .9;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 1.5rem;
+      overflow: hidden; background: var(--sf-dark);
+    }
+    /* Subtle grid pattern */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,164,74,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,164,74,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .hg1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(27,155,142,.12) 0%, transparent 70%); top: -100px; left: -100px; }
+    .hg2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(201,164,74,.1) 0%, transparent 70%); bottom: -80px; right: -80px; }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero-emblem {
+      width: clamp(90px, 18vw, 140px);
+      margin: 0 auto 1.6rem;
+      border-radius: 16px;
+      box-shadow: 0 0 60px rgba(201,164,74,.2);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
+      padding: .35rem 1rem; border-radius: 4px;
+      background: rgba(201,164,74,.08); border: 1px solid rgba(201,164,74,.25);
+      font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 600;
+      color: var(--sf-gold); letter-spacing: .08em; text-transform: uppercase;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sf-gold); display: inline-block; }
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 800; color: #fff;
+      line-height: 1.08; letter-spacing: -.03em; margin-bottom: 1.1rem;
+    }
+    .hero h1 span {
+      background: var(--sf-gold-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(.9rem, 2.2vw, 1.08rem);
+      color: rgba(255,255,255,.55); line-height: 1.72;
+      max-width: 540px; margin: 0 auto 2.5rem;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+    .hero-tag {
+      padding: .35rem .85rem; border-radius: 4px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      font-size: .73rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.65);
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--sf-card-dark);
+      border-bottom: 1px solid var(--sf-border);
+      padding: 2rem clamp(1rem, 5vw, 3rem);
+    }
+    .stats-inner {
+      max-width: 1000px; margin: auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px;
+      background: var(--sf-border); border: 1px solid var(--sf-border);
+    }
+    .stat-card {
+      text-align: center; padding: 1.6rem 1rem;
+      background: var(--sf-card-dark);
+    }
+    .stat-num {
+      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
+      background: var(--sf-gold-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; line-height: 1.1; margin-bottom: .4rem;
+    }
+    .stat-label {
+      font-size: .71rem; color: rgba(255,255,255,.4);
+      font-family: 'Sora', sans-serif; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+
+    /* ── SHARED ── */
+    section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 5vw, 3rem); }
+    .section-inner { max-width: 1000px; margin: auto; }
+    .section-label {
+      font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .13em;
+      background: var(--sf-gold-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; margin-bottom: .55rem;
+    }
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700; margin-bottom: .75rem;
+      line-height: 1.12; letter-spacing: -.025em;
+    }
+    .section-desc {
+      font-size: clamp(.88rem, 2vw, 1rem);
+      line-height: 1.72; max-width: 600px; margin-bottom: 2.5rem;
+    }
+    .light .section-title { color: var(--text); }
+    .light .section-desc { color: var(--sf-muted-dark); }
+    .dark .section-title { color: #fff; }
+    .dark .section-desc { color: var(--sf-muted-light); }
+
+    /* ── PROBLEM (light) ── */
+    #problem { background: #fff; }
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .problem-card {
+      background: #fff; border: 1px solid rgba(0,0,0,.08);
+      border-left: 3px solid var(--sf-gold);
+      border-radius: 0 8px 8px 0;
+      padding: 1.75rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.05);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .problem-card:hover { transform: translateX(4px); box-shadow: 0 6px 28px rgba(0,0,0,.08); }
+    .problem-icon {
+      font-size: 1.8rem; margin-bottom: .9rem; display: block;
+    }
+    .problem-card h3 { font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: .45rem; }
+    .problem-card p { font-size: .82rem; color: var(--sf-muted-dark); line-height: 1.65; }
+    .problem-stat {
+      display: inline-block; margin-top: .9rem;
+      padding: .3rem .85rem; border-radius: 4px;
+      background: rgba(201,164,74,.1); border: 1px solid rgba(201,164,74,.2);
+      font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700;
+      color: #8a6a1a;
+    }
+
+    /* ── SOLUTION (dark) ── */
+    #solution {
+      background: var(--sf-dark); position: relative;
+    }
+    #solution::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,164,74,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,164,74,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .solution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; position: relative; z-index: 1; }
+    .solution-card {
+      background: var(--sf-card-dark); border: 1px solid var(--sf-border);
+      border-top: 2px solid var(--sf-gold);
+      border-radius: 0 0 8px 8px;
+      padding: 1.75rem;
+      transition: border-color .2s, background .2s;
+    }
+    .solution-card:hover { background: rgba(201,164,74,.04); border-top-color: var(--sf-gold-light); }
+    .solution-num {
+      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
+      background: var(--sf-gold-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; margin-bottom: .5rem; line-height: 1;
+    }
+    .solution-card h3 { font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700; color: #fff; margin-bottom: .45rem; }
+    .solution-card p { font-size: .82rem; color: var(--sf-muted-light); line-height: 1.62; }
+
+    /* ── MY ROLE (light) ── */
+    #my-role { background: #f8f9fc; }
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .role-card {
+      background: #fff; border: 1px solid rgba(0,0,0,.07);
+      border-radius: 8px; padding: 1.6rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.08); }
+    .role-icon {
+      width: 40px; height: 40px; border-radius: 6px;
+      background: linear-gradient(135deg, rgba(201,164,74,.15), rgba(201,164,74,.08));
+      border: 1px solid rgba(201,164,74,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-bottom: .9rem;
+    }
+    .role-card h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .4rem; }
+    .role-card p { font-size: .8rem; color: var(--sf-muted-dark); line-height: 1.6; }
+
+    /* ── TRADE-OFFS (dark) ── */
+    #tradeoffs { background: var(--sf-darker); position: relative; }
+    #tradeoffs::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,164,74,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,164,74,.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .tradeoff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; position: relative; z-index: 1; }
+    .tradeoff-col h3 {
+      font-family: 'Sora', sans-serif; font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: 1rem; padding-bottom: .75rem;
+      border-bottom: 1px solid var(--sf-border);
+    }
+    .tradeoff-pro h3 { color: var(--sf-gold); }
+    .tradeoff-con h3 { color: #e05555; }
+    .tradeoff-item {
+      display: flex; gap: .75rem; margin-bottom: .85rem; align-items: flex-start;
+    }
+    .tradeoff-dot {
+      width: 6px; height: 6px; border-radius: 50%; margin-top: .45rem; flex-shrink: 0;
+    }
+    .tradeoff-pro .tradeoff-dot { background: var(--sf-gold); }
+    .tradeoff-con .tradeoff-dot { background: #e05555; }
+    .tradeoff-item p { font-size: .82rem; color: rgba(255,255,255,.55); line-height: 1.58; }
+    .tradeoff-item strong { color: rgba(255,255,255,.85); font-weight: 600; }
+
+    /* ── THE DECISION ── */
+    #decision { background: var(--sf-dark); position: relative; overflow: hidden; }
+    .decision-box {
+      border: 1px solid rgba(201,164,74,.2);
+      border-left: 4px solid var(--sf-gold);
+      border-radius: 0 8px 8px 0;
+      background: rgba(201,164,74,.04);
+      padding: 2.5rem 2rem; margin-bottom: 2rem;
+      position: relative; z-index: 1;
+    }
+    .decision-box h3 {
+      font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700;
+      color: #fff; margin-bottom: .75rem;
+    }
+    .decision-box p {
+      font-size: .9rem; color: rgba(255,255,255,.6); line-height: 1.72; max-width: 680px;
+    }
+    .decision-pills { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; position: relative; z-index: 1; }
+    .decision-pill {
+      padding: .42rem 1rem; border-radius: 4px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      font-family: 'Sora', sans-serif; font-size: .76rem; font-weight: 600;
+      color: rgba(255,255,255,.65);
+    }
+    .decision-pill.gold { background: rgba(201,164,74,.1); border-color: rgba(201,164,74,.25); color: var(--sf-gold); }
+
+    /* ── KEY RESULTS (light) ── */
+    #results { background: #fff; }
+    .results-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px; border: 1px solid rgba(0,0,0,.08); border-radius: 8px; overflow: hidden;
+    }
+    .result-item {
+      padding: 2rem 1.25rem; text-align: center; background: #fff;
+      border-right: 1px solid rgba(0,0,0,.06);
+    }
+    .result-item:last-child { border-right: none; }
+    .result-num {
+      font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 800;
+      background: var(--sf-gold-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; line-height: 1; margin-bottom: .5rem;
+    }
+    .result-label { font-size: .74rem; color: var(--sf-muted-dark); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; line-height: 1.45; }
+
+    /* ── FOOTER ── */
+    .sf-footer {
+      background: var(--sf-darker);
+      padding: 2.5rem clamp(1rem, 5vw, 3rem);
+      text-align: center;
+      border-top: 1px solid var(--sf-border);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.4rem;
+      padding: .65rem 1.5rem; border-radius: 4px;
+      background: rgba(201,164,74,.08); border: 1px solid rgba(201,164,74,.25);
+      color: var(--sf-gold); text-decoration: none;
+      font-family: 'Sora', sans-serif; font-size: .85rem; font-weight: 600;
+      transition: background .2s, border-color .2s;
+    }
+    .back-btn:hover { background: rgba(201,164,74,.15); border-color: rgba(201,164,74,.45); }
+    .back-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .sf-footer p { font-size: .78rem; color: rgba(255,255,255,.25); font-family: 'Sora', sans-serif; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .tradeoff-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); }
+      .result-item:last-child { border-bottom: none; }
+    }
+    @media (max-width: 500px) {
+      .hero-tag { font-size: .69rem; padding: .3rem .7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Portfolio
+    </a>
+    <img src="img/skillforge/logo.png" alt="SkillForge" class="nav-logo"/>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow hg1"></div>
+  <div class="hero-glow hg2"></div>
+
+  <div class="hero-content">
+    <img src="img/skillforge/CHROME TEMPLATE DESIGN SYNDROME.png" alt="SkillForge emblem" class="hero-emblem"/>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Product Discovery · 2024
+    </div>
+    <h1>Learn from the pros.<br><span>Not the pretenders.</span></h1>
+    <p class="hero-sub">
+      A platform connecting e-sports players with professional-grade coaching content — at a fraction of the cost. The right idea, validated with data, halted with discipline.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">Product Discovery</span>
+      <span class="hero-tag">Market Research</span>
+      <span class="hero-tag">Trade-off Analysis</span>
+      <span class="hero-tag">User Research</span>
+      <span class="hero-tag">Business Model</span>
+      <span class="hero-tag">Strategic Prioritization</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-card">
+      <span class="stat-num">350</span>
+      <span class="stat-label">Players Surveyed</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">25</span>
+      <span class="stat-label">In-depth Interviews</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">64%</span>
+      <span class="stat-label">Users Affected</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">€240</span>
+      <span class="stat-label">Price Gap</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">4×</span>
+      <span class="stat-label">TAM Expanded</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">+20%</span>
+      <span class="stat-label">Projected Margins</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem" class="light">
+  <div class="section-inner">
+    <span class="section-label">The Problem</span>
+    <h2 class="section-title">Great coaching exists. Almost no one can access it.</h2>
+    <p class="section-desc">
+      The e-sports coaching market is broken in two distinct ways — one about quality, one about cost. Both affect the same players.
+    </p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">🎮</span>
+        <h3>Being good doesn't mean you can teach</h3>
+        <p>Most coaches enter the market simply because they're skilled players — not because they understand pedagogy. There's no qualification filter. A Challenger-rank player and a Gold-rank player charge the same rates, and often deliver the same unclear advice.</p>
+        <span class="problem-stat">No quality standard in the market</span>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">💸</span>
+        <h3>€150–250/hour is not a market, it's a barrier</h3>
+        <p>1:1 coaching sessions cost up to €250 per hour. One session won't make you better. A real improvement arc takes months of consistent practice and feedback. At those prices, only a tiny minority can afford the volume of sessions that actually moves the needle.</p>
+        <span class="problem-stat">64% of users priced out</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution" class="dark">
+  <div class="section-inner">
+    <span class="section-label">The Solution Model</span>
+    <h2 class="section-title" style="color:#fff;">Pro knowledge. Scalable price.</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,.5);">
+      Instead of 1:1 live sessions, SkillForge flips the model: pro players record structured educational content once, and players buy it at a fraction of the coaching cost.
+    </p>
+    <div class="solution-grid">
+      <div class="solution-card">
+        <span class="solution-num">01</span>
+        <h3>Pro Players Record Content</h3>
+        <p>Retired or active professionals record game-specific educational videos — explaining decision-making, mechanics, and strategy with the depth only a top-level player can provide.</p>
+      </div>
+      <div class="solution-card">
+        <span class="solution-num">02</span>
+        <h3>Content Lives on the Platform</h3>
+        <p>Videos are structured as courses and hosted on SkillForge — organized by title (LoL, Valorant, Fortnite, R6), role, skill level, and topic for precise discoverability.</p>
+      </div>
+      <div class="solution-card">
+        <span class="solution-num">03</span>
+        <h3>Players Pay Per Course</h3>
+        <p>Users buy the content they need at accessible prices. SkillForge charges a commission on each sale — keeping the platform sustainable while the pro player keeps the majority of the revenue.</p>
+      </div>
+      <div class="solution-card">
+        <span class="solution-num">04</span>
+        <h3>Everyone Wins (in theory)</h3>
+        <p>Pro players monetize their knowledge without time commitment. Players access elite-level content affordably. The platform grows with a scalable, content-first inventory model.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY ROLE -->
+<section id="my-role" class="light">
+  <div class="section-inner">
+    <span class="section-label">My Contribution</span>
+    <h2 class="section-title">Research first. Build later.</h2>
+    <p class="section-desc">
+      My entire contribution to SkillForge happened before a single line of code was written — validating the problem, sizing the opportunity, and stress-testing the business model.
+    </p>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-icon">🔍</div>
+        <h4>Market Gap &amp; Competitive Analysis</h4>
+        <p>Identified and quantified the e-sports coaching market gap — a €150–250/hr price point creating a ~€240 effective barrier for most players. Conducted a structured competitive analysis covering 1:1 coaches, aggregator platforms (Coachify, Metafy, Tapin.gg), and generalist course marketplaces (Udemy) — mapping capability gaps and positioning opportunities for SkillForge.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📊</div>
+        <h4>Cross-title User Research</h4>
+        <p>Surveyed 350 players across League of Legends, Valorant, Fortnite, and Rainbow Six, and conducted 25 in-depth interviews to validate cross-game demand. Analysed the Italian and European coaching market — spanning amateur player communities and content creators/streamers — confirming the accessibility gap and expanding the potential TAM by 4× beyond the initial LoL-only scope.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">⚖️</div>
+        <h4>Creator Trade-off Analysis</h4>
+        <p>Evaluated the trade-off between active pro players (high popularity, high cost) vs. retired pros (lower acquisition cost, still elite knowledge). Selecting retired players projected a 20% improvement in platform margins.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📋</div>
+        <h4>Requirements, User Flows & User Stories</h4>
+        <p>Defined functional and non-functional requirements for the platform, mapped end-to-end user flows for both the buyer and creator journey, and structured user stories — establishing the feature set and content taxonomy needed to support multi-title, role-based course delivery.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">💡</div>
+        <h4>Business Model Design</h4>
+        <p>Designed the commission-based revenue model — balancing creator incentives, competitive pricing for users, and platform sustainability across different content tiers and titles.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🛑</div>
+        <h4>Strategic Halt Decision</h4>
+        <p>Led the decision to halt development after assessing that creator acquisition costs and limited access to top-tier players made the model non-viable at the current stage. Brand identity was the only design deliverable intentionally completed — the halt came before any engineering or UI design work began.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADE-OFFS -->
+<section id="tradeoffs" class="dark">
+  <div class="section-inner">
+    <span class="section-label">The Trade-off Analysis</span>
+    <h2 class="section-title" style="color:#fff;">The hardest part was the honest math.</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,.5);">
+      The model worked on paper. The problem was in the execution. Here's the full picture of what we weighed before making the call.
+    </p>
+    <div class="tradeoff-grid">
+      <div class="tradeoff-col tradeoff-pro">
+        <h3>What worked</h3>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>Validated demand.</strong> Research across 4 titles confirmed players wanted affordable, high-quality improvement content.</p>
+        </div>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>4× TAM expansion.</strong> Expanding beyond LoL to Valorant, Fortnite, and R6 made the total addressable market significantly larger.</p>
+        </div>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>Scalable model.</strong> Unlike 1:1 coaching, recorded content scales — one video can serve thousands of buyers with zero marginal cost.</p>
+        </div>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>Margin improvement.</strong> Targeting retired pros instead of active players projected a 20% improvement in acquisition cost per creator.</p>
+        </div>
+      </div>
+      <div class="tradeoff-col tradeoff-con">
+        <h3>What broke it</h3>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>Creator acquisition is hard.</strong> Reaching top-tier pro players — even retired ones — requires industry connections, agent relationships, and significant upfront negotiation.</p>
+        </div>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>Cold-start content problem.</strong> A platform with no content has no users. A platform with no users attracts no creators. Breaking the loop requires capital or leverage we didn't have.</p>
+        </div>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>Quality control at scale.</strong> Ensuring educational quality across creators, titles, and roles without a structured vetting process was an unsolved operational problem.</p>
+        </div>
+        <div class="tradeoff-item">
+          <div class="tradeoff-dot"></div>
+          <p><strong>Trust requires authority.</strong> Players pay for coaching when they trust the coach's reputation. Building that trust at platform-level takes time and budget we couldn't justify yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DECISION -->
+<section id="decision" class="dark">
+  <div class="section-inner">
+    <span class="section-label">The Decision</span>
+    <h2 class="section-title" style="color:#fff;">Knowing when not to build.</h2>
+    <div class="decision-box">
+      <h3>We stopped. On purpose.</h3>
+      <p>
+        After validating the problem and stress-testing the business model, the assessment was clear: the bottleneck was creator acquisition — and solving it would require resources, industry access, and a go-to-market motion that wasn't realistic at this stage. Building a product that depends on supply you can't reliably generate isn't a risk worth taking. <br><br>
+        This wasn't a failure of the idea. The market gap is real. The demand is there. The model is sound. But product discipline means recognizing the gap between a good opportunity and a buildable one — and making the call before sinking engineering and design time into something the supply side couldn't support. <br><br>
+        That decision, and the structured thinking behind it, is what SkillForge actually demonstrates.
+      </p>
+    </div>
+    <div class="decision-pills">
+      <span class="decision-pill gold">Strategic Prioritization</span>
+      <span class="decision-pill gold">Resource Discipline</span>
+      <span class="decision-pill">Supply-side Risk Assessment</span>
+      <span class="decision-pill">Build vs. No-build Framework</span>
+      <span class="decision-pill">Cold-start Problem Analysis</span>
+    </div>
+  </div>
+</section>
+
+<!-- KEY RESULTS -->
+<section id="results" class="light">
+  <div class="section-inner">
+    <span class="section-label">Research Outcomes</span>
+    <h2 class="section-title">The data we collected still stands.</h2>
+    <p class="section-desc">
+      The decision to halt doesn't erase the validity of the research. These findings would be the foundation of any future attempt at this market.
+    </p>
+    <div class="results-row">
+      <div class="result-item">
+        <span class="result-num">350</span>
+        <span class="result-label">Players surveyed across 4 titles</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">25</span>
+        <span class="result-label">In-depth user interviews conducted</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">64%</span>
+        <span class="result-label">Of users affected by accessibility barriers</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">€240</span>
+        <span class="result-label">Effective price gap vs. 1:1 coaching</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">4×</span>
+        <span class="result-label">TAM expansion from cross-title research</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">+20%</span>
+        <span class="result-label">Projected margin gain from creator model pivot</span>
+      </div>
+    </div>
+
+    <!-- TAM / SAM / SOM -->
+    <div style="margin-top:2.5rem;">
+      <h3 style="font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--sf-muted-dark);margin-bottom:1rem;">Market Sizing Approach</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;border:1px solid rgba(0,0,0,.08);border-radius:8px;overflow:hidden;">
+        <div style="padding:1.5rem 1.25rem;background:#fff;border-right:1px solid rgba(0,0,0,.06);">
+          <span style="font-family:'Sora',sans-serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--sf-gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:.4rem;">TAM</span>
+          <p style="font-family:'Sora',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.3rem;">Global Esports Market</p>
+          <p style="font-size:.78rem;color:var(--sf-muted-dark);line-height:1.5;">The entire competitive gaming ecosystem — players, content, events, infrastructure — across all titles worldwide.</p>
+        </div>
+        <div style="padding:1.5rem 1.25rem;background:#fff;border-right:1px solid rgba(0,0,0,.06);">
+          <span style="font-family:'Sora',sans-serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--sf-gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:.4rem;">SAM</span>
+          <p style="font-family:'Sora',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.3rem;">Esports Coaching Market</p>
+          <p style="font-size:.78rem;color:var(--sf-muted-dark);line-height:1.5;">Players actively spending on improvement — coaching sessions, courses, and structured guidance — across the Italian and European market.</p>
+        </div>
+        <div style="padding:1.5rem 1.25rem;background:#fff;">
+          <span style="font-family:'Sora',sans-serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--sf-gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:.4rem;">SOM</span>
+          <p style="font-family:'Sora',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.3rem;">LoL Coaching Market</p>
+          <p style="font-size:.78rem;color:var(--sf-muted-dark);line-height:1.5;">The initial beachhead: League of Legends coaching specifically — the market we knew best and where the founding team had the deepest community insight.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sf-footer">
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+  <p>SkillForge · E-sports Education Platform · Product Discovery · Luca Buonocore · 2024</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitGYM44 – Case Study | Luca Buonocore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text: #0d1220;
+      --muted: #6b7a99;
+      --card-bg: #f5f7fb;
+      --fg-dark: #0a0f1e;
+      --fg-darker: #070c18;
+      --fg-card: #0f1629;
+      --fg-border: rgba(255,255,255,.07);
+      --accent: #4a90d9;
+      --accent-light: #7eb8f5;
+      --accent-dark: #2563eb;
+      --fg-grad: linear-gradient(135deg, #2563eb 0%, #4a90d9 55%, #7eb8f5 100%);
+      --fg-grad-soft: linear-gradient(135deg, rgba(74,144,217,.12) 0%, rgba(126,184,245,.06) 100%);
+      --fg-muted: rgba(255,255,255,.45);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,12,24,.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--fg-border);
+      height: 60px; display: flex; align-items: center;
+      padding: 0 clamp(1rem, 5vw, 3rem);
+    }
+    .nav-inner { max-width: 1060px; width: 100%; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-back { display: flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.45); text-decoration: none; font-family: 'Sora', sans-serif; font-size: .84rem; font-weight: 500; transition: color .2s; }
+    .nav-back:hover { color: var(--accent-light); }
+    .nav-back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .nav-title { font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700; color: rgba(255,255,255,.75); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: clamp(4rem, 10vw, 7rem) 1.5rem;
+      overflow: hidden; background: var(--fg-dark);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-logo-wrap {
+      width: 76px; height: 76px; border-radius: 18px; margin: 0 auto 1.5rem;
+      background: rgba(74,144,217,.1); border: 1px solid rgba(74,144,217,.2);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .hero-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .45rem; margin-bottom: 1.25rem;
+      padding: .3rem .9rem; border-radius: 4px;
+      background: rgba(74,144,217,.08); border: 1px solid rgba(74,144,217,.22);
+      font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 600;
+      color: var(--accent-light); letter-spacing: .07em; text-transform: uppercase;
+    }
+    .hero-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); display: inline-block; }
+    .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(1.9rem, 4.5vw, 3.2rem); font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -.03em; margin-bottom: 1rem; }
+    .hero h1 span { background: var(--fg-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(.87rem, 2vw, 1rem); color: rgba(255,255,255,.5); line-height: 1.75; max-width: 560px; margin: 0 auto 2rem; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: .45rem; justify-content: center; margin-bottom: 2rem; }
+    .hero-tag { padding: .3rem .75rem; border-radius: 4px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); font-size: .71rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.55); }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.35rem; border-radius: 6px;
+      background: rgba(74,144,217,.1); border: 1px solid rgba(74,144,217,.28);
+      color: var(--accent-light); text-decoration: none;
+      font-family: 'Sora', sans-serif; font-size: .83rem; font-weight: 600;
+      transition: background .2s, border-color .2s;
+    }
+    .hero-cta:hover { background: rgba(74,144,217,.18); border-color: rgba(74,144,217,.45); }
+    .hero-cta svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ── STATS STRIP ── */
+    .stats-strip { background: var(--fg-card); border-bottom: 1px solid var(--fg-border); padding: 0 clamp(1rem, 5vw, 3rem); }
+    .stats-inner { max-width: 1060px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+    .stat-card { text-align: center; padding: 1.6rem 1rem; border-right: 1px solid var(--fg-border); }
+    .stat-card:last-child { border-right: none; }
+    .stat-num { font-family: 'Sora', sans-serif; font-size: 1.75rem; font-weight: 800; background: var(--fg-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; line-height: 1.1; margin-bottom: .35rem; }
+    .stat-label { font-size: .68rem; color: rgba(255,255,255,.32); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; }
+
+    /* ── SHARED ── */
+    section { padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 5vw, 3rem); }
+    .section-inner { max-width: 1060px; margin: auto; }
+    .section-label { font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .13em; color: var(--accent); display: block; margin-bottom: .5rem; }
+    .section-title { font-family: 'Sora', sans-serif; font-size: clamp(1.45rem, 3.5vw, 2.1rem); font-weight: 700; margin-bottom: .7rem; line-height: 1.15; letter-spacing: -.02em; }
+    .section-desc { font-size: clamp(.86rem, 2vw, .97rem); line-height: 1.75; max-width: 620px; margin-bottom: 2.25rem; }
+    .on-dark .section-title { color: #fff; }
+    .on-dark .section-desc { color: var(--fg-muted); }
+    .on-light .section-title { color: var(--text); }
+    .on-light .section-desc { color: var(--muted); }
+
+    /* ── THE APP ── */
+    #app { background: #fff; }
+    .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+    .app-card { background: var(--card-bg); border: 1px solid rgba(0,0,0,.06); border-radius: 12px; padding: 1.4rem; transition: transform .2s, box-shadow .2s; }
+    .app-card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(74,144,217,.08); }
+    .app-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(74,144,217,.09); border: 1px solid rgba(74,144,217,.16); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; margin-bottom: .85rem; }
+    .app-card h4 { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .3rem; }
+    .app-card p { font-size: .79rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── DELIVERABLES ── */
+    #deliverables { background: var(--fg-dark); }
+    .deliverables-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px; background: var(--fg-border); border: 1px solid var(--fg-border);
+      border-radius: 10px; overflow: hidden;
+    }
+    .del-card { background: var(--fg-card); padding: 1.65rem; transition: background .2s; }
+    .del-card:hover { background: rgba(74,144,217,.05); }
+    .del-num { font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 800; background: var(--fg-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: .45rem; display: block; }
+    .del-title { font-family: 'Sora', sans-serif; font-size: .92rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+    .del-desc { font-size: .79rem; color: rgba(255,255,255,.42); line-height: 1.65; margin-bottom: .8rem; }
+    .del-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .del-tag { padding: .2rem .6rem; border-radius: 4px; background: rgba(74,144,217,.1); border: 1px solid rgba(74,144,217,.2); font-family: 'Sora', sans-serif; font-size: .67rem; font-weight: 600; color: var(--accent-light); }
+    .del-meta { display: inline-block; margin-top: .75rem; padding: .22rem .65rem; border-radius: 4px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); font-family: 'Sora', sans-serif; font-size: .69rem; font-weight: 600; color: rgba(255,255,255,.32); }
+
+    /* ── MY ROLE ── */
+    #my-role { background: var(--card-bg); }
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .role-card { background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 10px; padding: 1.4rem; transition: transform .2s, box-shadow .2s; }
+    .role-card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(74,144,217,.07); }
+    .role-icon { width: 38px; height: 38px; border-radius: 9px; background: rgba(74,144,217,.09); border: 1px solid rgba(74,144,217,.16); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; margin-bottom: .85rem; }
+    .role-card h4 { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .35rem; }
+    .role-card p { font-size: .79rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── METHODOLOGY ── */
+    #methodology { background: var(--fg-darker); }
+    .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2.25rem; }
+    .method-block { background: var(--fg-card); border: 1px solid var(--fg-border); border-radius: 10px; padding: 1.6rem; }
+    .method-block h3 { font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700; color: var(--accent-light); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .9rem; padding-bottom: .7rem; border-bottom: 1px solid var(--fg-border); }
+    .method-item { display: flex; gap: .7rem; margin-bottom: .75rem; align-items: flex-start; }
+    .method-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .6; margin-top: .5rem; flex-shrink: 0; }
+    .method-item p { font-size: .8rem; color: rgba(255,255,255,.44); line-height: 1.6; }
+    .method-item strong { color: rgba(255,255,255,.78); font-weight: 600; }
+    .tools-title { font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.28); margin-bottom: .8rem; }
+    .tools-grid { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tool-pill { padding: .38rem .9rem; border-radius: 6px; background: var(--fg-card); border: 1px solid var(--fg-border); font-family: 'Sora', sans-serif; font-size: .76rem; font-weight: 600; color: rgba(255,255,255,.45); display: flex; align-items: center; gap: .38rem; }
+    .tool-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: .5; flex-shrink: 0; }
+
+    /* ── RESULTS ── */
+    #results { background: #fff; }
+    .results-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border: 1px solid rgba(0,0,0,.07); border-radius: 10px; overflow: hidden; }
+    .result-item { padding: 1.75rem 1.25rem; text-align: center; background: #fff; border-right: 1px solid rgba(0,0,0,.06); }
+    .result-item:last-child { border-right: none; }
+    .result-num { font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 800; background: var(--fg-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; line-height: 1; margin-bottom: .45rem; }
+    .result-label { font-size: .71rem; color: var(--muted); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; line-height: 1.45; }
+
+    /* ── FOOTER ── */
+    .fg-footer { background: var(--fg-darker); padding: 2.25rem clamp(1rem, 5vw, 3rem); text-align: center; border-top: 1px solid var(--fg-border); }
+    .back-btn { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem; padding: .6rem 1.35rem; border-radius: 6px; background: rgba(74,144,217,.09); border: 1px solid rgba(74,144,217,.25); color: var(--accent-light); text-decoration: none; font-family: 'Sora', sans-serif; font-size: .84rem; font-weight: 600; transition: background .2s, border-color .2s; }
+    .back-btn:hover { background: rgba(74,144,217,.17); border-color: rgba(74,144,217,.42); }
+    .back-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .fg-footer p { font-size: .76rem; color: rgba(255,255,255,.2); font-family: 'Sora', sans-serif; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .method-grid { grid-template-columns: 1fr; }
+      .result-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); }
+      .result-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Portfolio
+    </a>
+    <span class="nav-title">FitGYM44</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-logo-wrap">
+      <img src="img/FitGym44/logo.jpg" alt="FitGYM44 logo"/>
+    </div>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Software Engineering · University Project · 2023–2024
+    </div>
+    <h1>Specification as<br><span>a discipline.</span></h1>
+    <p class="hero-sub">
+      A university software engineering project built entirely around rigour — 5 structured deliverables, formal UML and OCL modelling, and Agile team leadership. The product was secondary. The process was the point.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">Project Lead</span>
+      <span class="hero-tag">Agile / Scrum</span>
+      <span class="hero-tag">Requirements Engineering</span>
+      <span class="hero-tag">UML</span>
+      <span class="hero-tag">OCL</span>
+      <span class="hero-tag">System Architecture</span>
+      <span class="hero-tag">Figma</span>
+    </div>
+    <a href="https://github.com/G-08/Deliverables" target="_blank" class="hero-cta">
+      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      View Repository
+    </a>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-card">
+      <span class="stat-num">28/30</span>
+      <span class="stat-label">Final Grade</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">5</span>
+      <span class="stat-label">Deliverables</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">~300h</span>
+      <span class="stat-label">Personal Hours</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">30+</span>
+      <span class="stat-label">Functional Requirements</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">9</span>
+      <span class="stat-label">Architecture Modules</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">135+</span>
+      <span class="stat-label">Documentation Pages</span>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills" class="on-light">
+  <div class="section-inner">
+    <span class="section-label">Skills Demonstrated</span>
+    <h2 class="section-title">What the project required me to master.</h2>
+    <p class="section-desc">A fitness app specification complex enough to span 9 architectural modules, 30+ requirements, and formal OCL constraints demanded a wide range of engineering competencies — applied under real team dynamics and a hard deadline.</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-icon">🧭</div>
+        <h4>Agile Project Leadership</h4>
+        <p>Led a 3-person team through a Scrum-based workflow — sprint planning, weekly standups, task allocation by competency, and adaptive meeting formats. Owned every deliverable from first draft to final sign-off.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">📋</div>
+        <h4>Requirements Engineering</h4>
+        <p>Primary author of D1 — structured 30+ functional requirements and a full set of non-functional requirements from scratch, in precise natural language, ensuring completeness and internal consistency before any UML work began.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">📐</div>
+        <h4>UML Modelling</h4>
+        <p>Specified the full system in UML across D2 and D3: use case diagrams, activity diagrams per flow, system context diagram, component diagram, and a 9-module class diagram covering every architectural boundary.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🔐</div>
+        <h4>Formal Logic & OCL</h4>
+        <p>Encoded all business logic not expressible in standard UML as OCL constraints — formally capturing invariants, pre/post-conditions, and rules across the entire domain model to eliminate implementation ambiguity.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🏗️</div>
+        <h4>System Architecture Design</h4>
+        <p>Designed a multi-module architecture spanning authentication, training, diet, payments, notifications, calendar, and database layers — specifying inter-module relationships and data flows before any code was written.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🔗</div>
+        <h4>External System Integration Spec</h4>
+        <p>Formally specified all third-party integration points: Bluetooth wearable APIs for step tracking, payment gateways for the premium tier, mail services, and event-driven notification pipelines — all within the system model.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🗺️</div>
+        <h4>User Flow Design</h4>
+        <p>Documented every major user journey — onboarding, workout scheduling, payment upgrade, achievement unlocking — as UML activity diagrams, before any implementation work started.</p>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">📄</div>
+        <h4>Technical Documentation</h4>
+        <p>Authored and cross-reviewed 135+ pages of structured technical documentation across five deliverables and three authors — maintaining consistency, coherence, and a single unified system design throughout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section id="deliverables" class="on-dark">
+  <div class="section-inner">
+    <span class="section-label">The Deliverables</span>
+    <h2 class="section-title">Five documents. Zero assumptions.</h2>
+    <p class="section-desc">Every feature, class, constraint, and user flow was written down before a single line of code was written. The deliverables are the project — the code is a consequence of them.</p>
+    <div class="deliverables-grid">
+      <div class="del-card">
+        <span class="del-num">D1</span>
+        <h3 class="del-title">Requirements Analysis</h3>
+        <p class="del-desc">Defined 30+ functional requirements and a full set of non-functional requirements in natural language. Established project objectives, front-end and back-end design direction, and hi-fi UI mockups built in Figma.</p>
+        <div class="del-tags">
+          <span class="del-tag">30+ RFs</span>
+          <span class="del-tag">RNFs</span>
+          <span class="del-tag">Figma Mockups</span>
+          <span class="del-tag">F/E &amp; B/E Design</span>
+        </div>
+        <span class="del-meta">23 pages</span>
+      </div>
+      <div class="del-card">
+        <span class="del-num">D2</span>
+        <h3 class="del-title">Requirements Specification</h3>
+        <p class="del-desc">Formalised every requirement using UML — use case diagrams and activity diagrams for each flow, structured RNF tables, a system context diagram, and a full component diagram defining all architectural boundaries.</p>
+        <div class="del-tags">
+          <span class="del-tag">UML Use Cases</span>
+          <span class="del-tag">Activity Diagrams</span>
+          <span class="del-tag">Component Diagram</span>
+          <span class="del-tag">Context Diagram</span>
+        </div>
+        <span class="del-meta">49 pages</span>
+      </div>
+      <div class="del-card">
+        <span class="del-num">D3</span>
+        <h3 class="del-title">System Architecture</h3>
+        <p class="del-desc">Full UML class diagram across 9 architectural modules — User &amp; Credentials, Achievements, Training, Dieting, Payments, Mails, Notifications, Calendar, and Database — with OCL constraints formally encoding all business logic and invariants.</p>
+        <div class="del-tags">
+          <span class="del-tag">UML Class Diagrams</span>
+          <span class="del-tag">OCL Constraints</span>
+          <span class="del-tag">9 Modules</span>
+        </div>
+        <span class="del-meta">47 pages</span>
+      </div>
+      <div class="del-card">
+        <span class="del-num">D4</span>
+        <h3 class="del-title">Development &amp; User Flows</h3>
+        <p class="del-desc">User flow diagrams and UML specifications for all major journeys — onboarding, workout scheduling, payments, achievements. Followed by the working implementation: backend API, database, frontend build, and structured testing.</p>
+        <div class="del-tags">
+          <span class="del-tag">User Flows</span>
+          <span class="del-tag">Backend API</span>
+          <span class="del-tag">Frontend</span>
+          <span class="del-tag">Testing</span>
+        </div>
+        <span class="del-meta">310h invested · heaviest phase</span>
+      </div>
+      <div class="del-card">
+        <span class="del-num">D5</span>
+        <h3 class="del-title">Final Report</h3>
+        <p class="del-desc">Project retrospective covering team organisation, individual roles and time distribution, critical issues encountered, and self-evaluation. Also includes reflections from 10 industry seminars — IBM, Meta, RedHat, Microsoft, APSS, and more.</p>
+        <div class="del-tags">
+          <span class="del-tag">Work Distribution</span>
+          <span class="del-tag">Retrospective</span>
+          <span class="del-tag">Industry Seminars</span>
+          <span class="del-tag">Self-evaluation</span>
+        </div>
+        <span class="del-meta">16 pages</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MY ROLE -->
+<section id="my-role" class="on-light">
+  <div class="section-inner">
+    <span class="section-label">My Contribution</span>
+    <h2 class="section-title">Lead. Specify. Deliver.</h2>
+    <p class="section-desc">As project lead, I contributed ~300 hours — the highest individual contribution on the team — owning requirements definition, UML specification, architecture documentation, and end-to-end deliverable review.</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-icon">🧭</div>
+        <h4>Project Lead &amp; Coordinator</h4>
+        <p>Led all team activities across sprints — task allocation, weekly standup meetings, issue resolution, and deliverable sign-off. Adapted meeting format to context: in-person when alignment was needed, online for regular check-ins, async when the team could work independently.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📋</div>
+        <h4>Requirements Engineering (D1)</h4>
+        <p>Primary author of D1 — defined 30+ functional requirements and all non-functional requirements in natural language, from project objectives to detailed specs, ensuring completeness and internal consistency throughout.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📐</div>
+        <h4>UML Specification (D2)</h4>
+        <p>Authored use case descriptions and activity diagrams for all major requirements, designed the system component diagram, produced the structured RNF tables, and built the context diagram defining system boundaries.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🏗️</div>
+        <h4>Architecture &amp; OCL (D3)</h4>
+        <p>Wrote class descriptions across all 9 architecture modules and authored the full set of OCL constraints — formally encoding all business logic and invariants not expressible in standard UML, eliminating implementation ambiguity.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🗺️</div>
+        <h4>User Flow Design (D4)</h4>
+        <p>Designed and documented UML user flow diagrams for all major journeys — onboarding, workout selection, payment upgrade, and achievement unlocking — before any development work began.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">✅</div>
+        <h4>Document Supervision</h4>
+        <p>Personally reviewed every deliverable before submission — checking for consistency, coherence, and completeness across all five documents, ensuring the full specification held together as a single unified system design.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="methodology" class="on-dark">
+  <div class="section-inner">
+    <span class="section-label">How We Worked</span>
+    <h2 class="section-title">Agile by design. Adaptive by necessity.</h2>
+    <p class="section-desc">The team followed a Scrum-inspired Agile methodology with weekly iterative reviews — adapting meeting formats and coordination style to what each sprint actually required, not a fixed template.</p>
+    <div class="method-grid">
+      <div class="method-block">
+        <h3>Process &amp; Methodology</h3>
+        <div class="method-item"><div class="method-dot"></div><p><strong>Scrum-inspired Agile</strong> with weekly standup meetings to track deliverable progress, surface blockers early, and keep all three team members aligned.</p></div>
+        <div class="method-item"><div class="method-dot"></div><p><strong>Iterative delivery</strong> — each deliverable built incrementally, with the ability to retroactively fix earlier decisions when inconsistencies surfaced downstream.</p></div>
+        <div class="method-item"><div class="method-dot"></div><p><strong>Adaptive meetings</strong> — in-person when structural decisions required full alignment, online for regular standups, fully async when everyone had clear independent tasks to complete.</p></div>
+        <div class="method-item"><div class="method-dot"></div><p><strong>Competency-based task allocation</strong> — development and backend work delegated to technically stronger members; specification, architecture, and documentation led by the project lead.</p></div>
+      </div>
+      <div class="method-block">
+        <h3>Key Decisions</h3>
+        <div class="method-item"><div class="method-dot"></div><p><strong>Specification before code</strong> — three full deliverables (D1, D2, D3) completed before any implementation began, eliminating ambiguity and reducing rework during development.</p></div>
+        <div class="method-item"><div class="method-dot"></div><p><strong>Trello Kanban for backlog</strong> — tasks, sprint goals, and to-do lists maintained in Trello for team-wide visibility and WIP discipline, preventing over-allocation.</p></div>
+        <div class="method-item"><div class="method-dot"></div><p><strong>UML as the shared language</strong> — all requirements formalised in UML so every team member — regardless of role — could read and validate the specification without interpretive gaps.</p></div>
+        <div class="method-item"><div class="method-dot"></div><p><strong>OCL for business logic</strong> — constraints not expressible in UML encoded formally in OCL, creating a precise, unambiguous bridge from specification to implementation.</p></div>
+      </div>
+    </div>
+    <div class="tools-wrap">
+      <p class="tools-title">Tools used</p>
+      <div class="tools-grid">
+        <span class="tool-pill"><span class="tool-dot"></span>Trello</span>
+        <span class="tool-pill"><span class="tool-dot"></span>Figma</span>
+        <span class="tool-pill"><span class="tool-dot"></span>Draw.IO</span>
+        <span class="tool-pill"><span class="tool-dot"></span>GitHub</span>
+        <span class="tool-pill"><span class="tool-dot"></span>Google Docs</span>
+        <span class="tool-pill"><span class="tool-dot"></span>Visual Studio Code</span>
+        <span class="tool-pill"><span class="tool-dot"></span>LiveShare</span>
+        <span class="tool-pill"><span class="tool-dot"></span>UML</span>
+        <span class="tool-pill"><span class="tool-dot"></span>OCL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" class="on-light">
+  <div class="section-inner">
+    <span class="section-label">Outcomes</span>
+    <h2 class="section-title">The numbers behind the grade.</h2>
+    <p class="section-desc">A 28/30 final grade backed by 800+ team hours, five detailed technical documents, and a fully specified product architecture ready for any engineering team to implement.</p>
+    <div class="results-row">
+      <div class="result-item">
+        <span class="result-num">28/30</span>
+        <span class="result-label">Final Grade</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">~805h</span>
+        <span class="result-label">Total Team Hours</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">~300h</span>
+        <span class="result-label">Personal Contribution</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">135+</span>
+        <span class="result-label">Documentation Pages</span>
+      </div>
+      <div class="result-item">
+        <span class="result-num">30+</span>
+        <span class="result-label">Functional Requirements</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="fg-footer">
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Portfolio
+  </a>
+  <p>FitGYM44 · Software Engineering Project · Luca Buonocore · 2023–2024</p>
+</footer>
+
+</body>
+</html>
