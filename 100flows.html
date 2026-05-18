@@ -169,7 +169,7 @@
     }
     .research-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(79,142,247,.1) 0%, transparent 70%); bottom: -80px; left: 50%; transform: translateX(-50%); pointer-events: none; }
     .domains-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1px; background: var(--fl-border);
       border: 1px solid var(--fl-border); border-radius: 12px; overflow: hidden;
       position: relative; z-index: 1;
@@ -178,14 +178,16 @@
       background: var(--fl-card-dark); padding: 1.75rem;
       transition: background .2s;
     }
-    .domain-card:hover { background: rgba(124,91,219,.08); }
+    .domain-card:hover { background: #2d1f5a; }
+    .domain-card:hover h3 { color: #fff; }
+    .domain-card:hover p  { color: rgba(255,255,255,.55); }
     .domain-icon {
       width: 42px; height: 42px; border-radius: 10px; margin-bottom: 1rem;
       background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.2);
       display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
     }
     .domain-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
-    .domain-card p { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.6; }
+    .domain-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
     .domain-tag {
       display: inline-block; margin-top: .85rem;
       padding: .25rem .7rem; border-radius: 99px;
@@ -254,7 +256,15 @@
     /* ── MVP (light) ── */
     #mvp { background: #fff; }
     .mvp-feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-    .mvp-feature { display: flex; gap: .9rem; align-items: flex-start; }
+    .mvp-feature {
+      display: flex; gap: .9rem; align-items: flex-start;
+      background: #fff; border: 1px solid rgba(0,0,0,.07);
+      border-top: 3px solid rgba(124,91,219,.5);
+      border-radius: 12px; padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .mvp-feature:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(124,91,219,.12); }
     .mvp-feature-dot {
       width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
       background: linear-gradient(135deg, rgba(124,91,219,.15), rgba(79,142,247,.1));
@@ -322,14 +332,6 @@
     .roadmap-item p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; padding-top: .3rem; }
     .roadmap-item p strong { color: rgba(255,255,255,.82); font-weight: 600; }
 
-    /* ── INTERFACE GALLERY ── */
-    #interface { background: var(--fl-dark); }
-    .interface-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
-    .interface-gallery .screenshot-wrap:first-child { grid-column: 1 / -1; }
-    .interface-gallery .screenshot-wrap { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 4px 24px rgba(0,0,0,.35); }
-    .interface-gallery .screenshot-wrap img { width: 110%; display: block; height: 320px; object-fit: cover; object-position: top left; margin-right: -10%; }
-    .interface-gallery .screenshot-wrap:first-child img { height: 440px; }
-    .interface-gallery .screenshot-caption { padding: .45rem .9rem; background: #f0f2f8; font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 600; color: #6b7a99; border-top: 1px solid rgba(0,0,0,.06); }
 
     /* ── TOOLS STRIP ── */
     .fl-tools { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,.06); }
@@ -432,14 +434,45 @@
   </div>
 </div>
 
-<!-- THE RESEARCH -->
+<!-- THE PROBLEM -->
+<section id="problem" class="on-light">
+  <div class="section-inner">
+    <span class="section-label">The Problem</span>
+    <h2 class="section-title">Project managers are making million-euro decisions with 1950s tools.</h2>
+    <p class="section-desc">
+      Gantt charts, PERT, and manual resource levelling were designed for linear, predictable projects. Modern software teams are anything but — yet the tooling hasn't changed. The result is a systemic, measurable failure across the industry.
+    </p>
+    <div class="domains-grid">
+      <div class="domain-card">
+        <div class="domain-icon">📉</div>
+        <h3>Most projects miss their targets</h3>
+        <p>Research consistently shows that the majority of software projects exceed their budget, miss their deadline, or deliver reduced scope. The tools PMs rely on are producing plans that become obsolete within days of creation.</p>
+        <span class="domain-tag">Industry-wide failure rate</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">⏱️</div>
+        <h3>Over half of PM time is administrative</h3>
+        <p>Status updates, manual scheduling adjustments, and report generation consume the majority of a project manager's week — leaving little time for the strategic thinking and stakeholder communication that actually drive outcomes.</p>
+        <span class="domain-tag">Wasted capacity</span>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🔭</div>
+        <h3>Risk is managed retrospectively</h3>
+        <p>Traditional PM methods identify problems after they've already cascaded into delays or cost overruns. There's no mechanism for early detection — only damage control. PMs are always reacting, never anticipating.</p>
+        <span class="domain-tag">Reactive by design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALIDATING THE PROBLEM -->
 <section id="research" class="on-dark">
   <div class="research-glow"></div>
   <div class="section-inner">
-    <span class="section-label">The Research Foundation</span>
-    <h2 class="section-title">Before building anything, understand everything.</h2>
+    <span class="section-label">Problem Validation</span>
+    <h2 class="section-title">3 months. 50+ academic papers. 5 PM domains. One conclusion.</h2>
     <p class="section-desc">
-      100flows began as a 3-month university thesis — a systematic investigation into how AI is transforming each of the five core domains of project management, drawing on 50+ academic papers, industry reports, and proprietary documentation from leading PM platforms. The platform's feature set is directly grounded in those findings.
+      Before writing a single line of product specification, I ran a systematic university thesis — a rigorous academic investigation across all five core PM domains, synthesising 50+ papers, industry reports, and real-world case studies. The research both confirmed the problem and produced the blueprint for the solution.
     </p>
     <div class="domains-grid">
       <div class="domain-card">
@@ -479,10 +512,10 @@
 <!-- KEY FINDINGS -->
 <section id="findings" class="on-light">
   <div class="section-inner">
-    <span class="section-label">Key Research Findings</span>
-    <h2 class="section-title">What the research actually proved.</h2>
+    <span class="section-label">Validation Findings</span>
+    <h2 class="section-title">What 50 papers and 3 months of research actually proved.</h2>
     <p class="section-desc">
-      The thesis synthesised academic literature, real-world case studies, and a comparative analysis of leading AI-powered SaaS tools to surface actionable insights.
+      The thesis cross-referenced academic literature, real-world case studies, and a structured comparison of 10+ leading AI-powered PM platforms. Five clear conclusions emerged — each one becoming a design principle for 100flows.
     </p>
     <div class="findings-grid">
       <div class="finding-card">
@@ -514,14 +547,14 @@
   <div class="paradigm-glow1"></div>
   <div class="paradigm-glow2"></div>
   <div class="section-inner">
-    <span class="section-label">The Core Thesis</span>
+    <span class="section-label">The Solution Thesis</span>
     <div class="paradigm-box">
       <p class="paradigm-quote">
         "AI doesn't replace the project manager.<br>
         It <span>elevates them.</span>"
       </p>
       <p>
-        The research introduces the concept of <strong style="color:rgba(255,255,255,.85);">Augmented Project Management</strong> — a paradigm shift where AI absorbs the computational, administrative, and analytical burden, allowing the PM to operate at a purely strategic, empathetic, and decisive level. The role doesn't disappear. It evolves into something more valuable.
+        The research produced a clear design principle: <strong style="color:rgba(255,255,255,.85);">Augmented Project Management</strong>. AI absorbs the computational, administrative, and analytical burden — freeing the PM to operate at a purely strategic, empathetic, and decisive level. The role doesn't disappear. It evolves into something far more valuable. This thesis became the product vision for 100flows.
       </p>
     </div>
     <div class="shift-grid">
@@ -549,10 +582,10 @@
 <!-- MVP -->
 <section id="mvp" class="on-light">
   <div class="section-inner">
-    <span class="section-label">The Product</span>
-    <h2 class="section-title">100flows: research turned into software.</h2>
+    <span class="section-label">Building the Solution</span>
+    <h2 class="section-title">100flows: every feature traces back to a research finding.</h2>
     <p class="section-desc">
-      The findings from the thesis are being translated directly into an MVP — a project management platform that embeds AI at every layer, not as a bolt-on feature, but as the core engine.
+      The thesis findings became the product specification. Each MVP feature maps directly to a validated research conclusion — not a guess, not a best practice borrowed from competitors, but an evidence-based design decision.
     </p>
     <div class="mvp-feature-list">
       <div class="mvp-feature">
@@ -587,67 +620,44 @@
   </div>
 </section>
 
-<!-- INTERFACE -->
-<section id="interface" class="on-dark">
-  <div class="section-inner">
-    <span class="section-label">UI/UX Design</span>
-    <h2 class="section-title">Designed end-to-end in Figma.</h2>
-    <p class="section-desc">Every screen was designed to make AI capabilities feel intuitive — translating complex research insights into interfaces that project managers can actually use without friction.</p>
-    <div class="interface-gallery">
-      <div class="screenshot-wrap">
-        <img src="img/100flows/Kanban_board_page.png" alt="100flows Kanban Board"/>
-        <div class="screenshot-caption">Kanban Board — AI-assisted task management</div>
-      </div>
-      <div class="screenshot-wrap">
-        <img src="img/100flows/Calendar_page_main.png" alt="100flows Calendar"/>
-        <div class="screenshot-caption">Calendar — AI-optimised scheduling</div>
-      </div>
-      <div class="screenshot-wrap">
-        <img src="img/100flows/New_ai_meeting.png" alt="100flows AI Meeting"/>
-        <div class="screenshot-caption">AI Meeting — automated scheduling &amp; agenda</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- MY ROLE -->
 <section id="my-role" class="on-light">
   <div class="section-inner">
-    <span class="section-label">My Contribution</span>
-    <h2 class="section-title">Research that drives product decisions.</h2>
+    <span class="section-label">Skills &amp; Contribution</span>
+    <h2 class="section-title">Solo researcher, strategist, designer, and developer.</h2>
     <p class="section-desc">
-      Every feature in 100flows traces back to a specific research finding. This is what I built before writing a single line of product specification.
+      100flows is a solo project — from academic hypothesis to working prototype. Every phase required a different skillset, and I owned all of them.
     </p>
     <div class="role-grid">
       <div class="role-card">
-        <div class="role-icon">📚</div>
-        <h4>Systematic Literature Review</h4>
-        <p>Investigated AI integration across all five PM knowledge domains, synthesising academic papers, industry reports, and real-world case studies into a coherent evidence base.</p>
-      </div>
-      <div class="role-card">
         <div class="role-icon">🔬</div>
-        <h4>ML &amp; Scheduling Deep-Dive</h4>
-        <p>Analysed predictive scheduling models, dynamic resource balancing algorithms, and the limitations of traditional methods (Gantt, PERT, CPM, CCPM, Agile) to identify where AI delivers the highest value.</p>
+        <h4>Academic Research &amp; Synthesis</h4>
+        <p>Conducted a 3-month systematic literature review across 50+ papers, industry reports, and SaaS product documentation — synthesising conflicting sources into a single, structured evidence base capable of driving product decisions.</p>
       </div>
       <div class="role-card">
-        <div class="role-icon">💬</div>
-        <h4>NLP Applications Research</h4>
-        <p>Evaluated NLP and LLM applications for stakeholder sentiment analysis, automated reporting, and natural language project interfaces — mapping the current state of the art.</p>
+        <div class="role-icon">📐</div>
+        <h4>AI &amp; ML Technical Analysis</h4>
+        <p>Evaluated predictive scheduling models, ML-based resource balancing algorithms, NLP/LLM applications for PM automation, and the technical ceiling of traditional methods (Gantt, PERT, CPM, CCPM) — translating academic findings into actionable product requirements.</p>
       </div>
       <div class="role-card">
         <div class="role-icon">🧩</div>
-        <h4>Comparative SaaS Analysis</h4>
-        <p>Conducted a structured comparison of leading AI-powered PM platforms and AI orchestration tools to identify market gaps, capability overlaps, and positioning opportunities for 100flows.</p>
+        <h4>Competitive &amp; Market Analysis</h4>
+        <p>Ran a structured comparison of 10+ leading AI-powered PM platforms — analysing feature sets, pricing models, AI integration depth, and market positioning — to identify the whitespace 100flows could credibly own.</p>
       </div>
       <div class="role-card">
         <div class="role-icon">🏗️</div>
-        <h4>Paradigm Definition</h4>
-        <p>Synthesised all findings into the "Augmented Project Management" framework — defining the PM role of the future and the product principles that should guide 100flows's development.</p>
+        <h4>Product Strategy &amp; Framework Design</h4>
+        <p>Distilled all research findings into the "Augmented Project Management" framework — a strategic product vision defining what the platform must do, what it must never do, and why. This became the product spec.</p>
       </div>
       <div class="role-card">
         <div class="role-icon">🎨</div>
-        <h4>UI/UX Design &amp; MVP Development</h4>
-        <p>Designed the full product interface in Figma — from information architecture and user flows to high-fidelity screens — before translating the research into a working software prototype.</p>
+        <h4>UI/UX Design</h4>
+        <p>Designed the full product interface in Figma — from information architecture and user flow mapping to high-fidelity screens. Every design decision was constrained by the research: no feature exists without a validated research justification.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">💻</div>
+        <h4>MVP Development</h4>
+        <p>Built the working prototype from the ground up — frontend interface, component structure, and feature logic — translating Figma designs into functional software and validating that the research-driven approach holds up under real implementation constraints.</p>
       </div>
     </div>
     <div class="fl-tools">

@@ -108,6 +108,8 @@
     .app-card p { font-size: .79rem; color: var(--muted); line-height: 1.6; }
 
     /* ── DELIVERABLES ── */
+    #challenge { background: var(--fg-dark); }
+    #challenge .section-desc { margin-bottom: 1.25rem; }
     #deliverables { background: var(--fg-dark); }
     .deliverables-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -242,12 +244,43 @@
   </div>
 </div>
 
+<!-- THE CHALLENGE -->
+<section id="challenge" class="on-dark">
+  <div class="section-inner">
+    <span class="section-label">The Challenge</span>
+    <h2 class="section-title">Specify a complex system. Completely. Before writing a line of code.</h2>
+    <p class="section-desc">
+      FitGYM44 was a university software engineering project with a deliberately demanding brief: design and fully specify a fitness management platform — covering training, dieting, payments, social features, wearables, and gamification — using formal engineering methods, and only then build it.
+    </p>
+    <div class="deliverables-grid">
+      <div class="del-card">
+        <span class="del-num">🎯</span>
+        <h3 class="del-title">The Product Scope</h3>
+        <p class="del-desc">A fitness SaaS platform covering 9 functional domains: user authentication, workout planning, diet tracking, payment tiers, social features, achievement systems, wearable integration, push notifications, and calendar scheduling — all integrated into a single coherent architecture.</p>
+        <div class="del-tags"><span class="del-tag">9 Modules</span><span class="del-tag">30+ Requirements</span><span class="del-tag">Full Stack</span></div>
+      </div>
+      <div class="del-card">
+        <span class="del-num">📐</span>
+        <h3 class="del-title">The Engineering Constraint</h3>
+        <p class="del-desc">Every requirement had to be formally specified in UML before any implementation could begin. Business logic not expressible in UML had to be encoded in OCL. Nothing could be left to developer interpretation — the specification had to be implementation-ready.</p>
+        <div class="del-tags"><span class="del-tag">UML</span><span class="del-tag">OCL Constraints</span><span class="del-tag">Spec-first</span></div>
+      </div>
+      <div class="del-card">
+        <span class="del-num">👥</span>
+        <h3 class="del-title">The Team Dynamic</h3>
+        <p class="del-desc">A 3-person team with different technical backgrounds, a hard academic deadline, and 5 structured deliverables to deliver in sequence — each one dependent on the correctness of the one before. Leading that coordination was as much the challenge as the specification itself.</p>
+        <div class="del-tags"><span class="del-tag">Agile/Scrum</span><span class="del-tag">Cross-functional</span><span class="del-tag">Iterative</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS -->
 <section id="skills" class="on-light">
   <div class="section-inner">
-    <span class="section-label">Skills Demonstrated</span>
-    <h2 class="section-title">What the project required me to master.</h2>
-    <p class="section-desc">A fitness app specification complex enough to span 9 architectural modules, 30+ requirements, and formal OCL constraints demanded a wide range of engineering competencies — applied under real team dynamics and a hard deadline.</p>
+    <span class="section-label">Engineering Competencies Applied</span>
+    <h2 class="section-title">What this level of rigour required.</h2>
+    <p class="section-desc">Nine architectural modules, 30+ formal requirements, OCL constraints, and five sequential deliverables demanded a broad stack of engineering competencies — all applied simultaneously, under real team dynamics and a hard academic deadline.</p>
     <div class="app-grid">
       <div class="app-card">
         <div class="app-icon">🧭</div>
@@ -301,9 +334,9 @@
 <!-- DELIVERABLES -->
 <section id="deliverables" class="on-dark">
   <div class="section-inner">
-    <span class="section-label">The Deliverables</span>
-    <h2 class="section-title">Five documents. Zero assumptions.</h2>
-    <p class="section-desc">Every feature, class, constraint, and user flow was written down before a single line of code was written. The deliverables are the project — the code is a consequence of them.</p>
+    <span class="section-label">The Process</span>
+    <h2 class="section-title">Five deliverables. No assumptions. Code last.</h2>
+    <p class="section-desc">Every requirement, class, constraint, and user flow was formally documented before implementation began. The deliverables aren't supporting artifacts — they are the project. The code is a consequence of them.</p>
     <div class="deliverables-grid">
       <div class="del-card">
         <span class="del-num">D1</span>
@@ -371,9 +404,9 @@
 <!-- MY ROLE -->
 <section id="my-role" class="on-light">
   <div class="section-inner">
-    <span class="section-label">My Contribution</span>
-    <h2 class="section-title">Lead. Specify. Deliver.</h2>
-    <p class="section-desc">As project lead, I contributed ~300 hours — the highest individual contribution on the team — owning requirements definition, UML specification, architecture documentation, and end-to-end deliverable review.</p>
+    <span class="section-label">Skills &amp; Contribution</span>
+    <h2 class="section-title">~300 hours. The highest individual contribution on the team.</h2>
+    <p class="section-desc">As project lead, I owned the specification from first requirement to final document — requirements engineering, UML modelling, system architecture, OCL constraints, and end-to-end deliverable review across all five documents.</p>
     <div class="role-grid">
       <div class="role-card">
         <div class="role-icon">🧭</div>
@@ -412,7 +445,7 @@
 <!-- METHODOLOGY -->
 <section id="methodology" class="on-dark">
   <div class="section-inner">
-    <span class="section-label">How We Worked</span>
+    <span class="section-label">Development Process</span>
     <h2 class="section-title">Agile by design. Adaptive by necessity.</h2>
     <p class="section-desc">The team followed a Scrum-inspired Agile methodology with weekly iterative reviews — adapting meeting formats and coordination style to what each sprint actually required, not a fixed template.</p>
     <div class="method-grid">

@@ -202,7 +202,9 @@
       background-size: 60px 60px;
       pointer-events: none;
     }
-    .solution-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; position: relative; z-index: 1; }
+    .solution-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; position: relative; z-index: 1; }
+    @media (max-width: 760px) { .solution-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 440px) { .solution-grid { grid-template-columns: 1fr; } }
     .solution-card {
       background: var(--sf-card-dark); border: 1px solid var(--sf-border);
       border-top: 2px solid var(--sf-gold);
@@ -300,9 +302,11 @@
     /* ── KEY RESULTS (light) ── */
     #results { background: #fff; }
     .results-row {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      display: grid; grid-template-columns: repeat(6, 1fr);
       gap: 1px; border: 1px solid rgba(0,0,0,.08); border-radius: 8px; overflow: hidden;
     }
+    @media (max-width: 700px) { .results-row { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 420px) { .results-row { grid-template-columns: repeat(2, 1fr); } }
     .result-item {
       padding: 2rem 1.25rem; text-align: center; background: #fff;
       border-right: 1px solid rgba(0,0,0,.06);
@@ -446,6 +450,37 @@
   </div>
 </section>
 
+<!-- VALIDATION -->
+<section id="validation" class="light" style="background:#f8f9fc;">
+  <div class="section-inner">
+    <span class="section-label">Problem Validation</span>
+    <h2 class="section-title">350 players surveyed. 25 interviews. One clear conclusion.</h2>
+    <p class="section-desc">
+      Before any design or engineering work started, I ran a structured research phase to validate whether the problem was real, who it affected, and whether the proposed model could address it. The research is what drove every subsequent decision — including the decision to halt.
+    </p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">📊</span>
+        <h3>Quantitative validation at scale</h3>
+        <p>Surveyed 350 players across League of Legends, Valorant, Fortnite, and Rainbow Six to validate demand across titles. 64% confirmed the accessibility barrier was a genuine blocker to their improvement. The research also expanded the original TAM 4× by confirming cross-title demand beyond the initial LoL scope.</p>
+        <span class="problem-stat">64% affected · 4× TAM expansion</span>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🗣️</span>
+        <h3>Qualitative depth through interviews</h3>
+        <p>Conducted 25 in-depth interviews to understand the texture of the problem — why players trusted (or didn't trust) specific coaches, what made content feel worth paying for, and what barriers existed beyond just price. These shaped the product requirements and creator vetting approach.</p>
+        <span class="problem-stat">25 in-depth interviews</span>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🔎</span>
+        <h3>Competitive landscape mapping</h3>
+        <p>Analysed 1:1 coaching platforms (Coachify, Metafy, Tapin.gg) and generalist course marketplaces (Udemy) to identify the gap SkillForge could credibly own: pro-tier educational content at non-premium price points — a niche none of the incumbents served properly.</p>
+        <span class="problem-stat">€240 price gap · unserved niche</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SOLUTION -->
 <section id="solution" class="dark">
   <div class="section-inner">
@@ -482,10 +517,10 @@
 <!-- MY ROLE -->
 <section id="my-role" class="light">
   <div class="section-inner">
-    <span class="section-label">My Contribution</span>
-    <h2 class="section-title">Research first. Build later.</h2>
+    <span class="section-label">Skills &amp; Contribution</span>
+    <h2 class="section-title">Product thinking before product building.</h2>
     <p class="section-desc">
-      My entire contribution to SkillForge happened before a single line of code was written — validating the problem, sizing the opportunity, and stress-testing the business model.
+      My entire contribution to SkillForge happened in the discovery phase — before any design or engineering work began. The project demonstrates how rigorous early-stage research and honest trade-off analysis can save months of wasted development time.
     </p>
     <div class="role-grid">
       <div class="role-card">
