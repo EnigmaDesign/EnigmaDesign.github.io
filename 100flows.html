@@ -139,7 +139,7 @@
     .stat-label { font-size: .72rem; color: var(--muted); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
 
     /* ── SHARED ── */
-    section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 5vw, 3rem); }
+    section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
     .section-inner { max-width: 1060px; margin: auto; }
     .section-label {
       font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700;
@@ -253,8 +253,7 @@
 
     /* ── MVP (light) ── */
     #mvp { background: #fff; }
-    .mvp-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-bottom: 3rem; }
-    .mvp-feature-list { display: flex; flex-direction: column; gap: 1rem; }
+    .mvp-feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
     .mvp-feature { display: flex; gap: .9rem; align-items: flex-start; }
     .mvp-feature-dot {
       width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
@@ -322,6 +321,21 @@
     }
     .roadmap-item p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; padding-top: .3rem; }
     .roadmap-item p strong { color: rgba(255,255,255,.82); font-weight: 600; }
+
+    /* ── INTERFACE GALLERY ── */
+    #interface { background: var(--fl-dark); }
+    .interface-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
+    .interface-gallery .screenshot-wrap:first-child { grid-column: 1 / -1; }
+    .interface-gallery .screenshot-wrap { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 4px 24px rgba(0,0,0,.35); }
+    .interface-gallery .screenshot-wrap img { width: 110%; display: block; height: 320px; object-fit: cover; object-position: top left; margin-right: -10%; }
+    .interface-gallery .screenshot-wrap:first-child img { height: 440px; }
+    .interface-gallery .screenshot-caption { padding: .45rem .9rem; background: #f0f2f8; font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 600; color: #6b7a99; border-top: 1px solid rgba(0,0,0,.06); }
+
+    /* ── TOOLS STRIP ── */
+    .fl-tools { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,.06); }
+    .fl-tools-label { font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .75rem; }
+    .fl-tools-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .fl-tool { padding: .32rem .85rem; border-radius: 6px; background: #fff; border: 1px solid rgba(0,0,0,.08); font-family: 'Sora', sans-serif; font-size: .76rem; font-weight: 600; color: var(--muted); }
 
     /* ── FOOTER ── */
     .flows-footer {
@@ -540,48 +554,57 @@
     <p class="section-desc">
       The findings from the thesis are being translated directly into an MVP — a project management platform that embeds AI at every layer, not as a bolt-on feature, but as the core engine.
     </p>
-    <div class="mvp-intro-grid">
-      <div class="mvp-feature-list">
-        <div class="mvp-feature">
-          <div class="mvp-feature-dot">📋</div>
-          <div>
-            <h4>AI-Enhanced Kanban Board</h4>
-            <p>Visual task management with intelligent workload warnings, automatic dependency detection, and AI-suggested task prioritisation based on deadline risk.</p>
-          </div>
-        </div>
-        <div class="mvp-feature">
-          <div class="mvp-feature-dot">👤</div>
-          <div>
-            <h4>Smart Onboarding &amp; Team Setup</h4>
-            <p>Guided project creation that captures team capacity, skills, and constraints — giving the AI the context it needs to generate accurate schedules from day one.</p>
-          </div>
-        </div>
-        <div class="mvp-feature">
-          <div class="mvp-feature-dot">🔔</div>
-          <div>
-            <h4>Proactive Risk Alerts</h4>
-            <p>The platform monitors project signals continuously and surfaces early warnings before bottlenecks become blockers — grounded directly in the risk management research.</p>
-          </div>
-        </div>
-        <div class="mvp-feature">
-          <div class="mvp-feature-dot">📊</div>
-          <div>
-            <h4>Automated Progress Reporting</h4>
-            <p>One-click executive summaries and stakeholder updates generated from live project data — eliminating one of the most time-consuming parts of a PM's week.</p>
-          </div>
+    <div class="mvp-feature-list">
+      <div class="mvp-feature">
+        <div class="mvp-feature-dot">📋</div>
+        <div>
+          <h4>AI-Enhanced Kanban Board</h4>
+          <p>Visual task management with intelligent workload warnings, automatic dependency detection, and AI-suggested task prioritisation based on deadline risk.</p>
         </div>
       </div>
-      <div>
-        <div class="screenshot-grid">
-          <div class="screenshot-wrap">
-            <img src="img/100flows/Kanban_board_group.png" alt="100flows Kanban Board — multiple views showing AI-enhanced task management"/>
-            <div class="screenshot-caption">Kanban Board — AI-assisted task management &amp; grouping</div>
-          </div>
-          <div class="screenshot-wrap">
-            <img src="img/100flows/Login_page.png" alt="100flows Login Page"/>
-            <div class="screenshot-caption">Platform Login &amp; Onboarding</div>
-          </div>
+      <div class="mvp-feature">
+        <div class="mvp-feature-dot">👤</div>
+        <div>
+          <h4>Smart Onboarding &amp; Team Setup</h4>
+          <p>Guided project creation that captures team capacity, skills, and constraints — giving the AI the context it needs to generate accurate schedules from day one.</p>
         </div>
+      </div>
+      <div class="mvp-feature">
+        <div class="mvp-feature-dot">🔔</div>
+        <div>
+          <h4>Proactive Risk Alerts</h4>
+          <p>The platform monitors project signals continuously and surfaces early warnings before bottlenecks become blockers — grounded directly in the risk management research.</p>
+        </div>
+      </div>
+      <div class="mvp-feature">
+        <div class="mvp-feature-dot">📊</div>
+        <div>
+          <h4>Automated Progress Reporting</h4>
+          <p>One-click executive summaries and stakeholder updates generated from live project data — eliminating one of the most time-consuming parts of a PM's week.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERFACE -->
+<section id="interface" class="on-dark">
+  <div class="section-inner">
+    <span class="section-label">UI/UX Design</span>
+    <h2 class="section-title">Designed end-to-end in Figma.</h2>
+    <p class="section-desc">Every screen was designed to make AI capabilities feel intuitive — translating complex research insights into interfaces that project managers can actually use without friction.</p>
+    <div class="interface-gallery">
+      <div class="screenshot-wrap">
+        <img src="img/100flows/Kanban_board_page.png" alt="100flows Kanban Board"/>
+        <div class="screenshot-caption">Kanban Board — AI-assisted task management</div>
+      </div>
+      <div class="screenshot-wrap">
+        <img src="img/100flows/Calendar_page_main.png" alt="100flows Calendar"/>
+        <div class="screenshot-caption">Calendar — AI-optimised scheduling</div>
+      </div>
+      <div class="screenshot-wrap">
+        <img src="img/100flows/New_ai_meeting.png" alt="100flows AI Meeting"/>
+        <div class="screenshot-caption">AI Meeting — automated scheduling &amp; agenda</div>
       </div>
     </div>
   </div>
@@ -622,9 +645,19 @@
         <p>Synthesised all findings into the "Augmented Project Management" framework — defining the PM role of the future and the product principles that should guide 100flows's development.</p>
       </div>
       <div class="role-card">
-        <div class="role-icon">⚙️</div>
-        <h4>MVP Development</h4>
-        <p>Translating the research into working software — designing the product architecture, feature prioritisation, and user flows for the first functional prototype of the platform.</p>
+        <div class="role-icon">🎨</div>
+        <h4>UI/UX Design &amp; MVP Development</h4>
+        <p>Designed the full product interface in Figma — from information architecture and user flows to high-fidelity screens — before translating the research into a working software prototype.</p>
+      </div>
+    </div>
+    <div class="fl-tools">
+      <p class="fl-tools-label">Tools</p>
+      <div class="fl-tools-row">
+        <span class="fl-tool">Figma</span>
+        <span class="fl-tool">Notion</span>
+        <span class="fl-tool">GitHub</span>
+        <span class="fl-tool">Google Docs</span>
+        <span class="fl-tool">VS Code</span>
       </div>
     </div>
   </div>

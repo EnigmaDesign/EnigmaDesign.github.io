@@ -141,7 +141,7 @@
     }
 
     /* ── SHARED ── */
-    section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1rem, 5vw, 3rem); }
+    section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
     .section-inner { max-width: 1000px; margin: auto; }
     .section-label {
       font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700;
@@ -293,7 +293,10 @@
     .result-label { font-family: 'Sora', sans-serif; font-size: .78rem; font-weight: 600; color: rgba(255,255,255,.55); line-height: 1.45; }
 
     /* ── BUSINESS MODEL ── */
-    #business { background: #fff; position: relative; overflow: hidden; }
+    #business { background: var(--groove-dark); position: relative; overflow: hidden; }
+    #business .section-label { -webkit-text-fill-color: rgba(252,92,140,.85); background: none; }
+    #business .section-title { color: #fff; }
+    #business .section-desc { color: rgba(255,255,255,.5); }
     .biz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .biz-card {
       background: var(--card-bg); border-radius: 20px;
@@ -334,6 +337,12 @@
     /* Decorative */
     .d-bubble { position: absolute; border-radius: 50%; pointer-events: none; }
     .d-ring { position: absolute; border-radius: 50%; border: 1.5px solid rgba(168,2,110,.11); pointer-events: none; }
+
+    /* ── TOOLS ── */
+    .page-tools { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid rgba(0,0,0,.07); }
+    .page-tools-label { font-family: 'Sora', sans-serif; font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .65rem; }
+    .page-tools-row { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .page-tool { padding: .28rem .78rem; border-radius: 6px; background: #f4f6fa; border: 1px solid rgba(0,0,0,.07); font-family: 'Sora', sans-serif; font-size: .74rem; font-weight: 600; color: var(--muted); }
 
     /* ── FOOTER ── */
     .groove-footer {
@@ -723,6 +732,17 @@
       </div>
       <div class="brand-img">
         <img src="img/groove/Free_Duct_Tape_Mockup_3.png" alt="Groove Branded Tape Mockup"/>
+      </div>
+    </div>
+    <div class="page-tools" style="margin-top:1.25rem;padding-top:0;border-top:none;">
+      <p class="page-tools-label">Tools used</p>
+      <div class="page-tools-row">
+        <span class="page-tool">Figma</span>
+        <span class="page-tool">Notion</span>
+        <span class="page-tool">Miro</span>
+        <span class="page-tool">Google Slides</span>
+        <span class="page-tool">Excel</span>
+        <span class="page-tool">Jira</span>
       </div>
     </div>
   </div>
