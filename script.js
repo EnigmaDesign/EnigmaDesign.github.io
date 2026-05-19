@@ -115,19 +115,65 @@ autoPlay('skills', 5000);
 autoPlay('proj', 4500);
 autoPlay('cert', 4000);
 
-// Touch swipe support
-function addSwipe(wrapperId, id) {
+// Drag/swipe support (touch + mouse)
+function addDrag(wrapperId, id) {
   const el = document.getElementById(wrapperId).querySelector('.slider-track-outer');
-  let startX = 0;
-  el.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+  let startX = 0, isDragging = false;
+
+  // Touch
+  el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
   el.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - startX;
     if (Math.abs(dx) > 40) slide(id, dx < 0 ? 1 : -1);
   });
+
+  // Mouse
+  el.addEventListener('mousedown', e => {
+    startX = e.clientX; isDragging = true;
+    el.classList.add('dragging');
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => { /* track but no live movement needed */ });
+  document.addEventListener('mouseup', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    el.classList.remove('dragging');
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 40) slide(id, dx < 0 ? 1 : -1);
+  });
 }
-addSwipe('skillsSlider', 'skills');
-addSwipe('projSlider', 'proj');
-addSwipe('certSlider', 'cert');
+addDrag('skillsSlider', 'skills');
+addDrag('projSlider', 'proj');
+addDrag('certSlider', 'cert');
+
+// ── Language switcher ──
+(function() {
+  const switcher = document.getElementById('langSwitcher');
+  const label    = document.getElementById('langLabel');
+  const menu     = document.getElementById('langMenu');
+  if (!switcher) return;
+
+  const langs = { en: 'English (US)', it: 'Italiano', fr: 'Français' };
+  let current = 'en';
+
+  switcher.addEventListener('click', e => {
+    switcher.classList.toggle('open');
+    e.stopPropagation();
+  });
+
+  document.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.addEventListener('click', e => {
+      current = opt.dataset.lang;
+      label.textContent = langs[current];
+      document.querySelectorAll('.lang-opt').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      switcher.classList.remove('open');
+      e.stopPropagation();
+    });
+  });
+
+  document.addEventListener('click', () => switcher.classList.remove('open'));
+})();
 
 // ── Scroll fade-up reveal ──
 const fadeObserver = new IntersectionObserver((entries) => {

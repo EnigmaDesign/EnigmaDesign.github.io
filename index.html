@@ -22,9 +22,6 @@
       <a href="#languages">Languages</a>
       <a href="#certifications">Certifications</a>
       <a href="#projects">Projects</a>
-      <div class="nav-avatar">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      </div>
     </div>
   </div>
 </nav>
@@ -128,14 +125,27 @@ Looking forward to securing international internship opportunities across Europe
             </div>
           </div>
 
+          <!-- Slide 3 – Tools -->
+          <div class="skills-slide">
+            <div class="skill-card">
+              <div class="skill-img">🎨</div>
+              <h3>Figma</h3>
+              <p>Designed high-fidelity UI prototypes and complete design systems for multiple products — from mobile fitness apps to startup platforms.</p>
+            </div>
+            <div class="skill-card">
+              <div class="skill-img">📋</div>
+              <h3>Notion & Jira</h3>
+              <p>Primary tools for project and product management. I use Notion for documentation and roadmaps, Jira for issue tracking and agile sprint workflows.</p>
+            </div>
+            <div class="skill-card">
+              <div class="skill-img">🤖</div>
+              <h3>AI Tooling</h3>
+              <p>Proficient with ChatGPT, Claude, and GitHub Copilot for research, writing, and development. Certified in Generative AI for Project Managers (PMI).</p>
+            </div>
+          </div>
+
         </div>
       </div>
-      <button class="slider-btn slider-prev" onclick="slide('skills',-1)">
-        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="slider-btn slider-next" onclick="slide('skills',1)">
-        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
-      </button>
       <div class="slider-dots" id="skillsDots"></div>
     </div>
   </div>
@@ -203,7 +213,7 @@ Looking forward to securing international internship opportunities across Europe
               <a href="100flows.html" class="proj-card" style="text-decoration:none;color:inherit;">
                 <div class="proj-logo-wrap proj-100flows">
                   <img src="img/100flows/logo.png" alt="100flows" style="width:40px;height:40px;object-fit:contain;"/>
-                  <span style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:#0f2153;letter-spacing:-.02em;">100flows</span>
+                  <span style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;background:linear-gradient(135deg,#7c5bdb 0%,#4f8ef7 50%,#38bdf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em;">100flows</span>
                 </div>
                 <div class="proj-body">
                   <h4>Research and development</h4>
@@ -233,32 +243,26 @@ Looking forward to securing international internship opportunities across Europe
           <!-- Slide 2 -->
           <div class="proj-slide">
             <div class="proj-grid">
+              <a href="fitgym44.html" class="proj-card" style="text-decoration:none;color:inherit;">
+                <div class="proj-logo-wrap proj-FitGYM44"></div>
+                <div class="proj-body">
+                  <h4>Software Engineering Project</h4>
+                  <p>Designed and developed the full UI/UX for an AI-driven fitness platform built as a university Software Engineering project. Led design decisions across onboarding, workout planning, and progress tracking — delivering a production-ready prototype validated through peer review and academic assessment.</p>
+                  <span class="proj-cta">View case study <span class="proj-cta-arr">→</span></span>
+                </div>
+              </a>
               <div class="proj-card">
                 <div class="proj-logo-wrap proj-MyBadge"></div>
                 <div class="proj-body">
                   <h4>School Project</h4>
-                  <p>My first project ever. Served as a developer for a mobile app that helps student recieving communications and news related to the school in live and effectively. Leveraged NFC to convert our simple badge in a "debit" card for the school bar. </p>
+                  <p>My first project ever. Served as a developer for a mobile app that helps students receive communications and news related to school in real time. Leveraged NFC to convert our badge into a "debit" card for the school bar.</p>
                 </div>
               </div>
-              <a href="fitgym44.html" class="proj-card" style="text-decoration:none;color:inherit;">
-                <div class="proj-logo-wrap proj-FitGYM44"></div>
-                <div class="proj-body">
-                  <h4>Software Engineering project</h4>
-                  <p>Developed and designed both UI & UX for an AI-driven software to help people achieving their dream physique.</p>
-                  <span class="proj-cta">View case study <span class="proj-cta-arr">→</span></span>
-                </div>
-              </a>
             </div>
           </div>
 
         </div>
       </div>
-      <button class="slider-btn slider-prev" onclick="slide('proj',-1)">
-        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="slider-btn slider-next" onclick="slide('proj',1)">
-        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
-      </button>
       <div class="slider-dots" id="projDots"></div>
     </div>
   </div>
@@ -403,7 +407,7 @@ Looking forward to securing international internship opportunities across Europe
       <h4>Hobby</h4>
       <a href="#">Gym</a>
       <a href="#">Soccer</a>
-      <a href="#">League Of Legends</a>
+      <a href="#">Gaming</a>
       <a href="#">Reading</a>
     </div>
     <div class="footer-col">
@@ -416,8 +420,16 @@ Looking forward to securing international internship opportunities across Europe
     </div>
   </div>
   <div class="footer-bottom">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12 15.3 15.3 0 0 1 12 2z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-    English (US)
+    <div class="lang-switcher" id="langSwitcher">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12 15.3 15.3 0 0 1 12 2z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+      <span id="langLabel">English (US)</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      <div class="lang-menu" id="langMenu">
+        <div class="lang-opt" data-lang="en">🇺🇸 English (US)</div>
+        <div class="lang-opt" data-lang="it">🇮🇹 Italiano</div>
+        <div class="lang-opt" data-lang="fr">🇫🇷 Français</div>
+      </div>
+    </div>
   </div>
 </footer>
 <script src="script.js"></script>
