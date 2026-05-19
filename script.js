@@ -62,7 +62,6 @@
 
 // ── Slider state ──
 const sliders = {
-  skills: { current: 0, total: 0, track: 'skillsTrack', dots: 'skillsDots' },
   proj:   { current: 0, total: 0, track: 'projTrack',   dots: 'projDots'   },
   cert:   { current: 0, total: 0, track: 'certTrack',   dots: 'certDots'   }
 };
@@ -70,6 +69,7 @@ const sliders = {
 function initSlider(id) {
   const s = sliders[id];
   const track = document.getElementById(s.track);
+  if (!track) return;
   s.total = track.children.length;
   const dotsContainer = document.getElementById(s.dots);
   for (let i = 0; i < s.total; i++) {
@@ -108,16 +108,16 @@ function autoPlay(id, interval) {
   setInterval(() => slide(id, 1), interval);
 }
 
-initSlider('skills');
 initSlider('proj');
 initSlider('cert');
-autoPlay('skills', 5000);
 autoPlay('proj', 4500);
 autoPlay('cert', 4000);
 
 // Drag/swipe support (touch + mouse)
 function addDrag(wrapperId, id) {
-  const el = document.getElementById(wrapperId).querySelector('.slider-track-outer');
+  const wrapper = document.getElementById(wrapperId);
+  if (!wrapper) return;
+  const el = wrapper.querySelector('.slider-track-outer');
   let startX = 0, isDragging = false;
 
   // Touch
@@ -142,7 +142,6 @@ function addDrag(wrapperId, id) {
     if (Math.abs(dx) > 40) slide(id, dx < 0 ? 1 : -1);
   });
 }
-addDrag('skillsSlider', 'skills');
 addDrag('projSlider', 'proj');
 addDrag('certSlider', 'cert');
 
