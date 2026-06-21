@@ -1,721 +1,955 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>100flows – Case Study | Luca Buonocore</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>100flows – Case Study | Luca Buonocore</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--text: #0d0d1a;
+--muted: #6b7a99;
+--card-bg: #f8f9fc;
+--fl-dark: #0c0f1e;
+--fl-darker: #080b16;
+--fl-card-dark: #131728;
+--fl-border: rgba(255,255,255,.07);
+--fl-purple: #7c5bdb;
+--fl-blue: #4f8ef7;
+--fl-teal: #38bdf8;
+--fl-grad: linear-gradient(135deg, #7c5bdb 0%, #4f8ef7 50%, #38bdf8 100%);
+--fl-grad-soft: linear-gradient(135deg, rgba(124,91,219,.15) 0%, rgba(79,142,247,.1) 100%);
+--fl-muted: rgba(255,255,255,.45);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
 
-    :root {
-      --text: #0d0d1a;
-      --muted: #6b7a99;
-      --card-bg: #f8f9fc;
-      --fl-dark: #0c0f1e;
-      --fl-darker: #080b16;
-      --fl-card-dark: #131728;
-      --fl-border: rgba(255,255,255,.07);
-      --fl-purple: #7c5bdb;
-      --fl-blue: #4f8ef7;
-      --fl-teal: #38bdf8;
-      --fl-grad: linear-gradient(135deg, #7c5bdb 0%, #4f8ef7 50%, #38bdf8 100%);
-      --fl-grad-soft: linear-gradient(135deg, rgba(124,91,219,.15) 0%, rgba(79,142,247,.1) 100%);
-      --fl-muted: rgba(255,255,255,.45);
-    }
+/* ── NAV ── */
+nav {
+position: sticky; top: 0; z-index: 100;
+background: rgba(12,15,30,.94); backdrop-filter: blur(16px);
+border-bottom: 1px solid var(--fl-border);
+height: 60px; display: flex; align-items: center;
+padding: 0 clamp(1rem, 5vw, 3rem);
+}
+.nav-inner {
+max-width: 1060px; width: 100%; margin: auto;
+display: flex; align-items: center; justify-content: space-between;
+}
+.nav-back {
+display: flex; align-items: center; gap: .5rem;
+color: rgba(255,255,255,.5); text-decoration: none;
+font-family: 'Sora', sans-serif; font-size: .84rem; font-weight: 500;
+transition: color .2s;
+}
+.nav-back:hover { color: var(--fl-teal); }
+.nav-back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+.nav-brand { display: flex; align-items: center; gap: .55rem; }
+.nav-logo-img { width: 26px; height: 26px; }
+.nav-brand-name {
+font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700;
+background: var(--fl-grad);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
 
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+/* ── HERO ── */
+.hero {
+position: relative; min-height: 92vh;
+display: flex; align-items: center; justify-content: center;
+text-align: center; padding: 4rem 1.5rem;
+overflow: hidden; background: var(--fl-dark);
+}
+.hero-glow { position: absolute; border-radius: 50%; pointer-events: none; }
+.hg1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,91,219,.18) 0%, transparent 65%); top: -150px; left: -150px; }
+.hg2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 65%); bottom: -100px; right: -100px; }
+.hg3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(79,142,247,.1) 0%, transparent 65%); top: 30%; right: 10%; }
+.hero-dots {
+position: absolute; inset: 0; pointer-events: none;
+background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+background-size: 32px 32px;
+}
+.hero-content { position: relative; z-index: 2; max-width: 760px; }
+.hero-logo-wrap {
+width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 1.5rem;
+background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.3);
+display: flex; align-items: center; justify-content: center;
+box-shadow: 0 0 60px rgba(124,91,219,.2);
+}
+.hero-logo-wrap img { width: 46px; height: 46px; }
+.hero-badge {
+display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
+padding: .35rem 1rem; border-radius: 99px;
+background: rgba(124,91,219,.12); border: 1px solid rgba(124,91,219,.3);
+font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 600;
+color: #a78bfa; letter-spacing: .07em; text-transform: uppercase;
+}
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #a78bfa; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+.hero h1 {
+font-family: 'Sora', sans-serif;
+font-size: clamp(2.2rem, 5.5vw, 4rem);
+font-weight: 800; color: #fff;
+line-height: 1.08; letter-spacing: -.03em; margin-bottom: 1.1rem;
+}
+.hero h1 span {
+background: var(--fl-grad);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+font-size: clamp(.9rem, 2.2vw, 1.08rem);
+color: rgba(255,255,255,.55); line-height: 1.75;
+max-width: 580px; margin: 0 auto 2.5rem;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+.hero-tag {
+padding: .35rem .88rem; border-radius: 99px;
+background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+font-size: .73rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.65);
+}
 
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(12,15,30,.94); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--fl-border);
-      height: 60px; display: flex; align-items: center;
-      padding: 0 clamp(1rem, 5vw, 3rem);
-    }
-    .nav-inner {
-      max-width: 1060px; width: 100%; margin: auto;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-back {
-      display: flex; align-items: center; gap: .5rem;
-      color: rgba(255,255,255,.5); text-decoration: none;
-      font-family: 'Sora', sans-serif; font-size: .84rem; font-weight: 500;
-      transition: color .2s;
-    }
-    .nav-back:hover { color: var(--fl-teal); }
-    .nav-back svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
-    .nav-brand {
-      display: flex; align-items: center; gap: .55rem;
-    }
-    .nav-logo-img { width: 26px; height: 26px; }
-    .nav-brand-name {
-      font-family: 'Sora', sans-serif; font-size: .95rem; font-weight: 700;
-      background: var(--fl-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
+/* ── STATS STRIP ── */
+.stats-strip { background: #fff; padding: 2.5rem clamp(1rem, 5vw, 3rem); border-bottom: 1px solid rgba(0,0,0,.06); }
+.stats-inner {
+max-width: 1060px; margin: auto;
+display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
+}
+.stat-card {
+text-align: center; padding: 1.5rem 1rem;
+border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
+box-shadow: 0 2px 12px rgba(0,0,0,.04);
+transition: transform .2s, box-shadow .2s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
+.stat-num {
+font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
+background: var(--fl-grad);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+display: block; line-height: 1.1; margin-bottom: .4rem;
+}
+.stat-label { font-size: .72rem; color: var(--muted); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
 
-    /* ── HERO ── */
-    .hero {
-      position: relative; min-height: 92vh;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 4rem 1.5rem;
-      overflow: hidden; background: var(--fl-dark);
-    }
-    /* Ambient glow */
-    .hero-glow {
-      position: absolute; border-radius: 50%; pointer-events: none;
-    }
-    .hg1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,91,219,.18) 0%, transparent 65%); top: -150px; left: -150px; }
-    .hg2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 65%); bottom: -100px; right: -100px; }
-    .hg3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(79,142,247,.1) 0%, transparent 65%); top: 30%; right: 10%; }
-    /* Dot pattern */
-    .hero-dots {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
-      background-size: 32px 32px;
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 760px; }
-    .hero-logo-wrap {
-      width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 1.5rem;
-      background: var(--fl-grad-soft);
-      border: 1px solid rgba(124,91,219,.3);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 60px rgba(124,91,219,.2);
-    }
-    .hero-logo-wrap img { width: 46px; height: 46px; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
-      padding: .35rem 1rem; border-radius: 99px;
-      background: rgba(124,91,219,.12); border: 1px solid rgba(124,91,219,.3);
-      font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 600;
-      color: #a78bfa; letter-spacing: .07em; text-transform: uppercase;
-    }
-    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #a78bfa; display: inline-block; animation: pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
-    .hero h1 {
-      font-family: 'Sora', sans-serif;
-      font-size: clamp(2.2rem, 5.5vw, 4rem);
-      font-weight: 800; color: #fff;
-      line-height: 1.08; letter-spacing: -.03em; margin-bottom: 1.1rem;
-    }
-    .hero h1 span {
-      background: var(--fl-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero-sub {
-      font-size: clamp(.9rem, 2.2vw, 1.08rem);
-      color: rgba(255,255,255,.55); line-height: 1.75;
-      max-width: 580px; margin: 0 auto 2.5rem;
-    }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
-    .hero-tag {
-      padding: .35rem .88rem; border-radius: 99px;
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      font-size: .73rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.65);
-    }
+/* ── SHARED ── */
+section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
+.section-inner { max-width: 1060px; margin: auto; }
+.section-label {
+font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700;
+text-transform: uppercase; letter-spacing: .13em;
+background: var(--fl-grad);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+display: block; margin-bottom: .55rem;
+}
+.section-title {
+font-family: 'Sora', sans-serif;
+font-size: clamp(1.6rem, 4vw, 2.4rem);
+font-weight: 700; margin-bottom: .75rem;
+line-height: 1.12; letter-spacing: -.025em;
+}
+.section-desc { font-size: clamp(.88rem, 2vw, 1rem); line-height: 1.75; max-width: 640px; margin-bottom: 2.5rem; }
+.on-light .section-title { color: var(--text); }
+.on-light .section-desc { color: var(--muted); }
+.on-dark .section-title { color: #fff; }
+.on-dark .section-desc { color: var(--fl-muted); }
 
-    /* ── STATS STRIP ── */
-    .stats-strip { background: #fff; padding: 2.5rem clamp(1rem, 5vw, 3rem); border-bottom: 1px solid rgba(0,0,0,.06); }
-    .stats-inner {
-      max-width: 1060px; margin: auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
-    }
-    .stat-card {
-      text-align: center; padding: 1.5rem 1rem;
-      border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
-      box-shadow: 0 2px 12px rgba(0,0,0,.04);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
-    .stat-num {
-      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
-      background: var(--fl-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      display: block; line-height: 1.1; margin-bottom: .4rem;
-    }
-    .stat-label { font-size: .72rem; color: var(--muted); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+/* ── THE PROBLEM (light) ── */
+#problem { background: #fff; }
+.problem-grid {
+display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1.25rem;
+}
+.problem-card {
+background: var(--card-bg); border: 1px solid rgba(0,0,0,.06);
+border-radius: 14px; padding: 1.75rem;
+box-shadow: 0 2px 16px rgba(0,0,0,.05);
+transition: transform .25s, box-shadow .25s;
+}
+.problem-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
+.problem-card:nth-child(1) { border-top: 3px solid #7c5bdb; }
+.problem-card:nth-child(2) { border-top: 3px solid #4f8ef7; }
+.problem-card:nth-child(3) { border-top: 3px solid #38bdf8; }
+.problem-icon {
+width: 44px; height: 44px; border-radius: 12px; margin-bottom: 1rem;
+background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.18);
+display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.problem-card h3 { font-family: 'Sora', sans-serif; font-size: .92rem; font-weight: 700; color: var(--text); margin-bottom: .45rem; }
+.problem-card p { font-size: .8rem; color: var(--muted); line-height: 1.65; }
+.problem-tag {
+display: inline-block; margin-top: .85rem;
+padding: .25rem .7rem; border-radius: 99px;
+background: rgba(124,91,219,.1); border: 1px solid rgba(124,91,219,.2);
+font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 600; color: #7c5bdb;
+}
 
-    /* ── SHARED ── */
-    section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
-    .section-inner { max-width: 1060px; margin: auto; }
-    .section-label {
-      font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .13em;
-      background: var(--fl-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      display: block; margin-bottom: .55rem;
-    }
-    .section-title {
-      font-family: 'Sora', sans-serif;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700; margin-bottom: .75rem;
-      line-height: 1.12; letter-spacing: -.025em;
-    }
-    .section-desc { font-size: clamp(.88rem, 2vw, 1rem); line-height: 1.75; max-width: 640px; margin-bottom: 2.5rem; }
-    .on-light .section-title { color: var(--text); }
-    .on-light .section-desc { color: var(--muted); }
-    .on-dark .section-title { color: #fff; }
-    .on-dark .section-desc { color: var(--fl-muted); }
+/* ── RESEARCH (dark) ── */
+#research { background: var(--fl-dark); position: relative; overflow: hidden; }
+#research::before {
+content: ''; position: absolute; inset: 0;
+background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+background-size: 28px 28px; pointer-events: none;
+}
+.research-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(79,142,247,.1) 0%, transparent 70%); bottom: -80px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+.domains-grid {
+display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+gap: 1px; background: var(--fl-border);
+border: 1px solid var(--fl-border); border-radius: 12px; overflow: hidden;
+position: relative; z-index: 1;
+}
+.domain-card { background: var(--fl-card-dark); padding: 1.75rem; transition: background .2s; }
+.domain-card:hover { background: #2d1f5a; }
+.domain-card:hover h3 { color: #fff; }
+.domain-card:hover p { color: rgba(255,255,255,.55); }
+.domain-icon {
+width: 42px; height: 42px; border-radius: 10px; margin-bottom: 1rem;
+background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.2);
+display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+}
+.domain-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
+.domain-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+.domain-tag {
+display: inline-block; margin-top: .85rem;
+padding: .25rem .7rem; border-radius: 99px;
+background: rgba(124,91,219,.15); border: 1px solid rgba(124,91,219,.25);
+font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 600; color: #a78bfa;
+}
 
-    /* ── THE RESEARCH (dark) ── */
-    #research { background: var(--fl-dark); position: relative; overflow: hidden; }
-    #research::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 28px 28px; pointer-events: none;
-    }
-    .research-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(79,142,247,.1) 0%, transparent 70%); bottom: -80px; left: 50%; transform: translateX(-50%); pointer-events: none; }
-    .domains-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1px; background: var(--fl-border);
-      border: 1px solid var(--fl-border); border-radius: 12px; overflow: hidden;
-      position: relative; z-index: 1;
-    }
-    .domain-card {
-      background: var(--fl-card-dark); padding: 1.75rem;
-      transition: background .2s;
-    }
-    .domain-card:hover { background: #2d1f5a; }
-    .domain-card:hover h3 { color: #fff; }
-    .domain-card:hover p  { color: rgba(255,255,255,.55); }
-    .domain-icon {
-      width: 42px; height: 42px; border-radius: 10px; margin-bottom: 1rem;
-      background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.2);
-      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-    }
-    .domain-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
-    .domain-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
-    .domain-tag {
-      display: inline-block; margin-top: .85rem;
-      padding: .25rem .7rem; border-radius: 99px;
-      background: rgba(124,91,219,.15); border: 1px solid rgba(124,91,219,.25);
-      font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 600; color: #a78bfa;
-    }
+/* ── EXPERT INTERVIEWS (light) ── */
+#interviews { background: #fff; }
+.iv-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+.iv-stat {
+text-align: center; padding: 1.4rem 1rem; border-radius: 12px;
+border: 1px solid rgba(0,0,0,.06); box-shadow: 0 2px 12px rgba(0,0,0,.04);
+transition: transform .2s, box-shadow .2s;
+}
+.iv-stat:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
+.iv-stat .n {
+font-family: 'Sora',sans-serif; font-size: 2rem; font-weight: 800;
+background: var(--fl-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+display: block; line-height: 1.1; margin-bottom: .35rem;
+}
+.iv-stat .l { font-size: .72rem; color: var(--muted); font-family: 'Sora',sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 
-    /* ── KEY FINDINGS (light) ── */
-    #findings { background: var(--card-bg); }
-    .findings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-    .finding-card {
-      background: #fff; border-radius: 12px;
-      border: 1px solid rgba(0,0,0,.06); padding: 1.75rem;
-      box-shadow: 0 2px 16px rgba(0,0,0,.05);
-      border-top: 3px solid transparent;
-      border-image: var(--fl-grad) 1;
-      border-image-slice: 0 0 0 0 / 0 0 3px 0;
-      transition: transform .25s, box-shadow .25s;
-    }
-    /* Simplified top border using box shadow trick */
-    .finding-card { border-top: 3px solid; border-image: none; }
-    .finding-card:nth-child(1) { border-top-color: #7c5bdb; }
-    .finding-card:nth-child(2) { border-top-color: #4f8ef7; }
-    .finding-card:nth-child(3) { border-top-color: #38bdf8; }
-    .finding-card:nth-child(4) { border-top-color: #7c5bdb; }
-    .finding-card:nth-child(5) { border-top-color: #4f8ef7; }
-    .finding-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
-    .finding-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .45rem; }
-    .finding-card p { font-size: .8rem; color: var(--muted); line-height: 1.65; }
+/* Company logos */
+.iv-logos { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem; margin-bottom: 2.75rem; }
+.iv-logo {
+height: 56px; padding: 0 1.4rem; display: flex; align-items: center; justify-content: center;
+background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 10px;
+box-shadow: 0 2px 10px rgba(0,0,0,.04); transition: transform .2s, box-shadow .2s;
+min-width: 110px;
+}
+.iv-logo:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,.1); }
+.iv-logo img { display: block; height: 28px; width: auto; max-width: 130px; object-fit: contain; }
+.iv-logo img.lg-stacked { height: 46px; }
 
-    /* ── THE PARADIGM (dark) ── */
-    #paradigm { background: var(--fl-darker); position: relative; overflow: hidden; }
-    .paradigm-glow1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(124,91,219,.12) 0%, transparent 70%); top: -100px; right: -100px; pointer-events: none; }
-    .paradigm-glow2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(56,189,248,.08) 0%, transparent 70%); bottom: -80px; left: -80px; pointer-events: none; }
-    .paradigm-box {
-      background: var(--fl-card-dark); border: 1px solid rgba(124,91,219,.2);
-      border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem;
-      position: relative; z-index: 1;
-    }
-    .paradigm-quote {
-      font-family: 'Sora', sans-serif; font-size: clamp(1.3rem, 3vw, 1.8rem);
-      font-weight: 700; color: #fff; line-height: 1.3;
-      margin-bottom: 1rem;
-    }
-    .paradigm-quote span {
-      background: var(--fl-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .paradigm-box p { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.75; max-width: 700px; }
-    .shift-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; position: relative; z-index: 1; }
-    .shift-col { background: var(--fl-card-dark); border: 1px solid var(--fl-border); border-radius: 12px; padding: 1.5rem; }
-    .shift-col h4 { font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; padding-bottom: .75rem; border-bottom: 1px solid var(--fl-border); }
-    .shift-col.before h4 { color: rgba(255,255,255,.4); }
-    .shift-col.after h4 { color: #a78bfa; }
-    .shift-item { display: flex; gap: .65rem; margin-bottom: .7rem; align-items: flex-start; }
-    .shift-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: .45rem; flex-shrink: 0; }
-    .before .shift-dot { background: rgba(255,255,255,.25); }
-    .after .shift-dot { background: #a78bfa; }
-    .shift-item p { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.5; }
-    .after .shift-item p { color: rgba(255,255,255,.65); }
-    .shift-arrow {
-      font-size: 1.5rem; color: rgba(124,91,219,.5);
-      display: flex; align-items: center; justify-content: center;
-    }
+/* Use cases */
+.iv-sublabel {
+font-family: 'Sora',sans-serif; font-size: .78rem; font-weight: 700;
+text-transform: uppercase; letter-spacing: .1em; color: var(--text);
+display: flex; align-items: center; gap: .6rem; margin: 0 0 1.25rem;
+}
+.iv-sublabel::before { content: ''; width: 22px; height: 3px; border-radius: 2px; background: var(--fl-grad); }
+.iv-usecases { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px,1fr)); gap: 1.25rem; margin-bottom: 2.75rem; }
+.iv-uc {
+background: var(--card-bg); border: 1px solid rgba(0,0,0,.06);
+border-top: 3px solid #7c5bdb; border-radius: 12px; padding: 1.5rem;
+box-shadow: 0 2px 14px rgba(0,0,0,.04); transition: transform .25s, box-shadow .25s;
+}
+.iv-uc:nth-child(2) { border-top-color: #4f8ef7; }
+.iv-uc:nth-child(3) { border-top-color: #38bdf8; }
+.iv-uc:nth-child(4) { border-top-color: #7c5bdb; }
+.iv-uc:nth-child(5) { border-top-color: #4f8ef7; }
+.iv-uc:nth-child(6) { border-top-color: #38bdf8; }
+.iv-uc:nth-child(7) { border-top-color: #7c5bdb; }
+.iv-uc:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
+.iv-uc .ic { font-size: 1.4rem; margin-bottom: .5rem; }
+.iv-uc h3 { font-family: 'Sora',sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .4rem; }
+.iv-uc p { font-size: .79rem; color: var(--muted); line-height: 1.6; }
+.iv-uc .tag {
+display: inline-block; margin-top: .7rem; padding: .22rem .65rem; border-radius: 99px;
+background: rgba(124,91,219,.12); border: 1px solid rgba(124,91,219,.2);
+font-family: 'Sora',sans-serif; font-size: .68rem; font-weight: 700; color: #7c5bdb;
+}
 
-    /* ── MVP (light) ── */
-    #mvp { background: #fff; }
-    .mvp-feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-    .mvp-feature {
-      display: flex; gap: .9rem; align-items: flex-start;
-      background: #fff; border: 1px solid rgba(0,0,0,.07);
-      border-top: 3px solid rgba(124,91,219,.5);
-      border-radius: 12px; padding: 1.5rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,.04);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .mvp-feature:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(124,91,219,.12); }
-    .mvp-feature-dot {
-      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(124,91,219,.15), rgba(79,142,247,.1));
-      border: 1px solid rgba(124,91,219,.2);
-      display: flex; align-items: center; justify-content: center; font-size: 1rem;
-    }
-    .mvp-feature h4 { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .2rem; }
-    .mvp-feature p { font-size: .79rem; color: var(--muted); line-height: 1.58; }
-    /* Screenshots */
-    .screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-    .screenshot-wrap {
-      border-radius: 12px; overflow: hidden;
-      border: 1px solid rgba(0,0,0,.07);
-      box-shadow: 0 4px 24px rgba(0,0,0,.08);
-      transition: transform .3s, box-shadow .3s;
-    }
-    .screenshot-wrap:first-child { grid-column: 1 / -1; }
-    .screenshot-wrap:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(124,91,219,.12); }
-    .screenshot-wrap img { width: 100%; display: block; }
-    .screenshot-caption {
-      padding: .65rem 1rem; background: #f8f9fc;
-      font-family: 'Sora', sans-serif; font-size: .72rem;
-      font-weight: 600; color: var(--muted); border-top: 1px solid rgba(0,0,0,.06);
-    }
+/* Concerns */
+.iv-concerns {
+background: var(--fl-card-dark); border: 1px solid rgba(124,91,219,.2);
+border-radius: 16px; padding: 2rem; margin-bottom: 2.75rem; position: relative; overflow: hidden;
+}
+.iv-concerns::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 90% 10%, rgba(124,91,219,.14) 0%, transparent 55%); pointer-events: none; }
+.iv-concerns h3 { font-family: 'Sora',sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 1.2rem; position: relative; z-index: 1; }
+.iv-concerns-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; position: relative; z-index: 1; }
+.iv-concern { display: flex; gap: .65rem; align-items: flex-start; }
+.iv-concern .d { width: 6px; height: 6px; border-radius: 50%; background: #a78bfa; margin-top: .5rem; flex-shrink: 0; }
+.iv-concern p { font-size: .81rem; color: rgba(255,255,255,.55); line-height: 1.55; }
+.iv-concern p b { color: rgba(255,255,255,.85); font-weight: 600; }
 
-    /* ── MY ROLE ── */
-    #my-role { background: var(--card-bg); }
-    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-    .role-card {
-      background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
-      padding: 1.6rem; box-shadow: 0 2px 12px rgba(0,0,0,.04);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
-    .role-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: linear-gradient(135deg, rgba(124,91,219,.12), rgba(79,142,247,.08));
-      border: 1px solid rgba(124,91,219,.15);
-      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: .9rem;
-    }
-    .role-card h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .4rem; }
-    .role-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+/* PM cards */
+.iv-pm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.25rem; }
+.iv-pm {
+background: var(--card-bg); border: 1px solid rgba(0,0,0,.06); border-radius: 12px;
+padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.04); transition: transform .25s, box-shadow .25s;
+}
+.iv-pm:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
+.iv-pm-head { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+.iv-pm-badge {
+width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+display: flex; align-items: center; justify-content: center;
+font-family: 'Sora',sans-serif; font-weight: 800; font-size: .9rem; color: #fff;
+background: var(--fl-grad);
+}
+.iv-pm-head .who { font-family: 'Sora',sans-serif; font-weight: 700; font-size: .9rem; }
+.iv-pm-head .role { font-size: .73rem; color: var(--muted); }
+.iv-pm ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+.iv-pm li { display: flex; gap: .6rem; align-items: flex-start; font-size: .8rem; line-height: 1.5; color: var(--text); }
+.iv-pm li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #7c5bdb; margin-top: .45rem; flex-shrink: 0; }
+.iv-pm li.neg::before { background: #f0883e; }
+.iv-pm li.neg { color: var(--muted); }
 
-    /* ── STATUS (dark) ── */
-    #status { background: var(--fl-dark); position: relative; overflow: hidden; }
-    .status-glow { position: absolute; width: 600px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(124,91,219,.1) 0%, transparent 70%); top: -50px; left: 50%; transform: translateX(-50%); pointer-events: none; }
-    .status-content { position: relative; z-index: 1; }
-    .status-badge {
-      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
-      padding: .4rem 1.1rem; border-radius: 99px;
-      background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.25);
-      font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700;
-      color: #38bdf8; letter-spacing: .06em; text-transform: uppercase;
-    }
-    .status-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #38bdf8; display: inline-block; animation: pulse 2s ease-in-out infinite; }
-    .status-desc { font-size: clamp(.9rem, 2vw, 1.05rem); color: rgba(255,255,255,.55); line-height: 1.75; max-width: 620px; margin-bottom: 2rem; }
-    .roadmap-items { display: flex; flex-direction: column; gap: .85rem; }
-    .roadmap-item { display: flex; gap: 1rem; align-items: flex-start; }
-    .roadmap-num {
-      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-      background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.3);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 700; color: #a78bfa;
-    }
-    .roadmap-item p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; padding-top: .3rem; }
-    .roadmap-item p strong { color: rgba(255,255,255,.82); font-weight: 600; }
+/* ── KEY FINDINGS ── */
+#findings { background: var(--card-bg); }
+.findings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.finding-card {
+background: #fff; border-radius: 12px;
+border: 1px solid rgba(0,0,0,.06); padding: 1.75rem;
+box-shadow: 0 2px 16px rgba(0,0,0,.05);
+transition: transform .25s, box-shadow .25s;
+}
+.finding-card:nth-child(1) { border-top: 3px solid #7c5bdb; }
+.finding-card:nth-child(2) { border-top: 3px solid #4f8ef7; }
+.finding-card:nth-child(3) { border-top: 3px solid #38bdf8; }
+.finding-card:nth-child(4) { border-top: 3px solid #7c5bdb; }
+.finding-card:nth-child(5) { border-top: 3px solid #4f8ef7; }
+.finding-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
+.finding-card h3 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .45rem; }
+.finding-card p { font-size: .8rem; color: var(--muted); line-height: 1.65; }
 
+/* ── THE PARADIGM (dark) ── */
+#paradigm { background: var(--fl-darker); position: relative; overflow: hidden; }
+.paradigm-glow1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(124,91,219,.12) 0%, transparent 70%); top: -100px; right: -100px; pointer-events: none; }
+.paradigm-glow2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(56,189,248,.08) 0%, transparent 70%); bottom: -80px; left: -80px; pointer-events: none; }
+.paradigm-box {
+background: var(--fl-card-dark); border: 1px solid rgba(124,91,219,.2);
+border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem;
+position: relative; z-index: 1;
+}
+.paradigm-quote {
+font-family: 'Sora', sans-serif; font-size: clamp(1.3rem, 3vw, 1.8rem);
+font-weight: 700; color: #fff; line-height: 1.3;
+margin-bottom: 1rem;
+}
+.paradigm-quote span {
+background: var(--fl-grad);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.paradigm-box p { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.75; max-width: 700px; }
+.shift-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; position: relative; z-index: 1; }
+.shift-col { background: var(--fl-card-dark); border: 1px solid var(--fl-border); border-radius: 12px; padding: 1.5rem; }
+.shift-col h4 { font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1rem; padding-bottom: .75rem; border-bottom: 1px solid var(--fl-border); }
+.shift-col.before h4 { color: rgba(255,255,255,.4); }
+.shift-col.after h4 { color: #a78bfa; }
+.shift-item { display: flex; gap: .65rem; margin-bottom: .7rem; align-items: flex-start; }
+.shift-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: .45rem; flex-shrink: 0; }
+.before .shift-dot { background: rgba(255,255,255,.25); }
+.after .shift-dot { background: #a78bfa; }
+.shift-item p { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.5; }
+.after .shift-item p { color: rgba(255,255,255,.65); }
+.shift-arrow { font-size: 1.5rem; color: rgba(124,91,219,.5); display: flex; align-items: center; justify-content: center; }
 
-    /* ── TOOLS STRIP ── */
-    .fl-tools { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,.06); }
-    .fl-tools-label { font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .75rem; }
-    .fl-tools-row { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .fl-tool { padding: .32rem .85rem; border-radius: 6px; background: #fff; border: 1px solid rgba(0,0,0,.08); font-family: 'Sora', sans-serif; font-size: .76rem; font-weight: 600; color: var(--muted); }
+/* ── MVP (light) ── */
+#mvp { background: #fff; }
+.mvp-feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+.mvp-feature {
+display: flex; gap: .9rem; align-items: flex-start;
+background: #fff; border: 1px solid rgba(0,0,0,.07);
+border-top: 3px solid rgba(124,91,219,.5);
+border-radius: 12px; padding: 1.5rem;
+box-shadow: 0 2px 12px rgba(0,0,0,.04);
+transition: transform .2s, box-shadow .2s;
+}
+.mvp-feature:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(124,91,219,.12); }
+.mvp-feature-dot {
+width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+background: linear-gradient(135deg, rgba(124,91,219,.15), rgba(79,142,247,.1));
+border: 1px solid rgba(124,91,219,.2);
+display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.mvp-feature h4 { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .2rem; }
+.mvp-feature p { font-size: .79rem; color: var(--muted); line-height: 1.58; }
 
-    /* ── FOOTER ── */
-    .flows-footer {
-      background: var(--fl-darker); padding: 2.5rem clamp(1rem, 5vw, 3rem);
-      text-align: center; border-top: 1px solid var(--fl-border);
-    }
-    .back-btn {
-      display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.4rem;
-      padding: .65rem 1.5rem; border-radius: 99px;
-      background: rgba(124,91,219,.1); border: 1px solid rgba(124,91,219,.3);
-      color: #a78bfa; text-decoration: none;
-      font-family: 'Sora', sans-serif; font-size: .85rem; font-weight: 600;
-      transition: background .2s, border-color .2s;
-    }
-    .back-btn:hover { background: rgba(124,91,219,.2); border-color: rgba(124,91,219,.5); }
-    .back-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
-    .flows-footer p { font-size: .78rem; color: rgba(255,255,255,.25); font-family: 'Sora', sans-serif; }
+/* ── MY ROLE ── */
+#my-role { background: var(--card-bg); }
+.role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.role-card {
+background: #fff; border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
+padding: 1.6rem; box-shadow: 0 2px 12px rgba(0,0,0,.04);
+transition: transform .2s, box-shadow .2s;
+}
+.role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
+.role-icon {
+width: 40px; height: 40px; border-radius: 10px;
+background: linear-gradient(135deg, rgba(124,91,219,.12), rgba(79,142,247,.08));
+border: 1px solid rgba(124,91,219,.15);
+display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: .9rem;
+}
+.role-card h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .4rem; }
+.role-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 720px) {
-      .mvp-intro-grid { grid-template-columns: 1fr; }
-      .shift-grid { grid-template-columns: 1fr; }
-      .shift-arrow { transform: rotate(90deg); }
-      .screenshot-grid { grid-template-columns: 1fr; }
-      .screenshot-wrap:first-child { grid-column: auto; }
-    }
-  </style>
+/* ── TOOLS STRIP ── */
+.fl-tools { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,.06); }
+.fl-tools-label { font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .75rem; }
+.fl-tools-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.fl-tool { padding: .32rem .85rem; border-radius: 6px; background: #fff; border: 1px solid rgba(0,0,0,.08); font-family: 'Sora', sans-serif; font-size: .76rem; font-weight: 600; color: var(--muted); }
+
+/* ── STATUS (dark) ── */
+#status { background: var(--fl-dark); position: relative; overflow: hidden; }
+.status-glow { position: absolute; width: 600px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(124,91,219,.1) 0%, transparent 70%); top: -50px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+.status-content { position: relative; z-index: 1; }
+.status-badge {
+display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
+padding: .4rem 1.1rem; border-radius: 99px;
+background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.25);
+font-family: 'Sora', sans-serif; font-size: .75rem; font-weight: 700;
+color: #38bdf8; letter-spacing: .06em; text-transform: uppercase;
+}
+.status-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #38bdf8; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+.status-desc { font-size: clamp(.9rem, 2vw, 1.05rem); color: rgba(255,255,255,.55); line-height: 1.75; max-width: 620px; margin-bottom: 2rem; }
+.roadmap-items { display: flex; flex-direction: column; gap: .85rem; }
+.roadmap-item { display: flex; gap: 1rem; align-items: flex-start; }
+.roadmap-num {
+width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+background: var(--fl-grad-soft); border: 1px solid rgba(124,91,219,.3);
+display: flex; align-items: center; justify-content: center;
+font-family: 'Sora', sans-serif; font-size: .72rem; font-weight: 700; color: #a78bfa;
+}
+.roadmap-item p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; padding-top: .3rem; }
+.roadmap-item p strong { color: rgba(255,255,255,.82); font-weight: 600; }
+
+/* ── FOOTER ── */
+.flows-footer {
+background: var(--fl-darker); padding: 2.5rem clamp(1rem, 5vw, 3rem);
+text-align: center; border-top: 1px solid var(--fl-border);
+}
+.back-btn {
+display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.4rem;
+padding: .65rem 1.5rem; border-radius: 99px;
+background: rgba(124,91,219,.1); border: 1px solid rgba(124,91,219,.3);
+color: #a78bfa; text-decoration: none;
+font-family: 'Sora', sans-serif; font-size: .85rem; font-weight: 600;
+transition: background .2s, border-color .2s;
+}
+.back-btn:hover { background: rgba(124,91,219,.2); border-color: rgba(124,91,219,.5); }
+.back-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+.flows-footer p { font-size: .78rem; color: rgba(255,255,255,.25); font-family: 'Sora', sans-serif; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+.shift-grid { grid-template-columns: 1fr; }
+.shift-arrow { transform: rotate(90deg); }
+}
+</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-back">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      Back to Portfolio
-    </a>
-    <div class="nav-brand">
-      <img src="img/100flows/logo.png" alt="100flows logo" class="nav-logo-img"/>
-      <span class="nav-brand-name">100flows</span>
-    </div>
-  </div>
+<div class="nav-inner">
+<a href="index.html" class="nav-back">
+<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+Back to Portfolio
+</a>
+<div class="nav-brand">
+<img src="img/100flows/logo.png" alt="100flows logo" class="nav-logo-img"/>
+<span class="nav-brand-name">100flows</span>
+</div>
+</div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-glow hg1"></div>
-  <div class="hero-glow hg2"></div>
-  <div class="hero-glow hg3"></div>
-  <div class="hero-dots"></div>
-
-  <div class="hero-content">
-    <div class="hero-logo-wrap">
-      <img src="img/100flows/logo.png" alt="100flows"/>
-    </div>
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Research &amp; Development · 2025 – Now
-    </div>
-    <h1>The PM who never<br><span>needs to guess again.</span></h1>
-    <p class="hero-sub">
-      100flows is an AI-powered project management platform born from a systematic academic study into how artificial intelligence is reshaping every domain of project management — from planning to risk, resources, and stakeholder communication.
-    </p>
-    <div class="hero-tags">
-      <span class="hero-tag">AI Research</span>
-      <span class="hero-tag">Product Development</span>
-      <span class="hero-tag">ML Integration</span>
-      <span class="hero-tag">NLP</span>
-      <span class="hero-tag">Project Management</span>
-      <span class="hero-tag">SaaS</span>
-    </div>
-  </div>
+<div class="hero-glow hg1"></div>
+<div class="hero-glow hg2"></div>
+<div class="hero-glow hg3"></div>
+<div class="hero-dots"></div>
+<div class="hero-content">
+<div class="hero-logo-wrap">
+<img src="img/100flows/logo.png" alt="100flows"/>
+</div>
+<div class="hero-badge">
+<span class="hero-badge-dot"></span>
+Research &amp; Development · 2025 – Now
+</div>
+<h1>The PM who never<br><span>needs to guess again.</span></h1>
+<p class="hero-sub">
+An AI-powered project management platform born from a systematic academic study into how artificial intelligence is reshaping every domain of project management — from planning and risk, to resources and stakeholder communication.
+</p>
+<div class="hero-tags">
+<span class="hero-tag">AI Research</span>
+<span class="hero-tag">Product Development</span>
+<span class="hero-tag">ML Integration</span>
+<span class="hero-tag">NLP</span>
+<span class="hero-tag">Project Management</span>
+<span class="hero-tag">SaaS</span>
+</div>
+</div>
 </section>
 
 <!-- STATS STRIP -->
 <div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-card">
-      <span class="stat-num">−50%</span>
-      <span class="stat-label">Decision Cycle Time (4.2 → 2.1 days)</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num">−72%</span>
-      <span class="stat-label">Comm. Overhead via NLP</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num">350+</span>
-      <span class="stat-label">Manual Hours Saved</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num">3.6×</span>
-      <span class="stat-label">Stakeholder Engagement Boost</span>
-    </div>
-  </div>
+<div class="stats-inner">
+<div class="stat-card">
+<span class="stat-num">−50%</span>
+<span class="stat-label">Decision Cycle Time (4.2 → 2.1 days)</span>
+</div>
+<div class="stat-card">
+<span class="stat-num">−72%</span>
+<span class="stat-label">Communication Overhead via NLP</span>
+</div>
+<div class="stat-card">
+<span class="stat-num">350+</span>
+<span class="stat-label">Manual Hours Saved per Project</span>
+</div>
+<div class="stat-card">
+<span class="stat-num">3.6×</span>
+<span class="stat-label">Stakeholder Engagement Boost</span>
+</div>
+</div>
 </div>
 
 <!-- THE PROBLEM -->
 <section id="problem" class="on-light">
-  <div class="section-inner">
-    <span class="section-label">The Problem</span>
-    <h2 class="section-title">Project managers are making million-euro decisions with 1950s tools.</h2>
-    <p class="section-desc">
-      Gantt charts, PERT, and manual resource levelling were designed for linear, predictable projects. Modern software teams are anything but — yet the tooling hasn't changed. The result is a systemic, measurable failure across the industry.
-    </p>
-    <div class="domains-grid">
-      <div class="domain-card">
-        <div class="domain-icon">📉</div>
-        <h3>Most projects miss their targets</h3>
-        <p>Research consistently shows that the majority of software projects exceed their budget, miss their deadline, or deliver reduced scope. The tools PMs rely on are producing plans that become obsolete within days of creation.</p>
-        <span class="domain-tag">Industry-wide failure rate</span>
-      </div>
-      <div class="domain-card">
-        <div class="domain-icon">⏱️</div>
-        <h3>Over half of PM time is administrative</h3>
-        <p>Status updates, manual scheduling adjustments, and report generation consume the majority of a project manager's week — leaving little time for the strategic thinking and stakeholder communication that actually drive outcomes.</p>
-        <span class="domain-tag">Wasted capacity</span>
-      </div>
-      <div class="domain-card">
-        <div class="domain-icon">🔭</div>
-        <h3>Risk is managed retrospectively</h3>
-        <p>Traditional PM methods identify problems after they've already cascaded into delays or cost overruns. There's no mechanism for early detection — only damage control. PMs are always reacting, never anticipating.</p>
-        <span class="domain-tag">Reactive by design</span>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="section-label">The Problem</span>
+<h2 class="section-title">Project managers are making million-euro decisions with 1950s tools.</h2>
+<p class="section-desc">
+Gantt charts, PERT, and manual resource levelling were designed for linear, predictable projects. Modern software teams are anything but — yet the tooling hasn't changed. The result is a systemic, measurable failure across the industry.
+</p>
+<div class="problem-grid">
+<div class="problem-card">
+<div class="problem-icon">📉</div>
+<h3>Most projects still miss their targets</h3>
+<p>Research consistently shows the majority of software projects exceed budget, miss deadlines, or deliver reduced scope. The tools PMs rely on produce plans that become obsolete within days of creation.</p>
+<span class="problem-tag">Industry-wide failure rate</span>
+</div>
+<div class="problem-card">
+<div class="problem-icon">⏱️</div>
+<h3>Over half of PM time is administrative</h3>
+<p>Status updates, manual scheduling adjustments, and report generation consume most of a PM's week — leaving little time for the strategic thinking and stakeholder communication that actually drive outcomes.</p>
+<span class="problem-tag">Wasted capacity</span>
+</div>
+<div class="problem-card">
+<div class="problem-icon">🔭</div>
+<h3>Risk is managed retrospectively</h3>
+<p>Traditional PM methods identify problems only after they cascade into delays or cost overruns. There's no mechanism for early detection — only damage control. PMs are always reacting, never anticipating.</p>
+<span class="problem-tag">Reactive by design</span>
+</div>
+</div>
+</div>
 </section>
 
-<!-- VALIDATING THE PROBLEM -->
+<!-- ACADEMIC RESEARCH -->
 <section id="research" class="on-dark">
-  <div class="research-glow"></div>
-  <div class="section-inner">
-    <span class="section-label">Problem Validation</span>
-    <h2 class="section-title">3 months. 50+ academic papers. 5 PM domains. One conclusion.</h2>
-    <p class="section-desc">
-      Before writing a single line of product specification, I ran a systematic university thesis — a rigorous academic investigation across all five core PM domains, synthesising 50+ papers, industry reports, and real-world case studies. The research both confirmed the problem and produced the blueprint for the solution.
-    </p>
-    <div class="domains-grid">
-      <div class="domain-card">
-        <div class="domain-icon">📅</div>
-        <h3>Planning &amp; Scheduling</h3>
-        <p>From static Gantt charts to ML-driven dynamic schedules. AI analyses thousands of historical projects to generate probabilistic estimates and continuously re-optimise timelines in real time.</p>
-        <span class="domain-tag">Predictive Scheduling</span>
-      </div>
-      <div class="domain-card">
-        <div class="domain-icon">⚠️</div>
-        <h3>Risk Management</h3>
-        <p>Machine learning identifies risk patterns invisible to humans — cascading dependencies, emerging bottlenecks, and tail risks — and generates what-if simulations before they become issues.</p>
-        <span class="domain-tag">Proactive Risk Detection</span>
-      </div>
-      <div class="domain-card">
-        <div class="domain-icon">👥</div>
-        <h3>Resource Management</h3>
-        <p>AI-powered capacity planning and real-time workload balancing prevent over-allocation and burnout. Assignments are optimised across skills, availability, and project priority simultaneously.</p>
-        <span class="domain-tag">Intelligent Allocation</span>
-      </div>
-      <div class="domain-card">
-        <div class="domain-icon">💬</div>
-        <h3>Stakeholder Communication</h3>
-        <p>NLP-driven sentiment analysis monitors stakeholder concerns across channels. Automated executive reporting converts raw project data into polished, decision-ready communications.</p>
-        <span class="domain-tag">NLP · Automated Reporting</span>
-      </div>
-      <div class="domain-card">
-        <div class="domain-icon">🧠</div>
-        <h3>Decision-Making</h3>
-        <p>AI aggregates signals from across the project — budget, progress, risk, team performance — to surface data-driven recommendations that eliminate cognitive bias at critical decision points.</p>
-        <span class="domain-tag">Data-Driven Intelligence</span>
-      </div>
-    </div>
-  </div>
+<div class="research-glow"></div>
+<div class="section-inner">
+<span class="section-label">Academic Foundation</span>
+<h2 class="section-title">3 months. 50+ academic papers. 5 PM domains. One conclusion.</h2>
+<p class="section-desc">
+Before writing a single line of product specification, I ran a systematic university thesis — a rigorous academic investigation across all five core PM domains, synthesising 50+ papers, industry reports, and real-world case studies. The research confirmed the problem and produced the blueprint for the solution.
+</p>
+<div class="domains-grid">
+<div class="domain-card">
+<div class="domain-icon">📅</div>
+<h3>Planning &amp; Scheduling</h3>
+<p>From static Gantt charts to ML-driven dynamic schedules. AI analyses thousands of historical projects to generate probabilistic estimates and continuously re-optimise timelines in real time.</p>
+<span class="domain-tag">Predictive Scheduling</span>
+</div>
+<div class="domain-card">
+<div class="domain-icon">⚠️</div>
+<h3>Risk Management</h3>
+<p>Machine learning identifies risk patterns invisible to humans — cascading dependencies, emerging bottlenecks, and tail risks — and generates what-if simulations before they become critical issues.</p>
+<span class="domain-tag">Proactive Risk Detection</span>
+</div>
+<div class="domain-card">
+<div class="domain-icon">👥</div>
+<h3>Resource Management</h3>
+<p>AI-powered capacity planning and real-time workload balancing prevent over-allocation and burnout. Assignments are optimised across skills, availability, and project priority simultaneously.</p>
+<span class="domain-tag">Intelligent Allocation</span>
+</div>
+<div class="domain-card">
+<div class="domain-icon">💬</div>
+<h3>Stakeholder Communication</h3>
+<p>NLP-driven sentiment analysis monitors stakeholder concerns across channels. Automated executive reporting converts raw project data into polished, decision-ready communications.</p>
+<span class="domain-tag">NLP · Automated Reporting</span>
+</div>
+<div class="domain-card">
+<div class="domain-icon">🧠</div>
+<h3>Decision-Making</h3>
+<p>AI aggregates signals from across the project — budget, progress, risk, team performance — to surface data-driven recommendations that eliminate cognitive bias at critical decision points.</p>
+<span class="domain-tag">Data-Driven Intelligence</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EXPERT INTERVIEWS -->
+<section id="interviews" class="on-light">
+<div class="section-inner">
+<span class="section-label">Primary Research</span>
+<h2 class="section-title">The literature said what. 8 PMs said why.</h2>
+<p class="section-desc">
+Desk research proves a problem exists — it doesn't prove people feel it. To ground the thesis in reality, I ran in-depth interviews with <strong>8 Product Managers</strong> across enterprise and research organisations, mapping where AI already creates value and where it still falls short.
+</p>
+
+<div class="iv-stats">
+<div class="iv-stat"><span class="n">8</span><span class="l">PMs Interviewed</span></div>
+<div class="iv-stat"><span class="n">6</span><span class="l">Organisations</span></div>
+<div class="iv-stat"><span class="n">7</span><span class="l">Recurring Use-Cases</span></div>
+<div class="iv-stat"><span class="n">8</span><span class="l">Critical Concerns Surfaced</span></div>
+</div>
+
+<!-- Company logos (real, downloaded from official sources) -->
+<div class="iv-logos">
+  <div class="iv-logo"><img src="img/logos/amazon.svg" alt="Amazon"/></div>
+  <div class="iv-logo"><img src="img/logos/microsoft.svg" alt="Microsoft"/></div>
+  <div class="iv-logo"><img src="img/logos/fbk.png" alt="Fondazione Bruno Kessler (FBK)" class="lg-stacked"/></div>
+  <div class="iv-logo"><img src="img/logos/workday.svg" alt="Workday"/></div>
+  <div class="iv-logo"><img src="img/logos/yahoo.svg" alt="Yahoo!"/></div>
+  <div class="iv-logo"><img src="img/logos/salesforce.svg" alt="Salesforce"/></div>
+</div>
+
+<!-- Use cases -->
+<div class="iv-sublabel">Where PMs apply AI today</div>
+<div class="iv-usecases">
+<div class="iv-uc">
+<div class="ic">✍️</div>
+<h3>Document &amp; Mail Drafting</h3>
+<p>The highest-impact use-case by consensus: sharply better communication quality, richer lexicon, and major time savings on docs, reports, and stakeholder emails.</p>
+<span class="tag">Strong consensus</span>
+</div>
+<div class="iv-uc">
+<div class="ic">🤝</div>
+<h3>Stakeholder Management</h3>
+<p>Translating requirements into language anyone understands and summarising KPIs. NotebookLM cited for user stories &amp; docs — saving ~4h/week per PM.</p>
+<span class="tag">Strong consensus</span>
+</div>
+<div class="iv-uc">
+<div class="ic">💬</div>
+<h3>Sentiment Analysis</h3>
+<p>Seen as reliable since it's fundamentally text analysis. Copilot and Cursor used to read signals and code — though compliance caveats remain in regulated environments.</p>
+<span class="tag">Reliable</span>
+</div>
+<div class="iv-uc">
+<div class="ic">📊</div>
+<h3>Data Querying &amp; Analysis</h3>
+<p>Mining large datasets to fix code, spot bugs, run gap analysis, and surface customer trends far faster than manual review. High ROI on data-heavy projects.</p>
+<span class="tag">High value</span>
+</div>
+<div class="iv-uc">
+<div class="ic">⚙️</div>
+<h3>Automation &amp; Vibe Coding</h3>
+<p>Custom Python automations with consistent output, removal of repetitive tasks, and logging pipelines that feed the AI richer working context over time.</p>
+<span class="tag">Time saver</span>
+</div>
+<div class="iv-uc">
+<div class="ic">🎨</div>
+<h3>Mockups &amp; A/B Testing</h3>
+<p>Faster prototype prep, clearer explanations to engineers, and experimentation-first A/B testing with quicker qualitative feedback loops and iteration cycles.</p>
+<span class="tag">Faster delivery</span>
+</div>
+<div class="iv-uc">
+<div class="ic">⚠️</div>
+<h3>Risk &amp; Predictive Analytics</h3>
+<p>Mining historical data to anticipate bottlenecks and budget overruns. Widely seen as valuable — yet most PMs admit it remains underused in day-to-day practice.</p>
+<span class="tag">Underused</span>
+</div>
+</div>
+
+<!-- Concerns -->
+<div class="iv-concerns">
+<h3>🛑 Concerns &amp; open questions raised by interviewees</h3>
+<div class="iv-concerns-grid">
+<div class="iv-concern"><span class="d"></span><p><b>Cost uncertainty</b> — still unclear whether AI is genuinely cheaper than equivalent human work at scale.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>Corporate data security</b> — inputs may be reused for model training; only ~10% of firms see real measurable benefit yet.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>Embryonic maturity</b> — promising but early; quality outputs require certain, high-quality structured data.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>High-risk domains</b> — personnel selection and compliance decisions flagged as particularly risky AI applications.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>EU regulatory gap</b> — Europe seen as lagging on both AI technology adoption and supporting legislation.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>Human in the loop</b> — AI is an assistant, not a replacement; the PM must always make the final call.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>Context limits</b> — struggles without rich context; <i>PMBOK 7th ed.</i> cited as PMI's official AI integration stance.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>Future outlook</b> — agentic AI is on the horizon, but impact is hard to predict beyond approximately 3 months out.</p></div>
+</div>
+</div>
+
+<!-- PM highlights -->
+<div class="iv-sublabel">Selected interview highlights</div>
+<div class="iv-pm-grid">
+<div class="iv-pm">
+<div class="iv-pm-head"><div class="iv-pm-badge">P1</div><div><div class="who">PM #1</div><div class="role">Enterprise · Cost &amp; Risk focus</div></div></div>
+<ul>
+<li>Uses Copilot for reports, gap analysis &amp; sentiment analysis on large datasets</li>
+<li>Applies predictive analytics to surface risks from historical project data</li>
+<li class="neg">Open question: is AI genuinely cheaper than humans at enterprise scale?</li>
+</ul>
+</div>
+<div class="iv-pm">
+<div class="iv-pm-head"><div class="iv-pm-badge">P2</div><div><div class="who">PM #2</div><div class="role">Stakeholder &amp; Docs focus</div></div></div>
+<ul>
+<li>Stakeholder docs &amp; requirement translation via NotebookLM (~4h/week saved)</li>
+<li>Sentiment analysis through Cursor for code review &amp; team signals</li>
+<li class="neg">Most strategic decisions still driven by customer &amp; business interaction, not AI</li>
+</ul>
+</div>
+<div class="iv-pm">
+<div class="iv-pm-head"><div class="iv-pm-badge">P3</div><div><div class="who">PM #3</div><div class="role">Compliance &amp; Governance</div></div></div>
+<ul>
+<li>Flags corporate security risk — inputs may be reused for model training</li>
+<li>Sentiment analysis &amp; stakeholder mgmt reliable, but compliance-bound</li>
+<li class="neg">Only ~10% of firms see real benefit; HR &amp; personnel selection = high risk</li>
+</ul>
+</div>
+<div class="iv-pm">
+<div class="iv-pm-head"><div class="iv-pm-badge">P4</div><div><div class="who">PM #4</div><div class="role">Experimentation &amp; Tooling</div></div></div>
+<ul>
+<li>A/B testing &amp; experimentation-first mindset for all product decisions</li>
+<li>Automates reports via a single command; faster mockup iteration cycles</li>
+<li class="neg">Warns against losing the human touch and risk of over-dependence on AI</li>
+</ul>
+</div>
+<div class="iv-pm">
+<div class="iv-pm-head"><div class="iv-pm-badge">P5</div><div><div class="who">PM #5</div><div class="role">Automation &amp; Communication</div></div></div>
+<ul>
+<li>High impact on document &amp; mail drafting: better quality, richer lexicon</li>
+<li>Vibe coding: custom Python automations with consistent, reproducible output</li>
+<li class="neg">Impossible to predict AI's impact beyond 3 months — growing influence on knowledge workers</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 
 <!-- KEY FINDINGS -->
 <section id="findings" class="on-light">
-  <div class="section-inner">
-    <span class="section-label">Validation Findings</span>
-    <h2 class="section-title">What 50 papers and 3 months of research actually proved.</h2>
-    <p class="section-desc">
-      The thesis cross-referenced academic literature, real-world case studies, and a structured comparison of 10+ leading AI-powered PM platforms. Five quantified conclusions emerged — each one becoming a design principle for 100flows.
-    </p>
-    <div class="findings-grid">
-      <div class="finding-card">
-        <h3>Traditional methods are hitting a wall</h3>
-        <p>Gantt charts, PERT, CPM, and manual resource levelling were designed for simpler, more linear projects. In today's environment — multi-team, fast-changing, data-rich — they produce static snapshots that become obsolete within hours of being created.</p>
-      </div>
-      <div class="finding-card">
-        <h3>AI cuts decision cycles in half</h3>
-        <p>AI-driven summaries and automated stakeholder briefings reduced decision-making response times from 4.2 to 2.1 days — a <strong style="color:#4f8ef7;">−50% reduction</strong> in cycle time. Faster decisions mean fewer cascading delays downstream.</p>
-      </div>
-      <div class="finding-card">
-        <h3>NLP eliminates communication overhead</h3>
-        <p>Automating clarification emails and cross-team status updates via NLP reduced technical communication overhead by <strong style="color:#4f8ef7;">72%</strong> — freeing engineers and PMs from the constant back-and-forth that kills deep work.</p>
-      </div>
-      <div class="finding-card">
-        <h3>Automated scheduling saves hundreds of hours</h3>
-        <p>AI-driven resource allocation and scheduling automation saved <strong style="color:#4f8ef7;">up to 200 manual hours</strong> for programming teams and <strong style="color:#4f8ef7;">150 hours</strong> for engineering teams per project cycle — effort redirected to actual delivery.</p>
-      </div>
-      <div class="finding-card">
-        <h3>Natural Language Interfaces multiply engagement</h3>
-        <p>Replacing static dashboards with Natural Language Interfaces boosted project transparency and stakeholder engagement by <strong style="color:#4f8ef7;">3.6×</strong>, increasing active stakeholder participation by <strong style="color:#4f8ef7;">31%</strong> across observed projects.</p>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="section-label">Validation Findings</span>
+<h2 class="section-title">What 50 papers and 3 months of research actually proved.</h2>
+<p class="section-desc">
+The thesis cross-referenced academic literature, real-world case studies, and a structured comparison of 10+ leading AI-powered PM platforms. Five quantified conclusions emerged — each one becoming a direct design principle for 100flows.
+</p>
+<div class="findings-grid">
+<div class="finding-card">
+<h3>Traditional methods are hitting a wall</h3>
+<p>Gantt charts, PERT, CPM, and manual resource levelling were designed for simpler, linear projects. In today's multi-team, fast-changing, data-rich environment, they produce static snapshots that become obsolete within hours of creation.</p>
+</div>
+<div class="finding-card">
+<h3>AI cuts decision cycles in half</h3>
+<p>AI-driven summaries and automated stakeholder briefings reduced decision-making response times from 4.2 to 2.1 days — a <strong style="color:#4f8ef7;">−50% reduction</strong> in cycle time. Faster decisions mean fewer cascading delays downstream.</p>
+</div>
+<div class="finding-card">
+<h3>NLP eliminates communication overhead</h3>
+<p>Automating clarification emails and cross-team status updates via NLP reduced technical communication overhead by <strong style="color:#4f8ef7;">72%</strong> — freeing engineers and PMs from the constant back-and-forth that kills deep work.</p>
+</div>
+<div class="finding-card">
+<h3>Automated scheduling saves hundreds of hours</h3>
+<p>AI-driven resource allocation and scheduling automation saved <strong style="color:#4f8ef7;">up to 200 manual hours</strong> for programming teams and <strong style="color:#4f8ef7;">150 hours</strong> for engineering teams per project cycle — effort redirected to actual delivery.</p>
+</div>
+<div class="finding-card">
+<h3>Natural Language Interfaces multiply engagement</h3>
+<p>Replacing static dashboards with Natural Language Interfaces boosted project transparency and stakeholder engagement by <strong style="color:#4f8ef7;">3.6×</strong>, with active stakeholder participation rising by <strong style="color:#4f8ef7;">31%</strong> across observed projects.</p>
+</div>
+</div>
+</div>
 </section>
 
 <!-- THE PARADIGM -->
 <section id="paradigm" class="on-dark">
-  <div class="paradigm-glow1"></div>
-  <div class="paradigm-glow2"></div>
-  <div class="section-inner">
-    <span class="section-label">The Solution Thesis</span>
-    <div class="paradigm-box">
-      <p class="paradigm-quote">
-        "AI doesn't replace the project manager.<br>
-        It <span>elevates them.</span>"
-      </p>
-      <p>
-        The research produced a clear design principle: <strong style="color:rgba(255,255,255,.85);">Augmented Project Management</strong>. AI absorbs the computational, administrative, and analytical burden — freeing the PM to operate at a purely strategic, empathetic, and decisive level. The role doesn't disappear. It evolves into something far more valuable. This thesis became the product vision for 100flows.
-      </p>
-    </div>
-    <div class="shift-grid">
-      <div class="shift-col before">
-        <h4>Traditional PM</h4>
-        <div class="shift-item"><div class="shift-dot"></div><p>Manual scheduling and static Gantt charts</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Retrospective risk identification</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Spreadsheet-based resource tracking</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Estimates based on intuition and experience</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Manual status reports and stakeholder updates</p></div>
-      </div>
-      <div class="shift-arrow">→</div>
-      <div class="shift-col after">
-        <h4>Augmented PM</h4>
-        <div class="shift-item"><div class="shift-dot"></div><p>Dynamic, self-updating AI-optimised schedules</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Predictive risk detection weeks in advance</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Real-time AI-driven capacity balancing</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Probabilistic estimates from historical ML models</p></div>
-        <div class="shift-item"><div class="shift-dot"></div><p>Automated executive reporting via NLP</p></div>
-      </div>
-    </div>
-  </div>
+<div class="paradigm-glow1"></div>
+<div class="paradigm-glow2"></div>
+<div class="section-inner">
+<span class="section-label">The Solution Thesis</span>
+<div class="paradigm-box">
+<p class="paradigm-quote">
+"AI doesn't replace the project manager.<br>
+It <span>elevates them.</span>"
+</p>
+<p>
+The research produced a clear design principle: <strong style="color:rgba(255,255,255,.85);">Augmented Project Management</strong>. AI absorbs the computational, administrative, and analytical burden — freeing the PM to operate at a purely strategic, empathetic, and decisive level. The role doesn't disappear. It evolves into something far more valuable. This thesis became the product vision for 100flows.
+</p>
+</div>
+<div class="shift-grid">
+<div class="shift-col before">
+<h4>Traditional PM</h4>
+<div class="shift-item"><div class="shift-dot"></div><p>Manual scheduling and static Gantt charts</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Retrospective risk identification after the fact</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Spreadsheet-based resource tracking</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Estimates based on intuition and experience alone</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Manual status reports and stakeholder updates</p></div>
+</div>
+<div class="shift-arrow">→</div>
+<div class="shift-col after">
+<h4>Augmented PM</h4>
+<div class="shift-item"><div class="shift-dot"></div><p>Dynamic, self-updating AI-optimised schedules</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Predictive risk detection weeks in advance</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Real-time AI-driven capacity balancing</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Probabilistic estimates from historical ML models</p></div>
+<div class="shift-item"><div class="shift-dot"></div><p>Automated executive reporting via NLP</p></div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- MVP -->
+<!-- MVP FEATURES -->
 <section id="mvp" class="on-light">
-  <div class="section-inner">
-    <span class="section-label">Building the Solution</span>
-    <h2 class="section-title">100flows: every feature traces back to a research finding.</h2>
-    <p class="section-desc">
-      The thesis findings became the product specification. Each MVP feature maps directly to a validated research conclusion — not a guess, not a best practice borrowed from competitors, but an evidence-based design decision.
-    </p>
-    <div class="mvp-feature-list">
-      <div class="mvp-feature">
-        <div class="mvp-feature-dot">📋</div>
-        <div>
-          <h4>AI-Enhanced Kanban Board</h4>
-          <p>Visual task management with intelligent workload warnings, automatic dependency detection, and AI-suggested task prioritisation based on deadline risk.</p>
-        </div>
-      </div>
-      <div class="mvp-feature">
-        <div class="mvp-feature-dot">👤</div>
-        <div>
-          <h4>Smart Onboarding &amp; Team Setup</h4>
-          <p>Guided project creation that captures team capacity, skills, and constraints — giving the AI the context it needs to generate accurate schedules from day one.</p>
-        </div>
-      </div>
-      <div class="mvp-feature">
-        <div class="mvp-feature-dot">🔔</div>
-        <div>
-          <h4>Proactive Risk Alerts</h4>
-          <p>The platform monitors project signals continuously and surfaces early warnings before bottlenecks become blockers — grounded directly in the risk management research.</p>
-        </div>
-      </div>
-      <div class="mvp-feature">
-        <div class="mvp-feature-dot">📊</div>
-        <div>
-          <h4>Automated Progress Reporting</h4>
-          <p>One-click executive summaries and stakeholder updates generated from live project data — eliminating one of the most time-consuming parts of a PM's week.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
+<div class="section-inner">
+<span class="section-label">Building the Solution</span>
+<h2 class="section-title">100flows: every feature traces back to a research finding.</h2>
+<p class="section-desc">
+The thesis findings became the product specification. Each MVP feature maps directly to a validated research conclusion — not a guess, not a best practice borrowed from competitors, but an evidence-based design decision.
+</p>
+<div class="mvp-feature-list">
+<div class="mvp-feature">
+<div class="mvp-feature-dot">📋</div>
+<div>
+<h4>AI-Enhanced Kanban Board</h4>
+<p>Visual task management with intelligent workload warnings, automatic dependency detection, and AI-suggested task prioritisation based on deadline risk and team capacity.</p>
+</div>
+</div>
+<div class="mvp-feature">
+<div class="mvp-feature-dot">👤</div>
+<div>
+<h4>Smart Onboarding &amp; Team Setup</h4>
+<p>Guided project creation that captures team capacity, skills, and constraints — giving the AI the context it needs to generate accurate schedules and risk assessments from day one.</p>
+</div>
+</div>
+<div class="mvp-feature">
+<div class="mvp-feature-dot">🔔</div>
+<div>
+<h4>Proactive Risk Alerts</h4>
+<p>The platform monitors project signals continuously and surfaces early warnings before bottlenecks become blockers — grounded directly in the risk management domain research.</p>
+</div>
+</div>
+<div class="mvp-feature">
+<div class="mvp-feature-dot">📊</div>
+<div>
+<h4>Automated Progress Reporting</h4>
+<p>One-click executive summaries and stakeholder updates generated from live project data — eliminating one of the most time-consuming and undervalued parts of a PM's week.</p>
+</div>
+</div>
+<div class="mvp-feature">
+<div class="mvp-feature-dot">📅</div>
+<div>
+<h4>AI Meeting Scheduling</h4>
+<p>Intelligent meeting creation that reads team availability, suggests optimal slots, and summarises outcomes automatically — reducing coordination overhead across distributed teams.</p>
+</div>
+</div>
+<div class="mvp-feature">
+<div class="mvp-feature-dot">📆</div>
+<div>
+<h4>Integrated Project Calendar</h4>
+<p>A unified calendar view of tasks, milestones, and events across the entire project — keeping every team member aligned on what's happening and when, with zero manual entry.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
-
 
 <!-- MY ROLE -->
 <section id="my-role" class="on-light">
-  <div class="section-inner">
-    <span class="section-label">Skills &amp; Contribution</span>
-    <h2 class="section-title">Solo researcher, strategist, designer, and developer.</h2>
-    <p class="section-desc">
-      100flows is a solo project — from academic hypothesis to working prototype. Every phase required a different skillset, and I owned all of them.
-    </p>
-    <div class="role-grid">
-      <div class="role-card">
-        <div class="role-icon">🔬</div>
-        <h4>Academic Research &amp; Synthesis</h4>
-        <p>Conducted a 3-month systematic literature review across 50+ papers, industry reports, and SaaS product documentation — synthesising conflicting sources into a single, structured evidence base capable of driving product decisions.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">📐</div>
-        <h4>AI &amp; ML Technical Analysis</h4>
-        <p>Evaluated predictive scheduling models, ML-based resource balancing algorithms, NLP/LLM applications for PM automation, and the technical ceiling of traditional methods (Gantt, PERT, CPM, CCPM) — translating academic findings into actionable product requirements.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">🧩</div>
-        <h4>Competitive &amp; Market Analysis</h4>
-        <p>Ran a structured comparison of 10+ leading AI-powered PM platforms — analysing feature sets, pricing models, AI integration depth, and market positioning — to identify the whitespace 100flows could credibly own.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">🏗️</div>
-        <h4>Product Strategy &amp; Framework Design</h4>
-        <p>Distilled all research findings into the "Augmented Project Management" framework — a strategic product vision defining what the platform must do, what it must never do, and why. This became the product spec.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">🎨</div>
-        <h4>UI/UX Design</h4>
-        <p>Designed the full product interface in Figma — from information architecture and user flow mapping to high-fidelity screens. Every design decision was constrained by the research: no feature exists without a validated research justification.</p>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">💻</div>
-        <h4>MVP Development</h4>
-        <p>Built the working prototype from the ground up — frontend interface, component structure, and feature logic — translating Figma designs into functional software and validating that the research-driven approach holds up under real implementation constraints.</p>
-      </div>
-    </div>
-    <div class="fl-tools">
-      <p class="fl-tools-label">Tools</p>
-      <div class="fl-tools-row">
-        <span class="fl-tool">Figma</span>
-        <span class="fl-tool">Notion</span>
-        <span class="fl-tool">GitHub</span>
-        <span class="fl-tool">Google Docs</span>
-        <span class="fl-tool">VS Code</span>
-      </div>
-    </div>
-  </div>
+<div class="section-inner">
+<span class="section-label">Skills &amp; Contribution</span>
+<h2 class="section-title">Solo researcher, strategist, designer, and developer.</h2>
+<p class="section-desc">
+100flows is a solo project — from academic hypothesis to working prototype. Every phase required a different skillset, and I owned all of them.
+</p>
+<div class="role-grid">
+<div class="role-card">
+<div class="role-icon">🔬</div>
+<h4>Academic Research &amp; Synthesis</h4>
+<p>Conducted a 3-month systematic literature review across 50+ papers, industry reports, and SaaS product documentation — synthesising conflicting sources into a structured evidence base capable of driving product decisions.</p>
+</div>
+<div class="role-card">
+<div class="role-icon">📐</div>
+<h4>AI &amp; ML Technical Analysis</h4>
+<p>Evaluated predictive scheduling models, ML-based resource balancing algorithms, NLP/LLM applications for PM automation, and the technical ceiling of traditional methods (Gantt, PERT, CPM, CCPM) — translating findings into actionable product requirements.</p>
+</div>
+<div class="role-card">
+<div class="role-icon">🧩</div>
+<h4>Competitive &amp; Market Analysis</h4>
+<p>Ran a structured comparison of 10+ leading AI-powered PM platforms — analysing feature sets, pricing models, AI integration depth, and market positioning — to identify the whitespace 100flows could credibly own.</p>
+</div>
+<div class="role-card">
+<div class="role-icon">🏗️</div>
+<h4>Product Strategy &amp; Framework Design</h4>
+<p>Distilled all research findings into the "Augmented Project Management" framework — a strategic product vision defining what the platform must do, what it must never do, and why. This became the product specification.</p>
+</div>
+<div class="role-card">
+<div class="role-icon">🎨</div>
+<h4>UI/UX Design</h4>
+<p>Designed the full product interface in Figma — from information architecture and user flow mapping to high-fidelity screens. Every design decision was constrained by the research: no feature exists without a validated justification.</p>
+</div>
+<div class="role-card">
+<div class="role-icon">💻</div>
+<h4>MVP Development</h4>
+<p>Built the working prototype from the ground up — frontend interface, component structure, and feature logic — translating Figma designs into functional software and validating the research-driven approach under real implementation constraints.</p>
+</div>
+</div>
+<div class="fl-tools">
+<p class="fl-tools-label">Tools</p>
+<div class="fl-tools-row">
+<span class="fl-tool">Figma</span>
+<span class="fl-tool">Notion</span>
+<span class="fl-tool">GitHub</span>
+<span class="fl-tool">Google Docs</span>
+<span class="fl-tool">VS Code</span>
+<span class="fl-tool">React</span>
+<span class="fl-tool">TypeScript</span>
+</div>
+</div>
+</div>
 </section>
 
-<!-- STATUS -->
+<!-- CURRENT STATUS -->
 <section id="status" class="on-dark">
-  <div class="status-glow"></div>
-  <div class="section-inner status-content">
-    <span class="section-label">Current Status</span>
-    <div class="status-badge">
-      <span class="status-badge-dot"></span>
-      Active Development
-    </div>
-    <h2 class="section-title" style="color:#fff;">Built on research. Shipping as software.</h2>
-    <p class="status-desc">
-      100flows is currently in active MVP development. The research phase is complete — the platform's feature roadmap is directly derived from the thesis findings and the comparative SaaS analysis.
-    </p>
-    <div class="roadmap-items">
-      <div class="roadmap-item">
-        <div class="roadmap-num">✓</div>
-        <p><strong>Research complete.</strong> Full academic investigation across all five PM domains, comparative SaaS analysis, and "Augmented PM" paradigm defined.</p>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-num">✓</div>
-        <p><strong>MVP UI in progress.</strong> Kanban board, login flow, and team onboarding screens actively being designed and developed.</p>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-num">→</div>
-        <p><strong>AI engine integration.</strong> Connecting the Kanban board to ML-powered scheduling, risk detection, and workload balancing modules.</p>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-num">→</div>
-        <p><strong>Automated reporting layer.</strong> NLP-driven executive summary generation and stakeholder update automation — the feature most directly tied to the research findings.</p>
-      </div>
-    </div>
-  </div>
+<div class="status-glow"></div>
+<div class="section-inner status-content">
+<span class="section-label">Current Status</span>
+<div class="status-badge">
+<span class="status-badge-dot"></span>
+Active Development
+</div>
+<h2 class="section-title" style="color:#fff;">Built on research. Shipping as software.</h2>
+<p class="status-desc">
+100flows is currently in active MVP development. The research phase is complete — the platform's feature roadmap is directly derived from the thesis findings and comparative SaaS analysis.
+</p>
+<div class="roadmap-items">
+<div class="roadmap-item">
+<div class="roadmap-num">✓</div>
+<p><strong>Research complete.</strong> Full academic investigation across all five PM domains, comparative SaaS analysis, and the "Augmented PM" paradigm defined.</p>
+</div>
+<div class="roadmap-item">
+<div class="roadmap-num">✓</div>
+<p><strong>UI design complete.</strong> Kanban board, login, team onboarding, calendar, and event screens designed and iterated to high fidelity in Figma.</p>
+</div>
+<div class="roadmap-item">
+<div class="roadmap-num">✓</div>
+<p><strong>MVP frontend in progress.</strong> Core screens — Kanban, login, profile management, and event flows — actively being built and tested.</p>
+</div>
+<div class="roadmap-item">
+<div class="roadmap-num">→</div>
+<p><strong>AI engine integration.</strong> Connecting the Kanban board to ML-powered scheduling, risk detection, and workload balancing modules.</p>
+</div>
+<div class="roadmap-item">
+<div class="roadmap-num">→</div>
+<p><strong>Automated reporting layer.</strong> NLP-driven executive summary generation and stakeholder update automation — the feature most directly tied to the research findings.</p>
+</div>
+</div>
+</div>
 </section>
 
 <!-- FOOTER -->
 <footer class="flows-footer">
-  <a href="index.html" class="back-btn">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    Back to Portfolio
-  </a>
-  <p>100flows · AI-Powered Project Management · Research &amp; Development · Luca Buonocore · 2025–Now</p>
+<a href="index.html" class="back-btn">
+<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+Back to Portfolio
+</a>
+<p>100flows · AI-Powered Project Management · Research &amp; Development · Luca Buonocore · 2025–Now</p>
 </footer>
 
 </body>
