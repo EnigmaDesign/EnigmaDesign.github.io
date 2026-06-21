@@ -260,6 +260,7 @@ box-shadow: 0 2px 14px rgba(0,0,0,.04); transition: transform .25s, box-shadow .
 .iv-uc:nth-child(5) { border-top-color: #4f8ef7; }
 .iv-uc:nth-child(6) { border-top-color: #38bdf8; }
 .iv-uc:nth-child(7) { border-top-color: #7c5bdb; }
+.iv-uc:nth-child(8) { border-top-color: #4f8ef7; }
 .iv-uc:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
 .iv-uc .ic { font-size: 1.4rem; margin-bottom: .5rem; }
 .iv-uc h3 { font-family: 'Sora',sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .4rem; }
@@ -282,28 +283,6 @@ border-radius: 16px; padding: 2rem; margin-bottom: 2.75rem; position: relative; 
 .iv-concern .d { width: 6px; height: 6px; border-radius: 50%; background: #a78bfa; margin-top: .5rem; flex-shrink: 0; }
 .iv-concern p { font-size: .81rem; color: rgba(255,255,255,.55); line-height: 1.55; }
 .iv-concern p b { color: rgba(255,255,255,.85); font-weight: 600; }
-
-/* PM cards */
-.iv-pm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.25rem; }
-.iv-pm {
-background: var(--card-bg); border: 1px solid rgba(0,0,0,.06); border-radius: 12px;
-padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.04); transition: transform .25s, box-shadow .25s;
-}
-.iv-pm:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(124,91,219,.1); }
-.iv-pm-head { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
-.iv-pm-badge {
-width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-display: flex; align-items: center; justify-content: center;
-font-family: 'Sora',sans-serif; font-weight: 800; font-size: .9rem; color: #fff;
-background: var(--fl-grad);
-}
-.iv-pm-head .who { font-family: 'Sora',sans-serif; font-weight: 700; font-size: .9rem; }
-.iv-pm-head .role { font-size: .73rem; color: var(--muted); }
-.iv-pm ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
-.iv-pm li { display: flex; gap: .6rem; align-items: flex-start; font-size: .8rem; line-height: 1.5; color: var(--text); }
-.iv-pm li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #7c5bdb; margin-top: .45rem; flex-shrink: 0; }
-.iv-pm li.neg::before { background: #f0883e; }
-.iv-pm li.neg { color: var(--muted); }
 
 /* ── KEY FINDINGS ── */
 #findings { background: var(--card-bg); }
@@ -602,7 +581,7 @@ Desk research proves a problem exists — it doesn't prove people feel it. To gr
 <div class="iv-stats">
 <div class="iv-stat"><span class="n">8</span><span class="l">PMs Interviewed</span></div>
 <div class="iv-stat"><span class="n">6</span><span class="l">Organisations</span></div>
-<div class="iv-stat"><span class="n">7</span><span class="l">Recurring Use-Cases</span></div>
+<div class="iv-stat"><span class="n">8</span><span class="l">Recurring Use-Cases</span></div>
 <div class="iv-stat"><span class="n">8</span><span class="l">Critical Concerns Surfaced</span></div>
 </div>
 
@@ -661,6 +640,12 @@ Desk research proves a problem exists — it doesn't prove people feel it. To gr
 <p>Mining historical data to anticipate bottlenecks and budget overruns. Widely seen as valuable — yet most PMs admit it remains underused in day-to-day practice.</p>
 <span class="tag">Underused</span>
 </div>
+<div class="iv-uc">
+<div class="ic">🤖</div>
+<h3>Agentic AI &amp; Custom Agents</h3>
+<p>No longer theoretical: PMs are building their own agents — e.g. an agent that ingests a CSV and generates custom bidding strategies, auto-tracking data &amp; performance (~30 min saved per run).</p>
+<span class="tag">Emerging</span>
+</div>
 </div>
 
 <!-- Concerns -->
@@ -674,54 +659,10 @@ Desk research proves a problem exists — it doesn't prove people feel it. To gr
 <div class="iv-concern"><span class="d"></span><p><b>EU regulatory gap</b> — Europe seen as lagging on both AI technology adoption and supporting legislation.</p></div>
 <div class="iv-concern"><span class="d"></span><p><b>Human in the loop</b> — AI is an assistant, not a replacement; the PM must always make the final call.</p></div>
 <div class="iv-concern"><span class="d"></span><p><b>Context limits</b> — struggles without rich context; <i>PMBOK 7th ed.</i> cited as PMI's official AI integration stance.</p></div>
-<div class="iv-concern"><span class="d"></span><p><b>Future outlook</b> — agentic AI is on the horizon, but impact is hard to predict beyond approximately 3 months out.</p></div>
+<div class="iv-concern"><span class="d"></span><p><b>Future outlook</b> — agentic AI has already arrived (PMs are building their own agents), yet impact is hard to predict beyond ~3 months out.</p></div>
 </div>
 </div>
 
-<!-- PM highlights -->
-<div class="iv-sublabel">Selected interview highlights</div>
-<div class="iv-pm-grid">
-<div class="iv-pm">
-<div class="iv-pm-head"><div class="iv-pm-badge">P1</div><div><div class="who">PM #1</div><div class="role">Enterprise · Cost &amp; Risk focus</div></div></div>
-<ul>
-<li>Uses Copilot for reports, gap analysis &amp; sentiment analysis on large datasets</li>
-<li>Applies predictive analytics to surface risks from historical project data</li>
-<li class="neg">Open question: is AI genuinely cheaper than humans at enterprise scale?</li>
-</ul>
-</div>
-<div class="iv-pm">
-<div class="iv-pm-head"><div class="iv-pm-badge">P2</div><div><div class="who">PM #2</div><div class="role">Stakeholder &amp; Docs focus</div></div></div>
-<ul>
-<li>Stakeholder docs &amp; requirement translation via NotebookLM (~4h/week saved)</li>
-<li>Sentiment analysis through Cursor for code review &amp; team signals</li>
-<li class="neg">Most strategic decisions still driven by customer &amp; business interaction, not AI</li>
-</ul>
-</div>
-<div class="iv-pm">
-<div class="iv-pm-head"><div class="iv-pm-badge">P3</div><div><div class="who">PM #3</div><div class="role">Compliance &amp; Governance</div></div></div>
-<ul>
-<li>Flags corporate security risk — inputs may be reused for model training</li>
-<li>Sentiment analysis &amp; stakeholder mgmt reliable, but compliance-bound</li>
-<li class="neg">Only ~10% of firms see real benefit; HR &amp; personnel selection = high risk</li>
-</ul>
-</div>
-<div class="iv-pm">
-<div class="iv-pm-head"><div class="iv-pm-badge">P4</div><div><div class="who">PM #4</div><div class="role">Experimentation &amp; Tooling</div></div></div>
-<ul>
-<li>A/B testing &amp; experimentation-first mindset for all product decisions</li>
-<li>Automates reports via a single command; faster mockup iteration cycles</li>
-<li class="neg">Warns against losing the human touch and risk of over-dependence on AI</li>
-</ul>
-</div>
-<div class="iv-pm">
-<div class="iv-pm-head"><div class="iv-pm-badge">P5</div><div><div class="who">PM #5</div><div class="role">Automation &amp; Communication</div></div></div>
-<ul>
-<li>High impact on document &amp; mail drafting: better quality, richer lexicon</li>
-<li>Vibe coding: custom Python automations with consistent, reproducible output</li>
-<li class="neg">Impossible to predict AI's impact beyond 3 months — growing influence on knowledge workers</li>
-</ul>
-</div>
-</div>
 </div>
 </section>
 
