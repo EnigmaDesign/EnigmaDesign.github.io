@@ -239,6 +239,10 @@
     .screens-scroll::-webkit-scrollbar-thumb { background: rgba(252,92,140,.35); border-radius: 4px; }
     .screen-item { flex-shrink: 0; }
     .screen-item .phone-frame { width: 170px; border-radius: 36px; }
+    .screen-item.lofi .phone-frame {
+      background:#fff; border:1px solid rgba(255,255,255,.14); border-radius:26px;
+      box-shadow:0 14px 36px rgba(0,0,0,.28);
+    }
     .screen-caption {
       text-align: center; margin-top: .75rem;
       font-family: 'Sora', sans-serif; font-size: .72rem;
@@ -344,6 +348,46 @@
     .page-tools-row { display: flex; flex-wrap: wrap; gap: .45rem; }
     .page-tool { padding: .28rem .78rem; border-radius: 6px; background: #f4f6fa; border: 1px solid rgba(0,0,0,.07); font-family: 'Sora', sans-serif; font-size: .74rem; font-weight: 600; color: var(--muted); }
 
+    /* ── PROCESS STEPS ── */
+    .process-step { display:flex; align-items:baseline; flex-wrap:wrap; gap:.7rem; margin:2.4rem 0 1.1rem; position:relative; z-index:1; }
+    .process-step-num {
+      font-family:'Sora',sans-serif; font-size:.64rem; font-weight:700; letter-spacing:.1em;
+      text-transform:uppercase; color:#fff;
+      padding:.32rem .7rem; border-radius:99px;
+      background:linear-gradient(135deg,#A8026E,#FC5C8C); white-space:nowrap;
+    }
+    .process-step h3 { font-family:'Sora',sans-serif; font-size:1rem; font-weight:700; color:#fff; }
+    .process-step .step-hint { font-size:.78rem; color:rgba(255,255,255,.45); font-family:'Sora',sans-serif; }
+    .mvp-placeholder {
+      position:relative; z-index:1; margin-top:.5rem;
+      border:1.5px dashed rgba(252,92,140,.4); border-radius:20px;
+      background:rgba(255,255,255,.04); padding:3rem 1.5rem; text-align:center;
+    }
+    .mvp-placeholder .play {
+      width:56px; height:56px; border-radius:50%; margin:0 auto 1rem;
+      background:var(--groove-grad); display:flex; align-items:center; justify-content:center;
+    }
+    .mvp-placeholder .play svg { width:22px; height:22px; fill:#fff; margin-left:3px; }
+    .mvp-placeholder h4 { font-family:'Sora',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:.4rem; }
+    .mvp-placeholder p { font-size:.82rem; color:rgba(255,255,255,.5); max-width:440px; margin:0 auto; line-height:1.6; }
+
+    /* ── REFLECTION ── */
+    #reflection { background:#fff; position:relative; overflow:hidden; }
+    .reflect-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
+    .reflect-card {
+      background:var(--card-bg); border-radius:16px;
+      border:1px solid rgba(0,0,0,.06); padding:1.7rem; border-top:3px solid var(--groove-accent);
+    }
+    .reflect-card.good   { border-top-color:#1a8f5c; }
+    .reflect-card.diff   { border-top-color:#c77f0a; }
+    .reflect-card.lesson { border-top-color:var(--groove-accent); }
+    .reflect-card .rk {
+      font-family:'Sora',sans-serif; font-size:.62rem; font-weight:700; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--muted); margin-bottom:.5rem; display:block;
+    }
+    .reflect-card h4 { font-family:'Sora',sans-serif; font-size:1rem; font-weight:700; margin-bottom:.5rem; color:var(--text); }
+    .reflect-card p { font-size:.83rem; color:var(--muted); line-height:1.65; }
+
     /* ── FOOTER ── */
     .groove-footer {
       background: var(--groove-dark);
@@ -411,15 +455,6 @@
     <p class="hero-sub">
       An AI-powered nightlife discovery platform that reduces venue decision time by 80% — giving young people the perfect Saturday night and giving clubs the digital visibility they've always been missing.
     </p>
-    <div class="hero-tags">
-      <span class="hero-tag">Product Management</span>
-      <span class="hero-tag">AI Integration</span>
-      <span class="hero-tag">User Research</span>
-      <span class="hero-tag">Team Leadership</span>
-      <span class="hero-tag">Business Model</span>
-      <span class="hero-tag">Figma</span>
-      <span class="hero-tag">Agile</span>
-    </div>
   </div>
 </section>
 
@@ -455,7 +490,7 @@
   <div class="d-ring" style="width:52px;height:52px;bottom:24px;left:7%;animation:float 9s ease-in-out infinite;"></div>
   <div class="d-ring" style="width:32px;height:32px;top:28px;right:10%;animation:float-alt 7s ease-in-out infinite 1s;"></div>
   <div class="section-inner">
-    <span class="section-label">The Problem</span>
+    <span class="section-label">01 — The Problem</span>
     <h2 class="section-title">Finding the right venue takes over 30 minutes.</h2>
     <p class="section-desc">
       72% of surveyed users struggled to find the right place to go on a Saturday night. The existing tools each fail in a different way — and none of them were built for this.
@@ -477,7 +512,7 @@
         <div class="problem-icon">⏱️</div>
         <h3>The process takes 30+ minutes</h3>
         <p>Users bounce between apps, ask friends, check Instagram Stories — a fragmented, frustrating flow that still often ends in uncertainty or the wrong choice.</p>
-        <span class="problem-stat">72% confirmed this pain point</span>
+        <span class="problem-stat">30+ min, every weekend</span>
       </div>
     </div>
   </div>
@@ -487,17 +522,17 @@
 <section id="validation" style="background:#f9f5fb;position:relative;overflow:hidden;">
   <div class="d-bubble" style="width:220px;height:220px;background:rgba(168,2,110,.05);bottom:-60px;left:-50px;filter:blur(36px);"></div>
   <div class="section-inner">
-    <span class="section-label">Problem Validation</span>
+    <span class="section-label">02 — Research &amp; Insight</span>
     <h2 class="section-title">We didn't build on assumptions. We built on data.</h2>
     <p class="section-desc">
-      Before any design work started, I ran a structured research phase to validate the problem at scale — 500+ respondents, qualitative interviews, and direct competitive benchmarking. Every product decision that followed is grounded in what that research revealed.
+      Before any design work started, I ran a structured research phase to validate the problem at scale — a large-sample survey, qualitative interviews, and direct competitive benchmarking. Every product decision that followed is grounded in what that research revealed.
     </p>
     <div class="problem-grid">
       <div class="problem-card">
         <div class="problem-icon">📊</div>
         <h3>500+ quantitative data points</h3>
         <p>I designed and distributed a survey to over 500 respondents to test the core hypothesis: is nightlife discovery actually broken? 72% confirmed the pain point — independently, without prompting. The problem is real and widespread.</p>
-        <span class="problem-stat">72% confirmed pain · 500+ respondents</span>
+        <span class="problem-stat">Confirmed unprompted</span>
       </div>
       <div class="problem-card">
         <div class="problem-icon">🗣️</div>
@@ -508,8 +543,8 @@
       <div class="problem-card">
         <div class="problem-icon">🔎</div>
         <h3>Competitive gap analysis</h3>
-        <p>Mapped the existing landscape — Google, Instagram, Spotify, dedicated venue apps — and identified exactly where each one failed the user. The gap wasn't a missing feature. It was a missing category: AI-driven real-time discovery built specifically for nightlife.</p>
-        <span class="problem-stat">Category gap identified</span>
+        <p>I benchmarked the real players — TicketOne, DICE and similar event-ticketing platforms — and none were verticalized for nightlife. They sell tickets to events you already know about; none own discovery, and the clubs themselves rarely run proper digital marketing. The gap wasn't a missing feature — it was a missing category: a nightlife-first discovery product that also acts as digital PR for clubs.</p>
+        <span class="problem-stat">No vertical nightlife player</span>
       </div>
     </div>
   </div>
@@ -520,38 +555,38 @@
   <div class="section-inner">
     <div class="solution-grid">
       <div>
-        <span class="section-label">The Solution</span>
-        <h2 class="section-title">Groove: AI-powered nightlife, instantly.</h2>
+        <span class="section-label">03 — Solution &amp; Process</span>
+        <h2 class="section-title">The four bets I made on the solution.</h2>
         <p class="section-desc">
-          A map-based discovery app that acts as a digital PR for clubs. Groove's AI recommendation engine matches users to the right venue in seconds — not minutes.
+          The research pointed to a missing category, not a missing feature. So I made a deliberate call: build an AI-first, map-based discovery product — a digital PR for clubs — instead of another listings directory. Each feature below was a decision with a trade-off, not a wish-list item.
         </p>
         <div class="solution-features">
           <div class="feature-row">
             <div class="feature-dot">🤖</div>
             <div>
-              <h4>AI Recommendation Engine</h4>
-              <p>Combines Spotify listening data, past behavior, and real-time event signals to surface the exact venue a user will actually enjoy — not just the nearest one.</p>
+              <h4>I bet on recommendation, not search</h4>
+              <p>Your Spotify music taste — pulled purely via its API — plus past behavior and live event signals surface the venue you'll actually enjoy, not just the nearest one. The trade-off was a real data dependency, which I judged worth it to kill the 30-minute scroll.</p>
             </div>
           </div>
           <div class="feature-row">
             <div class="feature-dot">🗺️</div>
             <div>
-              <h4>Map-based Discovery</h4>
-              <p>See nearby events, live DJ sets, and active venues on an interactive map — filterable by music genre, entry price, dresscode, or vibe.</p>
+              <h4>I made the map the primary surface</h4>
+              <p>Nearby events, live sets and active venues at a glance — filterable by genre, price, dresscode or vibe. I chose discovery you can see over a feed you have to scroll.</p>
             </div>
           </div>
           <div class="feature-row">
             <div class="feature-dot">📋</div>
             <div>
-              <h4>Detailed Club Profiles</h4>
-              <p>DJ lineup, ticket price, dress code, average age, music genre — know exactly what to expect before you even leave the house.</p>
+              <h4>I prioritised decision-ready profiles</h4>
+              <p>DJ lineup, ticket price, dress code, average age, genre — everything needed to commit before leaving home. The job was to remove doubt, not add tabs.</p>
             </div>
           </div>
           <div class="feature-row">
             <div class="feature-dot">🎟️</div>
             <div>
-              <h4>In-App Ticketing</h4>
-              <p>Multiple release tiers, real-time availability, and instant purchase — no third-party redirects, no queues at the door.</p>
+              <h4>I pulled ticketing in-house</h4>
+              <p>Tiered releases, real-time availability, instant purchase — no third-party redirects. Owning the full journey also gave the business model its primary revenue hook.</p>
             </div>
           </div>
         </div>
@@ -570,49 +605,75 @@
   </div>
 </section>
 
-<!-- APP SCREENS -->
+<!-- DESIGN PROCESS -->
 <section id="screens">
   <div class="section-inner">
-    <span class="section-label">App Screens</span>
-    <h2 class="section-title">Built end to end.</h2>
-    <p class="section-desc">From personalized homepage to event detail and ticketing — every screen designed to cut decision time.</p>
+    <span class="section-label">The Process</span>
+    <h2 class="section-title" style="color:#fff;">From lo-fi sketch to working MVP.</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,.5);">Every screen went through the same funnel: rough wireframes to pressure-test the flow, high-fidelity design to make it feel real, then a working prototype tested against the 30-minute baseline.</p>
+
+    <!-- STEP 1 · LOW-FIDELITY -->
+    <div class="process-step">
+      <span class="process-step-num">Step 1</span>
+      <h3>Low-fidelity wireframes</h3>
+      <span class="step-hint">— pressure-testing the flow before polishing a single pixel</span>
+    </div>
+    <div class="screens-scroll">
+      <div class="screen-item lofi">
+        <div class="phone-frame"><img src="img/groove/Sign-up.png" alt="Sign-up wireframe"/></div>
+        <p class="screen-caption">Sign-up</p>
+      </div>
+      <div class="screen-item lofi">
+        <div class="phone-frame"><img src="img/groove/Homepage + Search.png" alt="Homepage & search wireframe"/></div>
+        <p class="screen-caption">Home &amp; Search</p>
+      </div>
+      <div class="screen-item lofi">
+        <div class="phone-frame"><img src="img/groove/Mappa.png" alt="Map discovery wireframe"/></div>
+        <p class="screen-caption">Map Discovery</p>
+      </div>
+      <div class="screen-item lofi">
+        <div class="phone-frame"><img src="img/groove/Evento_LoFi.png" alt="Event detail wireframe"/></div>
+        <p class="screen-caption">Event Detail</p>
+      </div>
+      <div class="screen-item lofi">
+        <div class="phone-frame"><img src="img/groove/Biglietti.png" alt="Ticketing wireframe"/></div>
+        <p class="screen-caption">Ticketing</p>
+      </div>
+      <div class="screen-item lofi">
+        <div class="phone-frame"><img src="img/groove/Profilo.png" alt="Profile wireframe"/></div>
+        <p class="screen-caption">Profile</p>
+      </div>
+    </div>
+
+    <!-- STEP 2 · HIGH-FIDELITY -->
+    <div class="process-step">
+      <span class="process-step-num">Step 2</span>
+      <h3>High-fidelity design</h3>
+      <span class="step-hint">— turning the validated flow into the real Groove look</span>
+    </div>
     <div class="screens-scroll">
       <div class="screen-item">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="img/groove/Home.png" alt="Home Screen"/>
-        </div>
+        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Home.png" alt="Home Screen"/></div>
         <p class="screen-caption">Home</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="img/groove/Home2.png" alt="Nearby & Friends"/>
-        </div>
+        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Home2.png" alt="Nearby & Friends"/></div>
         <p class="screen-caption">Nearby &amp; Friends</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="img/groove/Home3.png" alt="Social Discovery"/>
-        </div>
+        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Home3.png" alt="Social Discovery"/></div>
         <p class="screen-caption">Social Discovery</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="img/groove/Evento.png" alt="Event Page"/>
-        </div>
+        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Evento.png" alt="Event Page"/></div>
         <p class="screen-caption">Event Page</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <img src="img/groove/Evento-2.png" alt="Ticketing"/>
-        </div>
+        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Evento-2.png" alt="Ticketing"/></div>
         <p class="screen-caption">Ticketing</p>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -640,7 +701,7 @@
       <div class="role-card">
         <span class="role-num">🤖</span>
         <h4>AI Feature Design</h4>
-        <p>Designed the logic for Groove's AI recommendation engine — specifying how Spotify listening data, user behavior signals, and real-time event metadata would be combined to surface personalised venue matches at the right moment.</p>
+        <p>Designed the logic for Groove's AI recommendation engine — specifying how Spotify music-taste data (read via its API), user behavior signals, and real-time event metadata would be combined to surface personalised venue matches at the right moment.</p>
       </div>
       <div class="role-card">
         <span class="role-num">3×</span>
@@ -661,39 +722,13 @@
   </div>
 </section>
 
-<!-- KEY RESULTS -->
-<section id="results">
-  <div class="section-inner">
-    <span class="section-label">Outcomes</span>
-    <h2 class="section-title" style="color:#fff;">Validated in testing. Recognised by investors.</h2>
-    <div class="results-grid">
-      <div class="result-card">
-        <span class="result-num">−80%</span>
-        <span class="result-label">Venue decision time reduced (30+ min → &lt;5 min)</span>
-      </div>
-      <div class="result-card">
-        <span class="result-num">72%</span>
-        <span class="result-label">Of surveyed users confirmed the pain point</span>
-      </div>
-      <div class="result-card">
-        <span class="result-num">500+</span>
-        <span class="result-label">Data points driving product roadmap and personas</span>
-      </div>
-      <div class="result-card">
-        <span class="result-num">↑</span>
-        <span class="result-label">User preference vs. competitors in validation interviews</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- TRACTION & VALIDATION -->
 <section id="traction" style="background:#fff;position:relative;overflow:hidden;">
   <div class="d-bubble" style="width:200px;height:200px;background:rgba(168,2,110,.04);top:-50px;left:-40px;filter:blur(30px);"></div>
   <div class="d-ring" style="width:55px;height:55px;bottom:24px;right:6%;animation:float 11s ease-in-out infinite;"></div>
   <div class="section-inner">
-    <span class="section-label">Traction</span>
-    <h2 class="section-title">Validated by users. Noticed by investors.</h2>
+    <span class="section-label">04 — Impact</span>
+    <h2 class="section-title">Two proof points that made it real.</h2>
     <p class="section-desc">We didn't stop at prototypes. Groove's working MVP was deployed to real users — and the results earned a seat at the table.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem;">
 
@@ -701,7 +736,7 @@
       <div style="background:var(--card-bg);border-radius:20px;border:1px solid rgba(0,0,0,.06);padding:2rem;box-shadow:0 2px 16px rgba(0,0,0,.04);transition:transform .25s,box-shadow .25s;" onmouseenter="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(168,2,110,.1)'" onmouseleave="this.style.transform='';this.style.boxShadow='0 2px 16px rgba(0,0,0,.04)'">
         <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(168,2,110,.12),rgba(252,92,140,.07));display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:1.2rem;">🧪</div>
         <h3 style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.55rem;color:var(--text);">MVP User Testing</h3>
-        <p style="font-size:.83rem;color:var(--muted);line-height:1.68;">We deployed the working MVP to a real user cohort and ran structured testing sessions to measure solution effectiveness head-to-head against existing tools. The data confirmed our core hypothesis: decision time dropped significantly when users had Groove — turning a claim into a measured result.</p>
+        <p style="font-size:.83rem;color:var(--muted);line-height:1.68;">We deployed the working MVP to a real user cohort and ran structured testing sessions to measure solution effectiveness head-to-head against existing tools. The data confirmed our core hypothesis: decision time dropped significantly when users had Groove, and testers preferred it over the tools they currently juggle — turning a claim into a measured result.</p>
         <span style="display:inline-block;margin-top:1.1rem;padding:.38rem 1rem;border-radius:99px;background:linear-gradient(135deg,rgba(168,2,110,.1),rgba(252,92,140,.07));font-family:'Sora',sans-serif;font-size:.76rem;font-weight:700;color:var(--groove-accent);">Core hypothesis validated</span>
       </div>
 
@@ -723,15 +758,45 @@
   </div>
 </section>
 
+<!-- REFLECTION — DRAFT: verify wording/facts with Luca before publishing -->
+<section id="reflection">
+  <div class="d-bubble" style="width:200px;height:200px;background:rgba(168,2,110,.04);top:-50px;right:-40px;filter:blur(30px);"></div>
+  <div class="d-ring" style="width:50px;height:50px;bottom:24px;left:6%;animation:float-slow 10s ease-in-out infinite;"></div>
+  <div class="section-inner">
+    <span class="section-label">05 — Reflection</span>
+    <h2 class="section-title">What Groove taught me.</h2>
+    <p class="section-desc">
+      Groove validated a real problem and earned real investor interest — but the most valuable thing it produced was the set of lessons I carried into every project after it.
+    </p>
+    <div class="reflect-grid">
+      <div class="reflect-card diff">
+        <span class="rk">What I'd do differently</span>
+        <h4>Solve the cold-start first</h4>
+        <p>A two-sided marketplace only works if both sides show up. Next time I'd validate the club/supply side — and its willingness to pay — as rigorously as I validated users, and I'd scope the first MVP to a single city to prove the loop before widening the surface area.</p>
+      </div>
+      <div class="reflect-card lesson">
+        <span class="rk">The PM takeaway</span>
+        <h4>A validated problem ≠ a viable business</h4>
+        <p>The funding was conditional for a reason: strong demand isn't the same as a closable deal. Learning to separate “people want this” from “this can sustainably ship” — and to treat stopping as a disciplined decision, not a failure — is the same judgment that later led me to halt SkillForge before pouring months into a non-viable model.</p>
+      </div>
+      <div class="reflect-card good">
+        <span class="rk">The research lesson</span>
+        <h4>Don't trust secondary data blindly</h4>
+        <p>Early on I leaned on secondary data — existing market reports and third-party stats — to size the opportunity. Some of it didn't survive contact with my own users. Secondary data is a starting hypothesis, not proof: I now treat every borrowed number as a prompt for primary research, and trust it only once real people confirm it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- BUSINESS MODEL -->
 <section id="business">
   <div class="d-bubble" style="width:230px;height:230px;background:rgba(168,2,110,.04);bottom:-65px;right:-55px;filter:blur(36px);"></div>
   <div class="d-ring" style="width:50px;height:50px;top:28px;left:6%;animation:float-alt 8s ease-in-out infinite;"></div>
   <div class="section-inner">
     <span class="section-label">Business Model</span>
-    <h2 class="section-title">Built to scale sustainably.</h2>
+    <h2 class="section-title">How I designed it to make money.</h2>
     <p class="section-desc">
-      A two-sided marketplace: clubs get visibility and ticket sales, users get discovery. Revenue lives in the middle — lightweight for everyone.
+      I designed a two-sided model where revenue never taxes the user: clubs pay for visibility and ticket sales, users discover for free. I kept it deliberately lightweight so adoption stayed frictionless on both sides — the commercial thinking mattered to me as much as the product.
     </p>
     <div class="biz-grid">
       <div class="biz-card">
@@ -750,35 +815,6 @@
   </div>
 </section>
 
-<!-- BRAND IDENTITY -->
-<section id="brand">
-  <div class="section-inner">
-    <span class="section-label">Brand Identity</span>
-    <h2 class="section-title">Built to feel like a night out.</h2>
-    <p class="section-desc">
-      Deep navy to magenta, bold type, and a visual language that belongs in the clubs it represents — electric by design.
-    </p>
-    <div class="brand-grid">
-      <div class="brand-img">
-        <img src="img/groove/mockup.png" alt="Groove ID Card Mockup"/>
-      </div>
-      <div class="brand-img">
-        <img src="img/groove/Free_Duct_Tape_Mockup_3.png" alt="Groove Branded Tape Mockup"/>
-      </div>
-    </div>
-    <div class="page-tools" style="margin-top:1.25rem;padding-top:0;border-top:none;">
-      <p class="page-tools-label">Tools used</p>
-      <div class="page-tools-row">
-        <span class="page-tool">Figma</span>
-        <span class="page-tool">Notion</span>
-        <span class="page-tool">Miro</span>
-        <span class="page-tool">Google Slides</span>
-        <span class="page-tool">Excel</span>
-        <span class="page-tool">Jira</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer class="groove-footer">
