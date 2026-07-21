@@ -490,9 +490,9 @@ Gantt charts, PERT, and manual resource levelling were designed for linear, pred
 <div class="research-glow"></div>
 <div class="section-inner">
 <span class="section-label">02 — Research &amp; Insight</span>
-<h2 class="section-title">3 months. 50+ academic papers. 5 PM domains. One conclusion.</h2>
+<h2 class="section-title">60+ papers. 5 PM domains. One clear conclusion.</h2>
 <p class="section-desc">
-Before writing a single line of product specification, I ran a systematic university thesis — a rigorous academic investigation across all five core PM domains, synthesising 50+ papers, industry reports, and real-world case studies. The research confirmed the problem and produced the blueprint for the solution.
+Before writing a single line of product spec, I ran a systematic university thesis — a rigorous review of the academic literature, industry reports and real-world case studies across every core PM domain, mapping exactly where AI creates technical leverage and where it still breaks down. The research confirmed the problem and produced the blueprint for the solution.
 </p>
 <div class="domains-grid">
 <div class="domain-card">
@@ -630,7 +630,7 @@ Desk research proves a problem exists — it doesn't prove people feel it. To gr
 <section id="findings" class="on-light">
 <div class="section-inner">
 <span class="section-label">Validation Findings</span>
-<h2 class="section-title">What 50 papers and 3 months of research actually proved.</h2>
+<h2 class="section-title">What the research actually proved.</h2>
 <p class="section-desc">
 The thesis cross-referenced academic literature, real-world case studies, and a structured comparison of 10+ leading AI-powered PM platforms. Five quantified conclusions emerged — each one becoming a direct design principle for 100flows.
 </p>
@@ -757,11 +757,19 @@ The thesis findings became the product specification. Each MVP feature maps dire
 <span class="section-label">The Product</span>
 <h2 class="section-title">From research to a designed product.</h2>
 <p class="section-desc">I designed the full 100flows interface in Figma — every screen constrained by a research finding, not by what simply looked good. Here's the MVP taking shape.</p>
-<div class="ui-gallery">
-<figure class="ui-shot"><img src="img/100flows/Kanban_board_page.png" alt="100flows AI-enhanced Kanban board"/><figcaption>AI-enhanced Kanban board — workload warnings &amp; dependency detection</figcaption></figure>
-<figure class="ui-shot"><img src="img/100flows/Calendar_page_main.png" alt="100flows integrated project calendar"/><figcaption>Integrated project calendar — tasks, milestones &amp; events in one view</figcaption></figure>
-<figure class="ui-shot"><img src="img/100flows/New_ai_meeting.png" alt="100flows AI meeting scheduling"/><figcaption>AI meeting scheduling — availability-aware slots &amp; auto-summaries</figcaption></figure>
-<figure class="ui-shot"><img src="img/100flows/New_event_page.png" alt="100flows event creation"/><figcaption>Event creation — structured inputs that feed the AI its context</figcaption></figure>
+<div class="ui-slider">
+<div class="ui-viewport">
+<div class="ui-track" id="uiTrack">
+<div class="ui-slide"><img src="img/100flows/Kanban_board_page.png" alt="100flows AI-enhanced Kanban board"/></div>
+<div class="ui-slide"><img src="img/100flows/Calendar_page_main.png" alt="100flows integrated project calendar"/></div>
+<div class="ui-slide"><img src="img/100flows/New_ai_meeting.png" alt="100flows AI meeting scheduling"/></div>
+<div class="ui-slide"><img src="img/100flows/New_event_page.png" alt="100flows event creation"/></div>
+</div>
+</div>
+<button class="ui-arrow ui-prev" onclick="uiSlide(-1)" aria-label="Previous screen"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+<button class="ui-arrow ui-next" onclick="uiSlide(1)" aria-label="Next screen"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+<p class="ui-caption" id="uiCaption"></p>
+<div class="ui-dots" id="uiDots"></div>
 </div>
 </div>
 </section>
@@ -778,7 +786,7 @@ The thesis findings became the product specification. Each MVP feature maps dire
 <div class="role-card">
 <div class="role-icon">🔬</div>
 <h4>Academic Research &amp; Synthesis</h4>
-<p>Ran a 3-month systematic study — 50+ papers, industry reports and SaaS documentation, plus 8 in-depth interviews with PMs at Amazon, Microsoft, Salesforce, Workday, Yahoo! and FBK — synthesising conflicting sources into a structured evidence base capable of driving product decisions.</p>
+<p>Ran a 3-month systematic study — 60+ papers plus 8 in-depth interviews with PMs at global tech companies — synthesising conflicting, fast-moving sources into a structured evidence base capable of driving real product decisions.</p>
 </div>
 <div class="role-card">
 <div class="role-icon">📐</div>
@@ -825,7 +833,7 @@ The research is done and the product is designed — the frontend build is now u
 <div class="roadmap-items">
 <div class="roadmap-item">
 <div class="roadmap-num">✓</div>
-<p><strong>Research complete.</strong> Academic investigation across all five PM domains, 8 expert interviews, and the "Augmented PM" paradigm defined.</p>
+<p><strong>Research complete.</strong> Systematic literature review, 8 expert interviews, and the "Augmented PM" thesis defined.</p>
 </div>
 <div class="roadmap-item">
 <div class="roadmap-num">✓</div>
@@ -851,6 +859,37 @@ Back to Portfolio
 </a>
 <p>100flows · AI-Powered Project Management · Research &amp; Development · Luca Buonocore · 2025–Now</p>
 </footer>
+
+<script>
+(function(){
+  var track = document.getElementById('uiTrack');
+  if (!track) return;
+  var slides = track.children.length;
+  var captions = [
+    'AI-enhanced Kanban board — workload warnings & dependency detection',
+    'Integrated project calendar — tasks, milestones & events in one view',
+    'AI meeting scheduling — availability-aware slots & auto-summaries',
+    'Event creation — structured inputs that feed the AI its context'
+  ];
+  var cur = 0;
+  var capEl = document.getElementById('uiCaption');
+  var dotsC = document.getElementById('uiDots');
+  for (var i = 0; i < slides; i++) {
+    var d = document.createElement('button');
+    d.className = 'ui-dot' + (i === 0 ? ' active' : '');
+    (function(idx){ d.addEventListener('click', function(){ cur = idx; update(); }); })(i);
+    dotsC.appendChild(d);
+  }
+  window.uiSlide = function(dir){ cur = (cur + dir + slides) % slides; update(); };
+  function update(){
+    track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+    if (capEl) capEl.textContent = captions[cur] || '';
+    var dots = dotsC.children;
+    for (var i = 0; i < dots.length; i++) dots[i].className = 'ui-dot' + (i === cur ? ' active' : '');
+  }
+  update();
+})();
+</script>
 
 </body>
 </html>
