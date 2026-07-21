@@ -101,34 +101,6 @@ font-size: clamp(.9rem, 2.2vw, 1.08rem);
 color: rgba(255,255,255,.55); line-height: 1.75;
 max-width: 580px; margin: 0 auto 2.5rem;
 }
-.hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
-.hero-tag {
-padding: .35rem .88rem; border-radius: 99px;
-background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-font-size: .73rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.65);
-}
-
-/* ── STATS STRIP ── */
-.stats-strip { background: #fff; padding: 2.5rem clamp(1rem, 5vw, 3rem); border-bottom: 1px solid rgba(0,0,0,.06); }
-.stats-inner {
-max-width: 1060px; margin: auto;
-display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
-}
-.stat-card {
-text-align: center; padding: 1.5rem 1rem;
-border-radius: 12px; border: 1px solid rgba(0,0,0,.06);
-box-shadow: 0 2px 12px rgba(0,0,0,.04);
-transition: transform .2s, box-shadow .2s;
-}
-.stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
-.stat-num {
-font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
-background: var(--fl-grad);
--webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-display: block; line-height: 1.1; margin-bottom: .4rem;
-}
-.stat-label { font-size: .72rem; color: var(--muted); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
-
 /* ── SHARED ── */
 section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
 .section-inner { max-width: 1060px; margin: auto; }
@@ -355,6 +327,30 @@ display: flex; align-items: center; justify-content: center; font-size: 1rem;
 .mvp-feature h4 { font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; margin-bottom: .2rem; }
 .mvp-feature p { font-size: .79rem; color: var(--muted); line-height: 1.58; }
 
+/* ── PRODUCT UI SLIDER (dark) ── */
+#screens { background: var(--fl-dark); position: relative; overflow: hidden; }
+.ui-slider { position: relative; max-width: 900px; margin: 0 auto; z-index: 1; }
+.ui-viewport { overflow: hidden; border-radius: 14px; border: 1px solid rgba(255,255,255,.09); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+.ui-track { display: flex; transition: transform .45s cubic-bezier(.4,0,.2,1); }
+.ui-slide { min-width: 100%; }
+.ui-slide img { width: 100%; display: block; }
+.ui-arrow {
+position: absolute; top: 50%; transform: translateY(-50%);
+width: 44px; height: 44px; border-radius: 50%;
+background: rgba(12,15,30,.72); border: 1px solid rgba(255,255,255,.18);
+-webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+cursor: pointer; display: flex; align-items: center; justify-content: center;
+z-index: 3; transition: background .2s, transform .2s;
+}
+.ui-arrow:hover { background: rgba(124,91,219,.65); }
+.ui-arrow svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2.2; }
+.ui-prev { left: 12px; }
+.ui-next { right: 12px; }
+.ui-caption { text-align: center; margin-top: 1rem; font-family: 'Sora', sans-serif; font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.55); min-height: 1.2em; }
+.ui-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1rem; }
+.ui-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.25); border: none; padding: 0; cursor: pointer; transition: background .2s, transform .2s; }
+.ui-dot.active { background: #a78bfa; transform: scale(1.3); }
+
 /* ── MY ROLE ── */
 #my-role { background: var(--card-bg); }
 .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
@@ -372,12 +368,6 @@ display: flex; align-items: center; justify-content: center; font-size: 1.1rem; 
 }
 .role-card h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .4rem; }
 .role-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
-
-/* ── TOOLS STRIP ── */
-.fl-tools { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,.06); }
-.fl-tools-label { font-family: 'Sora', sans-serif; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .75rem; }
-.fl-tools-row { display: flex; flex-wrap: wrap; gap: .5rem; }
-.fl-tool { padding: .32rem .85rem; border-radius: 6px; background: #fff; border: 1px solid rgba(0,0,0,.08); font-family: 'Sora', sans-serif; font-size: .76rem; font-weight: 600; color: var(--muted); }
 
 /* ── STATUS (dark) ── */
 #status { background: var(--fl-dark); position: relative; overflow: hidden; }
@@ -461,43 +451,13 @@ Research &amp; Development · 2025 – Now
 <p class="hero-sub">
 An AI-powered project management platform born from a systematic academic study into how artificial intelligence is reshaping every domain of project management — from planning and risk, to resources and stakeholder communication.
 </p>
-<div class="hero-tags">
-<span class="hero-tag">AI Research</span>
-<span class="hero-tag">Product Development</span>
-<span class="hero-tag">ML Integration</span>
-<span class="hero-tag">NLP</span>
-<span class="hero-tag">Project Management</span>
-<span class="hero-tag">SaaS</span>
-</div>
 </div>
 </section>
-
-<!-- STATS STRIP -->
-<div class="stats-strip">
-<div class="stats-inner">
-<div class="stat-card">
-<span class="stat-num">−50%</span>
-<span class="stat-label">Decision Cycle Time (4.2 → 2.1 days)</span>
-</div>
-<div class="stat-card">
-<span class="stat-num">−72%</span>
-<span class="stat-label">Communication Overhead via NLP</span>
-</div>
-<div class="stat-card">
-<span class="stat-num">350+</span>
-<span class="stat-label">Manual Hours Saved per Project</span>
-</div>
-<div class="stat-card">
-<span class="stat-num">3.6×</span>
-<span class="stat-label">Stakeholder Engagement Boost</span>
-</div>
-</div>
-</div>
 
 <!-- THE PROBLEM -->
 <section id="problem" class="on-light">
 <div class="section-inner">
-<span class="section-label">The Problem</span>
+<span class="section-label">01 — The Problem</span>
 <h2 class="section-title">Project managers are making million-euro decisions with 1950s tools.</h2>
 <p class="section-desc">
 Gantt charts, PERT, and manual resource levelling were designed for linear, predictable projects. Modern software teams are anything but — yet the tooling hasn't changed. The result is a systemic, measurable failure across the industry.
@@ -529,7 +489,7 @@ Gantt charts, PERT, and manual resource levelling were designed for linear, pred
 <section id="research" class="on-dark">
 <div class="research-glow"></div>
 <div class="section-inner">
-<span class="section-label">Academic Foundation</span>
+<span class="section-label">02 — Research &amp; Insight</span>
 <h2 class="section-title">3 months. 50+ academic papers. 5 PM domains. One conclusion.</h2>
 <p class="section-desc">
 Before writing a single line of product specification, I ran a systematic university thesis — a rigorous academic investigation across all five core PM domains, synthesising 50+ papers, industry reports, and real-world case studies. The research confirmed the problem and produced the blueprint for the solution.
@@ -693,7 +653,7 @@ The thesis cross-referenced academic literature, real-world case studies, and a 
 </div>
 <div class="finding-card">
 <h3>Natural Language Interfaces multiply engagement</h3>
-<p>Replacing static dashboards with Natural Language Interfaces boosted project transparency and stakeholder engagement by <strong style="color:#4f8ef7;">3.6×</strong>, with active stakeholder participation rising by <strong style="color:#4f8ef7;">31%</strong> across observed projects.</p>
+<p>Replacing static dashboards with Natural Language Interfaces boosted project transparency and stakeholder engagement by <strong style="color:#4f8ef7;">3.6×</strong>, with active stakeholder participation rising by <strong style="color:#4f8ef7;">31%</strong> across the studies reviewed.</p>
 </div>
 </div>
 </div>
@@ -704,7 +664,7 @@ The thesis cross-referenced academic literature, real-world case studies, and a 
 <div class="paradigm-glow1"></div>
 <div class="paradigm-glow2"></div>
 <div class="section-inner">
-<span class="section-label">The Solution Thesis</span>
+<span class="section-label">03 — The Solution</span>
 <div class="paradigm-box">
 <p class="paradigm-quote">
 "AI doesn't replace the project manager.<br>
@@ -791,19 +751,34 @@ The thesis findings became the product specification. Each MVP feature maps dire
 </div>
 </section>
 
+<!-- PRODUCT UI -->
+<section id="screens" class="on-dark">
+<div class="section-inner">
+<span class="section-label">The Product</span>
+<h2 class="section-title">From research to a designed product.</h2>
+<p class="section-desc">I designed the full 100flows interface in Figma — every screen constrained by a research finding, not by what simply looked good. Here's the MVP taking shape.</p>
+<div class="ui-gallery">
+<figure class="ui-shot"><img src="img/100flows/Kanban_board_page.png" alt="100flows AI-enhanced Kanban board"/><figcaption>AI-enhanced Kanban board — workload warnings &amp; dependency detection</figcaption></figure>
+<figure class="ui-shot"><img src="img/100flows/Calendar_page_main.png" alt="100flows integrated project calendar"/><figcaption>Integrated project calendar — tasks, milestones &amp; events in one view</figcaption></figure>
+<figure class="ui-shot"><img src="img/100flows/New_ai_meeting.png" alt="100flows AI meeting scheduling"/><figcaption>AI meeting scheduling — availability-aware slots &amp; auto-summaries</figcaption></figure>
+<figure class="ui-shot"><img src="img/100flows/New_event_page.png" alt="100flows event creation"/><figcaption>Event creation — structured inputs that feed the AI its context</figcaption></figure>
+</div>
+</div>
+</section>
+
 <!-- MY ROLE -->
 <section id="my-role" class="on-light">
 <div class="section-inner">
 <span class="section-label">Skills &amp; Contribution</span>
 <h2 class="section-title">Solo researcher, strategist, designer, and developer.</h2>
 <p class="section-desc">
-100flows is a solo project — from academic hypothesis to working prototype. Every phase required a different skillset, and I owned all of them.
+100flows is a solo project — from academic hypothesis to research, product strategy, full UI design, and an in-progress build. Every phase required a different skillset, and I owned all of them.
 </p>
 <div class="role-grid">
 <div class="role-card">
 <div class="role-icon">🔬</div>
 <h4>Academic Research &amp; Synthesis</h4>
-<p>Conducted a 3-month systematic literature review across 50+ papers, industry reports, and SaaS product documentation — synthesising conflicting sources into a structured evidence base capable of driving product decisions.</p>
+<p>Ran a 3-month systematic study — 50+ papers, industry reports and SaaS documentation, plus 8 in-depth interviews with PMs at Amazon, Microsoft, Salesforce, Workday, Yahoo! and FBK — synthesising conflicting sources into a structured evidence base capable of driving product decisions.</p>
 </div>
 <div class="role-card">
 <div class="role-icon">📐</div>
@@ -827,20 +802,8 @@ The thesis findings became the product specification. Each MVP feature maps dire
 </div>
 <div class="role-card">
 <div class="role-icon">💻</div>
-<h4>MVP Development</h4>
-<p>Built the working prototype from the ground up — frontend interface, component structure, and feature logic — translating Figma designs into functional software and validating the research-driven approach under real implementation constraints.</p>
-</div>
-</div>
-<div class="fl-tools">
-<p class="fl-tools-label">Tools</p>
-<div class="fl-tools-row">
-<span class="fl-tool">Figma</span>
-<span class="fl-tool">Notion</span>
-<span class="fl-tool">GitHub</span>
-<span class="fl-tool">Google Docs</span>
-<span class="fl-tool">VS Code</span>
-<span class="fl-tool">React</span>
-<span class="fl-tool">TypeScript</span>
+<h4>MVP Build (in progress)</h4>
+<p>Started building the MVP frontend from my Figma designs — component structure and core screen flows — as the first implementation slice, turning research-backed design decisions into a real, testable interface.</p>
 </div>
 </div>
 </div>
@@ -850,35 +813,31 @@ The thesis findings became the product specification. Each MVP feature maps dire
 <section id="status" class="on-dark">
 <div class="status-glow"></div>
 <div class="section-inner status-content">
-<span class="section-label">Current Status</span>
+<span class="section-label">04 — What's Next</span>
 <div class="status-badge">
 <span class="status-badge-dot"></span>
-Active Development
+In Progress
 </div>
-<h2 class="section-title" style="color:#fff;">Built on research. Shipping as software.</h2>
+<h2 class="section-title" style="color:#fff;">From an MVP to a multi-agent risk engine.</h2>
 <p class="status-desc">
-100flows is currently in active MVP development. The research phase is complete — the platform's feature roadmap is directly derived from the thesis findings and comparative SaaS analysis.
+The research is done and the product is designed — the frontend build is now underway. But the direction I'm most set on developing next goes beyond the MVP: a multi-agent AI system for structured project risk analysis, framed around <strong>reasoning under uncertainty rather than prediction</strong> — a way to test how reliable a multi-agent setup actually is at anticipating project risk. I'm pressure-testing the design with senior PMs at companies including Microsoft and Amazon.
 </p>
 <div class="roadmap-items">
 <div class="roadmap-item">
 <div class="roadmap-num">✓</div>
-<p><strong>Research complete.</strong> Full academic investigation across all five PM domains, comparative SaaS analysis, and the "Augmented PM" paradigm defined.</p>
+<p><strong>Research complete.</strong> Academic investigation across all five PM domains, 8 expert interviews, and the "Augmented PM" paradigm defined.</p>
 </div>
 <div class="roadmap-item">
 <div class="roadmap-num">✓</div>
-<p><strong>UI design complete.</strong> Kanban board, login, team onboarding, calendar, and event screens designed and iterated to high fidelity in Figma.</p>
-</div>
-<div class="roadmap-item">
-<div class="roadmap-num">✓</div>
-<p><strong>MVP frontend in progress.</strong> Core screens — Kanban, login, profile management, and event flows — actively being built and tested.</p>
+<p><strong>UI design complete.</strong> Kanban, calendar, onboarding, meeting and event screens designed and iterated to high fidelity in Figma.</p>
 </div>
 <div class="roadmap-item">
 <div class="roadmap-num">→</div>
-<p><strong>AI engine integration.</strong> Connecting the Kanban board to ML-powered scheduling, risk detection, and workload balancing modules.</p>
+<p><strong>MVP frontend, in progress.</strong> Turning the core designed screens into a real, testable interface.</p>
 </div>
 <div class="roadmap-item">
-<div class="roadmap-num">→</div>
-<p><strong>Automated reporting layer.</strong> NLP-driven executive summary generation and stakeholder update automation — the feature most directly tied to the research findings.</p>
+<div class="roadmap-num">★</div>
+<p><strong>Multi-agent risk engine — the next bet.</strong> A multi-agent system for structured risk analysis, built to probe how much a PM can actually trust AI on risk prediction — reasoning under uncertainty, with a human always in the loop.</p>
 </div>
 </div>
 </div>

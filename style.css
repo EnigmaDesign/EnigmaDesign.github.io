@@ -299,8 +299,6 @@
   .proj-100flows { gap: .6rem; }
   .proj-skillforge { background-color:#9C1D22; background-image: url("img/skillforge/logo.png"); background-position: center; color: #c0392b; background-size: contain; background-size: 80%; background-repeat: no-repeat;}
   .proj-groove { background-image: url("img/groove/Groove Logo.png"), linear-gradient(135deg, #010A35 0%, #14249E 25%, #A8026E 50%, #FC5C8C 100%); background-position: center; background-repeat: no-repeat; color: #6b21e8; font-size: 1.5rem; background-size: contain;}
-  .proj-MyBadge {background-image: url("img/MyBadge/logo.png"); background-size: cover; background-repeat: no-repeat; background-position: center;}
-  .proj-FitGYM44 {background-color: #151345; background-image: url("img/FitGym44/logo.jpg"); background-repeat: no-repeat; background-position: center; background-size: 50%;}
   .proj-body { padding: .9rem 1rem 1rem; }
   .proj-body h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 600; }
   .proj-body p { font-size: .78rem; color: var(--muted); margin-top: .3rem; }

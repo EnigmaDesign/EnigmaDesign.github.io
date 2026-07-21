@@ -62,7 +62,6 @@
 
 // ── Slider state ──
 const sliders = {
-  proj:   { current: 0, total: 0, track: 'projTrack',   dots: 'projDots'   },
   cert:   { current: 0, total: 0, track: 'certTrack',   dots: 'certDots'   }
 };
 
@@ -108,9 +107,7 @@ function autoPlay(id, interval) {
   setInterval(() => slide(id, 1), interval);
 }
 
-initSlider('proj');
 initSlider('cert');
-autoPlay('proj', 4500);
 autoPlay('cert', 4000);
 
 // Drag/swipe support (touch + mouse)
@@ -142,7 +139,6 @@ function addDrag(wrapperId, id) {
     if (Math.abs(dx) > 40) slide(id, dx < 0 ? 1 : -1);
   });
 }
-addDrag('projSlider', 'proj');
 addDrag('certSlider', 'cert');
 
 // ── Language switcher ──

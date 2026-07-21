@@ -105,40 +105,6 @@
       color: rgba(255,255,255,.55); line-height: 1.72;
       max-width: 540px; margin: 0 auto 2.5rem;
     }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
-    .hero-tag {
-      padding: .35rem .85rem; border-radius: 4px;
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      font-size: .73rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.65);
-    }
-
-    /* ── STATS STRIP ── */
-    .stats-strip {
-      background: var(--sf-card-dark);
-      border-bottom: 1px solid var(--sf-border);
-      padding: 2rem clamp(1rem, 5vw, 3rem);
-    }
-    .stats-inner {
-      max-width: 1000px; margin: auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px;
-      background: var(--sf-border); border: 1px solid var(--sf-border);
-    }
-    .stat-card {
-      text-align: center; padding: 1.6rem 1rem;
-      background: var(--sf-card-dark);
-    }
-    .stat-num {
-      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
-      background: var(--sf-gold-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      display: block; line-height: 1.1; margin-bottom: .4rem;
-    }
-    .stat-label {
-      font-size: .71rem; color: rgba(255,255,255,.4);
-      font-family: 'Sora', sans-serif; font-weight: 600;
-      text-transform: uppercase; letter-spacing: .07em;
-    }
-
     /* ── SHARED ── */
     section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
     .section-inner { max-width: 1000px; margin: auto; }
@@ -275,56 +241,20 @@
 
     /* ── THE DECISION ── */
     #decision { background: var(--sf-dark); position: relative; overflow: hidden; }
-    .decision-box {
-      border: 1px solid rgba(156,29,34,.2);
-      border-left: 4px solid var(--sf-gold);
-      border-radius: 0 8px 8px 0;
-      background: rgba(156,29,34,.04);
-      padding: 2.5rem 2rem; margin-bottom: 2rem;
+    .decision-lead {
       position: relative; z-index: 1;
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 700; line-height: 1.2;
+      background: var(--sf-gold-grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin: .25rem 0 1.5rem; max-width: 760px;
     }
-    .decision-box h3 {
-      font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700;
-      color: #fff; margin-bottom: .75rem;
-    }
-    .decision-box p {
-      font-size: .9rem; color: rgba(255,255,255,.6); line-height: 1.72; max-width: 680px;
-    }
-    .decision-pills { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; position: relative; z-index: 1; }
-    .decision-pill {
-      padding: .42rem 1rem; border-radius: 4px;
-      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-      font-family: 'Sora', sans-serif; font-size: .76rem; font-weight: 600;
-      color: rgba(255,255,255,.65);
-    }
-    .decision-pill.gold { background: rgba(156,29,34,.1); border-color: rgba(156,29,34,.25); color: var(--sf-gold); }
+    .decision-body { position: relative; z-index: 1; max-width: 720px; }
+    .decision-body p { font-size: .95rem; color: rgba(255,255,255,.62); line-height: 1.8; margin-bottom: 1.1rem; }
+    .decision-body p:last-child { margin-bottom: 0; }
 
     /* ── KEY RESULTS (light) ── */
     #results { background: #fff; }
-    .results-row {
-      display: grid; grid-template-columns: repeat(6, 1fr);
-      gap: 1px; border: 1px solid rgba(0,0,0,.08); border-radius: 8px; overflow: hidden;
-    }
-    @media (max-width: 700px) { .results-row { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 420px) { .results-row { grid-template-columns: repeat(2, 1fr); } }
-    .result-item {
-      padding: 2rem 1.25rem; text-align: center; background: #fff;
-      border-right: 1px solid rgba(0,0,0,.06);
-    }
-    .result-item:last-child { border-right: none; }
-    .result-num {
-      font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 800;
-      background: var(--sf-gold-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      display: block; line-height: 1; margin-bottom: .5rem;
-    }
-    .result-label { font-size: .74rem; color: var(--sf-muted-dark); font-family: 'Sora', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; line-height: 1.45; }
-
-    /* ── TOOLS ── */
-    .page-tools { margin-top: 2.25rem; padding-top: 1.75rem; border-top: 1px solid rgba(0,0,0,.07); }
-    .page-tools-label { font-family: 'Sora', sans-serif; font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #6b7a99; margin-bottom: .65rem; }
-    .page-tools-row { display: flex; flex-wrap: wrap; gap: .45rem; }
-    .page-tool { padding: .28rem .78rem; border-radius: 6px; background: #f4f6fa; border: 1px solid rgba(0,0,0,.07); font-family: 'Sora', sans-serif; font-size: .74rem; font-weight: 600; color: #6b7a99; }
 
     /* ── FOOTER ── */
     .sf-footer {
@@ -348,11 +278,6 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       .tradeoff-grid { grid-template-columns: 1fr; }
-      .result-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,.06); }
-      .result-item:last-child { border-bottom: none; }
-    }
-    @media (max-width: 500px) {
-      .hero-tag { font-size: .69rem; padding: .3rem .7rem; }
     }
   </style>
 </head>
@@ -575,13 +500,11 @@
   <div class="section-inner">
     <span class="section-label">05 — The Decision</span>
     <h2 class="section-title" style="color:#fff;">Knowing when not to build.</h2>
-    <div class="decision-box">
-      <h3>We stopped. On purpose.</h3>
-      <p>
-        After validating the problem and stress-testing the business model, the assessment was clear: the bottleneck was creator acquisition — and solving it would require resources, industry access, and a go-to-market motion that wasn't realistic at this stage. Building a product that depends on supply you can't reliably generate isn't a risk worth taking. <br><br>
-        This wasn't a failure of the idea. The market gap is real. The demand is there. The model is sound. But product discipline means recognizing the gap between a good opportunity and a buildable one — and making the call before sinking engineering and design time into something the supply side couldn't support. <br><br>
-        That call came down to a build-vs-no-build framework: weighing strategic prioritization and resource discipline against an honest supply-side risk assessment of the cold-start problem. That structured thinking — not a shipped product — is what SkillForge actually demonstrates.
-      </p>
+    <p class="decision-lead">We stopped. On purpose.</p>
+    <div class="decision-body">
+      <p>After validating the problem and stress-testing the business model, the assessment was clear: the bottleneck was creator acquisition — and solving it would require resources, industry access, and a go-to-market motion that wasn't realistic at this stage. Building a product that depends on supply you can't reliably generate isn't a risk worth taking.</p>
+      <p>This wasn't a failure of the idea. The market gap is real. The demand is there. The model is sound. But product discipline means recognizing the gap between a good opportunity and a buildable one — and making the call before sinking engineering and design time into something the supply side couldn't support.</p>
+      <p>That call came down to a build-vs-no-build framework: weighing strategic prioritization and resource discipline against an honest supply-side risk assessment of the cold-start problem. That structured thinking — not a shipped product — is what SkillForge actually demonstrates.</p>
     </div>
   </div>
 </section>

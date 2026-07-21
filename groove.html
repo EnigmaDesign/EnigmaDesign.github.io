@@ -89,13 +89,6 @@
       color: rgba(255,255,255,.62); line-height: 1.72;
       max-width: 520px; margin: 0 auto 2.5rem;
     }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
-    .hero-tag {
-      padding: .37rem .88rem; border-radius: 99px;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.13);
-      font-size: .74rem; font-family: 'Sora', sans-serif; color: rgba(255,255,255,.72);
-    }
-
     /* Floating rings */
     .hero-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,.11); pointer-events: none; }
     .hr1 { width: 460px; height: 460px; top: -180px; left: -180px; }
@@ -110,35 +103,6 @@
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
     @keyframes float-alt { 0%, 100% { transform: translateY(-6px); } 50% { transform: translateY(10px); } }
     @keyframes float-slow { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(6deg); } }
-
-    /* ── STATS STRIP ── */
-    .stats-strip {
-      background: #fff;
-      padding: 2.5rem clamp(1rem, 5vw, 3rem);
-      border-bottom: 1px solid rgba(0,0,0,.06);
-    }
-    .stats-inner {
-      max-width: 1000px; margin: auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
-    }
-    .stat-card {
-      text-align: center; padding: 1.5rem 1rem;
-      border-radius: 16px; border: 1px solid rgba(0,0,0,.06);
-      box-shadow: 0 2px 12px rgba(0,0,0,.04);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(168,2,110,.08); }
-    .stat-num {
-      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
-      background: var(--groove-grad);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      display: block; line-height: 1.1; margin-bottom: .4rem;
-    }
-    .stat-label {
-      font-size: .72rem; color: var(--muted);
-      font-family: 'Sora', sans-serif; font-weight: 600;
-      text-transform: uppercase; letter-spacing: .06em;
-    }
 
     /* ── SHARED ── */
     section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
@@ -211,11 +175,6 @@
       overflow: hidden; flex-shrink: 0;
     }
     .phone-frame img { width: 100%; display: block; }
-    .phone-notch {
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 80px; height: 20px; background: #111;
-      border-radius: 0 0 14px 14px; z-index: 2;
-    }
     .phone-main { width: 200px; }
     .phone-secondary { width: 165px; margin-bottom: 16px; opacity: .9; }
 
@@ -268,34 +227,6 @@
     .role-card h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 700; margin-bottom: .4rem; }
     .role-card p { font-size: .8rem; color: var(--muted); line-height: 1.58; }
 
-    /* ── KEY RESULTS ── */
-    #results { background: var(--groove-dark); position: relative; overflow: hidden; }
-    #results::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: url("img/groove/fantasia.png");
-      background-size: cover; background-position: center; opacity: .07;
-    }
-    #results .section-label { -webkit-text-fill-color: rgba(252,92,140,.85); background: none; }
-    #results .section-title { color: #fff; }
-    .results-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem; position: relative; z-index: 1;
-    }
-    .result-card {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09);
-      border-radius: 16px; padding: 1.75rem 1.5rem; text-align: center;
-      backdrop-filter: blur(4px);
-      transition: background .25s, border-color .25s, transform .25s;
-    }
-    .result-card:hover { background: rgba(255,255,255,.1); border-color: rgba(252,92,140,.3); transform: translateY(-3px); }
-    .result-num {
-      font-family: 'Sora', sans-serif; font-size: 2.6rem; font-weight: 800;
-      background: linear-gradient(90deg, #A8026E, #FC5C8C);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      display: block; line-height: 1; margin-bottom: .5rem;
-    }
-    .result-label { font-family: 'Sora', sans-serif; font-size: .78rem; font-weight: 600; color: rgba(255,255,255,.55); line-height: 1.45; }
-
     /* ── BUSINESS MODEL ── */
     #business { background: var(--groove-dark); position: relative; overflow: hidden; }
     #business .section-label { -webkit-text-fill-color: rgba(252,92,140,.85); background: none; }
@@ -324,29 +255,9 @@
       color: var(--groove-accent);
     }
 
-    /* ── BRAND ── */
-    #brand { background: var(--card-bg); }
-    .brand-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem; margin-top: 2.5rem;
-    }
-    .brand-img {
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,.11);
-      transition: transform .3s, box-shadow .3s;
-    }
-    .brand-img:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,.16); }
-    .brand-img img { width: 100%; display: block; }
-
     /* Decorative */
     .d-bubble { position: absolute; border-radius: 50%; pointer-events: none; }
     .d-ring { position: absolute; border-radius: 50%; border: 1.5px solid rgba(168,2,110,.11); pointer-events: none; }
-
-    /* ── TOOLS ── */
-    .page-tools { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid rgba(0,0,0,.07); }
-    .page-tools-label { font-family: 'Sora', sans-serif; font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .65rem; }
-    .page-tools-row { display: flex; flex-wrap: wrap; gap: .45rem; }
-    .page-tool { padding: .28rem .78rem; border-radius: 6px; background: #f4f6fa; border: 1px solid rgba(0,0,0,.07); font-family: 'Sora', sans-serif; font-size: .74rem; font-weight: 600; color: var(--muted); }
 
     /* ── PROCESS STEPS ── */
     .process-step { display:flex; align-items:baseline; flex-wrap:wrap; gap:.7rem; margin:2.4rem 0 1.1rem; position:relative; z-index:1; }
@@ -358,18 +269,6 @@
     }
     .process-step h3 { font-family:'Sora',sans-serif; font-size:1rem; font-weight:700; color:#fff; }
     .process-step .step-hint { font-size:.78rem; color:rgba(255,255,255,.45); font-family:'Sora',sans-serif; }
-    .mvp-placeholder {
-      position:relative; z-index:1; margin-top:.5rem;
-      border:1.5px dashed rgba(252,92,140,.4); border-radius:20px;
-      background:rgba(255,255,255,.04); padding:3rem 1.5rem; text-align:center;
-    }
-    .mvp-placeholder .play {
-      width:56px; height:56px; border-radius:50%; margin:0 auto 1rem;
-      background:var(--groove-grad); display:flex; align-items:center; justify-content:center;
-    }
-    .mvp-placeholder .play svg { width:22px; height:22px; fill:#fff; margin-left:3px; }
-    .mvp-placeholder h4 { font-family:'Sora',sans-serif; font-size:1rem; font-weight:700; color:#fff; margin-bottom:.4rem; }
-    .mvp-placeholder p { font-size:.82rem; color:rgba(255,255,255,.5); max-width:440px; margin:0 auto; line-height:1.6; }
 
     /* ── REFLECTION ── */
     #reflection { background:#fff; position:relative; overflow:hidden; }
@@ -378,8 +277,8 @@
       background:var(--card-bg); border-radius:16px;
       border:1px solid rgba(0,0,0,.06); padding:1.7rem; border-top:3px solid var(--groove-accent);
     }
-    .reflect-card.good   { border-top-color:#1a8f5c; }
-    .reflect-card.diff   { border-top-color:#c77f0a; }
+    .reflect-card.good   { border-top-color:#FC5C8C; }
+    .reflect-card.diff   { border-top-color:#14249E; }
     .reflect-card.lesson { border-top-color:var(--groove-accent); }
     .reflect-card .rk {
       font-family:'Sora',sans-serif; font-size:.62rem; font-weight:700; letter-spacing:.1em;
@@ -415,7 +314,6 @@
       .hr1, .hr2 { display: none; }
     }
     @media (max-width: 500px) {
-      .hero-tag { font-size: .69rem; padding: .3rem .75rem; }
       .screen-item .phone-frame { width: 145px; }
     }
   </style>
@@ -457,32 +355,6 @@
     </p>
   </div>
 </section>
-
-<!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-card">
-      <span class="stat-num">500+</span>
-      <span class="stat-label">User Data Points</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num">−80%</span>
-      <span class="stat-label">Decision Time</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num">72%</span>
-      <span class="stat-label">Pain Point Rate</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num">9</span>
-      <span class="stat-label">Team Members</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-num">€100K</span>
-      <span class="stat-label">Conditional Funding</span>
-    </div>
-  </div>
-</div>
 
 <!-- PROBLEM -->
 <section id="problem">
@@ -593,12 +465,10 @@
       </div>
       <div class="phones-col">
         <div class="phone-frame phone-secondary">
-          <div class="phone-notch"></div>
-          <img src="img/groove/Evento-2.png" alt="Groove Event Detail Screen"/>
+                    <img src="img/groove/Evento-2.png" alt="Groove Event Detail Screen"/>
         </div>
         <div class="phone-frame phone-main">
-          <div class="phone-notch"></div>
-          <img src="img/groove/Home.png" alt="Groove App Home Screen"/>
+                    <img src="img/groove/Home.png" alt="Groove App Home Screen"/>
         </div>
       </div>
     </div>
@@ -653,23 +523,23 @@
     </div>
     <div class="screens-scroll">
       <div class="screen-item">
-        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Home.png" alt="Home Screen"/></div>
+        <div class="phone-frame"><img src="img/groove/Home.png" alt="Home Screen"/></div>
         <p class="screen-caption">Home</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Home2.png" alt="Nearby & Friends"/></div>
+        <div class="phone-frame"><img src="img/groove/Home2.png" alt="Nearby & Friends"/></div>
         <p class="screen-caption">Nearby &amp; Friends</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Home3.png" alt="Social Discovery"/></div>
+        <div class="phone-frame"><img src="img/groove/Home3.png" alt="Social Discovery"/></div>
         <p class="screen-caption">Social Discovery</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Evento.png" alt="Event Page"/></div>
+        <div class="phone-frame"><img src="img/groove/Evento.png" alt="Event Page"/></div>
         <p class="screen-caption">Event Page</p>
       </div>
       <div class="screen-item">
-        <div class="phone-frame"><div class="phone-notch"></div><img src="img/groove/Evento-2.png" alt="Ticketing"/></div>
+        <div class="phone-frame"><img src="img/groove/Evento-2.png" alt="Ticketing"/></div>
         <p class="screen-caption">Ticketing</p>
       </div>
     </div>
