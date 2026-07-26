@@ -99,8 +99,12 @@ background: var(--fl-grad);
 .hero-sub {
 font-size: clamp(.9rem, 2.2vw, 1.08rem);
 color: rgba(255,255,255,.55); line-height: 1.75;
-max-width: 580px; margin: 0 auto 2.5rem;
+max-width: 580px; margin: 0 auto 2.2rem;
 }
+.hero-facts { display:flex; flex-wrap:wrap; justify-content:center; gap:1.4rem 2.6rem; }
+.hero-facts .hf { display:flex; flex-direction:column; align-items:center; }
+.hero-facts .hf-n { font-family:'Sora',sans-serif; font-size:1.7rem; font-weight:800; line-height:1; background:var(--fl-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-facts .hf-l { font-family:'Sora',sans-serif; font-size:.66rem; font-weight:600; text-transform:uppercase; letter-spacing:.07em; color:rgba(255,255,255,.5); margin-top:.4rem; }
 /* ── SHARED ── */
 section { padding: clamp(2rem, 4.5vw, 3.5rem) clamp(1rem, 5vw, 3rem); }
 .section-inner { max-width: 1060px; margin: auto; }
@@ -187,30 +191,12 @@ font-family: 'Sora', sans-serif; font-size: .7rem; font-weight: 600; color: #a78
 
 /* ── EXPERT INTERVIEWS (light) ── */
 #interviews { background: #fff; }
-.iv-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 1rem; margin-bottom: 2.5rem; }
-.iv-stat {
-text-align: center; padding: 1.4rem 1rem; border-radius: 12px;
-border: 1px solid rgba(0,0,0,.06); box-shadow: 0 2px 12px rgba(0,0,0,.04);
-transition: transform .2s, box-shadow .2s;
-}
-.iv-stat:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,91,219,.1); }
-.iv-stat .n {
-font-family: 'Sora',sans-serif; font-size: 2rem; font-weight: 800;
-background: var(--fl-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-display: block; line-height: 1.1; margin-bottom: .35rem;
-}
-.iv-stat .l { font-size: .72rem; color: var(--muted); font-family: 'Sora',sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 
 /* Company logos */
-.iv-logos { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem; margin-bottom: 2.75rem; }
-.iv-logo {
-height: 56px; padding: 0 1.4rem; display: flex; align-items: center; justify-content: center;
-background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 10px;
-box-shadow: 0 2px 10px rgba(0,0,0,.04); transition: transform .2s, box-shadow .2s;
-min-width: 110px;
-}
-.iv-logo:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,.1); }
-.iv-logo img { display: block; height: 28px; width: auto; max-width: 130px; object-fit: contain; }
+.iv-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2.6rem; margin-bottom: 2.75rem; }
+.iv-logo { display: flex; align-items: center; justify-content: center; }
+.iv-logo img { display: block; height: 30px; width: auto; max-width: 132px; object-fit: contain; opacity: .82; transition: opacity .2s; }
+.iv-logo:hover img { opacity: 1; }
 .iv-logo img.lg-stacked { height: 46px; }
 
 /* Use cases */
@@ -451,6 +437,12 @@ Research &amp; Development · 2025 – Now
 <p class="hero-sub">
 An AI-powered project management platform born from a systematic academic study into how artificial intelligence is reshaping every domain of project management — from planning and risk, to resources and stakeholder communication.
 </p>
+<div class="hero-facts">
+<div class="hf"><span class="hf-n">60+</span><span class="hf-l">Papers reviewed</span></div>
+<div class="hf"><span class="hf-n">8</span><span class="hf-l">PMs interviewed</span></div>
+<div class="hf"><span class="hf-n">5</span><span class="hf-l">PM domains mapped</span></div>
+<div class="hf"><span class="hf-n">10+</span><span class="hf-l">Platforms analysed</span></div>
+</div>
 </div>
 </section>
 
@@ -490,7 +482,7 @@ Gantt charts, PERT, and manual resource levelling were designed for linear, pred
 <div class="research-glow"></div>
 <div class="section-inner">
 <span class="section-label">02 — Research &amp; Insight</span>
-<h2 class="section-title">60+ papers. 5 PM domains. One clear conclusion.</h2>
+<h2 class="section-title">One systematic thesis. One clear conclusion.</h2>
 <p class="section-desc">
 Before writing a single line of product spec, I ran a systematic university thesis — a rigorous review of the academic literature, industry reports and real-world case studies across every core PM domain, mapping exactly where AI creates technical leverage and where it still breaks down. The research confirmed the problem and produced the blueprint for the solution.
 </p>
@@ -538,13 +530,7 @@ Before writing a single line of product spec, I ran a systematic university thes
 Desk research proves a problem exists — it doesn't prove people feel it. To ground the thesis in reality, I ran in-depth interviews with <strong>8 Product Managers</strong> across enterprise and research organisations, mapping where AI already creates value and where it still falls short.
 </p>
 
-<div class="iv-stats">
-<div class="iv-stat"><span class="n">8</span><span class="l">PMs Interviewed</span></div>
-<div class="iv-stat"><span class="n">6</span><span class="l">Organisations</span></div>
-<div class="iv-stat"><span class="n">8</span><span class="l">Recurring Use-Cases</span></div>
-<div class="iv-stat"><span class="n">8</span><span class="l">Critical Concerns Surfaced</span></div>
-</div>
-
+<div class="iv-sublabel">The 8 PMs I interviewed came from</div>
 <!-- Company logos (real, downloaded from official sources) -->
 <div class="iv-logos">
   <div class="iv-logo"><img src="img/logos/amazon.svg" alt="Amazon"/></div>
@@ -629,10 +615,10 @@ Desk research proves a problem exists — it doesn't prove people feel it. To gr
 <!-- KEY FINDINGS -->
 <section id="findings" class="on-light">
 <div class="section-inner">
-<span class="section-label">Validation Findings</span>
-<h2 class="section-title">What the research actually proved.</h2>
+<span class="section-label">What the Research Says</span>
+<h2 class="section-title">The opportunity, quantified by the literature.</h2>
 <p class="section-desc">
-The thesis cross-referenced academic literature, real-world case studies, and a structured comparison of 10+ leading AI-powered PM platforms. Five quantified conclusions emerged — each one becoming a direct design principle for 100flows.
+The figures below come from the academic literature, real-world case studies and a structured comparison of 10+ AI-powered PM platforms — <strong style="color:var(--text);">what AI can deliver in project management</strong>, not results measured on 100flows (still a pre-user MVP). Each one became a direct design principle for the product.
 </p>
 <div class="findings-grid">
 <div class="finding-card">

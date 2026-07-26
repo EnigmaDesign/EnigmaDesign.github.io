@@ -46,7 +46,9 @@
       "Bash(\"/c/Python311/python.exe\" -m http.server 8099 --bind 127.0.0.1)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8099/groove.html)",
       "Bash(pkill -f \"http.server 8099\")",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8099/100flows.html)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8099/100flows.html)",
+      "Bash(command -v gh)",
+      "Bash(git mv *)"
     ]
   }
 }

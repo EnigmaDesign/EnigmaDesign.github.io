@@ -128,8 +128,8 @@
   #intro { background: var(--orange); }
   .intro-inner { display: flex; flex-direction: column; gap: 1.2rem; }
   .intro-text {
-    font-size: clamp(.92rem, 2vw, 1.05rem);
-    line-height: 1.75;
+    font-size: .88rem;
+    line-height: 1.7;
     color: var(--text);
     max-width: 720px;
   }
@@ -255,6 +255,16 @@
   .grad-courses { display: flex; flex-wrap: wrap; gap: .38rem; margin-top: .1rem; }
   .grad-course-pill { padding: .18rem .55rem; border-radius: 4px; background: #eef2f9; font-size: .67rem; font-weight: 600; font-family: 'Sora', sans-serif; color: #4a6fa5; letter-spacing: .02em; }
 
+  /* ── INTRO + EXPERIENCE (merged, no card) ── */
+  .intro-exp { margin-top: 1.85rem; padding-top: 1.6rem; border-top: 1px solid rgba(0,0,0,.14); max-width: 720px; position: relative; z-index: 1; }
+  .intro-exp-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .intro-exp-head h3 { font-family: 'Sora', sans-serif; font-size: 1.02rem; font-weight: 700; }
+  .intro-exp-org { font-size: .85rem; color: rgba(0,0,0,.6); margin-top: .25rem; }
+  .intro-exp-dates { font-family: 'Sora', sans-serif; font-size: .78rem; font-weight: 600; color: var(--text); white-space: nowrap; }
+  .intro-exp-points { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+  .intro-exp-points li { font-size: .88rem; color: var(--text); line-height: 1.6; padding-left: 1.1rem; position: relative; }
+  .intro-exp-points li::before { content: ''; position: absolute; left: 0; top: .55rem; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-btn); }
+
   /* ── PROJECTS ── */
   #projects { background: #ffffff; position: relative; overflow: hidden; }
   .proj-bg-blob { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(245,201,168,.3); right: -120px; bottom: -100px; filter: blur(70px); pointer-events: none; }
@@ -281,7 +291,7 @@
   }
   .proj-100flows { gap: .6rem; }
   .proj-skillforge { background-color:#9C1D22; background-image: url("img/skillforge/logo.png"); background-position: center; color: #c0392b; background-size: contain; background-size: 80%; background-repeat: no-repeat;}
-  .proj-groove { background-image: url("img/groove/Groove Logo.png"), linear-gradient(135deg, #010A35 0%, #14249E 25%, #A8026E 50%, #FC5C8C 100%); background-position: center; background-repeat: no-repeat; color: #6b21e8; font-size: 1.5rem; background-size: contain;}
+  .proj-groove { background-image: url("img/groove/groove-logo.png"), linear-gradient(135deg, #010A35 0%, #14249E 25%, #A8026E 50%, #FC5C8C 100%); background-position: center; background-repeat: no-repeat; color: #6b21e8; font-size: 1.5rem; background-size: contain;}
   .proj-body { padding: .9rem 1rem 1rem; }
   .proj-body h4 { font-family: 'Sora', sans-serif; font-size: .9rem; font-weight: 600; }
   .proj-body p { font-size: .78rem; color: var(--muted); margin-top: .3rem; }
@@ -318,6 +328,7 @@
     transition: color .2s;
   }
   .footer-col a:hover { color: var(--blue-btn); }
+  .footer-col .footer-item { display: block; font-size: .82rem; color: var(--muted); margin-bottom: .55rem; }
   .footer-bottom {
     max-width: 900px; margin: 2rem auto 0;
     display: flex; align-items: center;
