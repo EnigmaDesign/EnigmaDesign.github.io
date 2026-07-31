@@ -1,183 +1,88 @@
-// ── Typewriter (main + subtitle loop) ──
-(function() {
-  const mainText = 'Hi, this is Luca.';
-  const subPhrases = [
-    'The PM you were looking for.',
-    'I design products people actually want.',
-    'Leading projects to success.',
-    'Bridging vision and execution.',
-    'Turning ideas into products.'
-  ];
-
-  const mainEl   = document.getElementById('typewriter');
-  const subEl    = document.getElementById('typewriter-sub');
-  const cursor   = document.querySelector('.cursor');
-
-  // Type main title first
-  let i = 0;
-  setTimeout(function typeMain() {
-    mainEl.textContent = mainText.slice(0, i);
-    i++;
-    if (i <= mainText.length) {
-      setTimeout(typeMain, 80);
-    } else {
-      // Start subtitle loop after a short pause
-      setTimeout(() => loopSub(0), 600);
-      // Fade cursor after main done
-      setTimeout(() => {
-        cursor.style.transition = 'opacity .5s';
-        cursor.style.opacity = '0';
-      }, 3000);
-    }
-  }, 400);
-
-  function loopSub(phraseIndex) {
-    const phrase = subPhrases[phraseIndex % subPhrases.length];
-    typePhrase(phrase, 0, () => {
-      // pause, then erase
-      setTimeout(() => erasePhrase(phrase.length, () => {
-        setTimeout(() => loopSub(phraseIndex + 1), 300);
-      }), 1800);
-    });
-  }
-
-  function typePhrase(phrase, j, done) {
-    subEl.textContent = phrase.slice(0, j);
-    if (j <= phrase.length) {
-      setTimeout(() => typePhrase(phrase, j + 1, done), 60);
-    } else {
-      done();
-    }
-  }
-
-  function erasePhrase(len, done) {
-    subEl.textContent = subEl.textContent.slice(0, len);
-    if (len > 0) {
-      setTimeout(() => erasePhrase(len - 1, done), 35);
-    } else {
-      done();
-    }
+// ── Scroll reveal ──
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!('IntersectionObserver' in window) || reduce) {
+    els.forEach(function (e) { e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (e) { io.observe(e); });
   }
 })();
 
-// ── Slider state ──
-const sliders = {
-  cert:   { current: 0, total: 0, track: 'certTrack',   dots: 'certDots'   }
-};
+// ── Mockup galleries (Hi-Fi / Lo-Fi tabs + prev/next) ──
+(function () {
+  document.querySelectorAll('.gallery').forEach(function (g) {
+    var vp = g.querySelector('.gallery-viewport');
+    var tabs = g.querySelectorAll('.gtab');
+    var prev = g.querySelector('.gprev');
+    var next = g.querySelector('.gnext');
 
-function initSlider(id) {
-  const s = sliders[id];
-  const track = document.getElementById(s.track);
-  if (!track) return;
-  s.total = track.children.length;
-  const dotsContainer = document.getElementById(s.dots);
-  for (let i = 0; i < s.total; i++) {
-    const d = document.createElement('div');
-    d.className = 'slider-dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => goTo(id, i);
-    dotsContainer.appendChild(d);
-  }
-  updateSlider(id);
-}
-
-function goTo(id, index) {
-  const s = sliders[id];
-  s.current = (index + s.total) % s.total;
-  updateSlider(id);
-}
-
-function slide(id, dir) {
-  const s = sliders[id];
-  s.current = (s.current + dir + s.total) % s.total;
-  updateSlider(id);
-}
-
-function updateSlider(id) {
-  const s = sliders[id];
-  const track = document.getElementById(s.track);
-  const dots  = document.getElementById(s.dots).children;
-  track.style.transform = `translateX(-${s.current * 100}%)`;
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].classList.toggle('active', i === s.current);
-  }
-}
-
-// Auto-play
-function autoPlay(id, interval) {
-  setInterval(() => slide(id, 1), interval);
-}
-
-initSlider('cert');
-autoPlay('cert', 4000);
-
-// Drag/swipe support (touch + mouse)
-function addDrag(wrapperId, id) {
-  const wrapper = document.getElementById(wrapperId);
-  if (!wrapper) return;
-  const el = wrapper.querySelector('.slider-track-outer');
-  let startX = 0, isDragging = false;
-
-  // Touch
-  el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  el.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 40) slide(id, dx < 0 ? 1 : -1);
-  });
-
-  // Mouse
-  el.addEventListener('mousedown', e => {
-    startX = e.clientX; isDragging = true;
-    el.classList.add('dragging');
-    e.preventDefault();
-  });
-  document.addEventListener('mousemove', e => { /* track but no live movement needed */ });
-  document.addEventListener('mouseup', e => {
-    if (!isDragging) return;
-    isDragging = false;
-    el.classList.remove('dragging');
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) > 40) slide(id, dx < 0 ? 1 : -1);
-  });
-}
-addDrag('certSlider', 'cert');
-
-// ── Language switcher ──
-(function() {
-  const switcher = document.getElementById('langSwitcher');
-  const label    = document.getElementById('langLabel');
-  const menu     = document.getElementById('langMenu');
-  if (!switcher) return;
-
-  const langs = { en: 'English (US)', it: 'Italiano', fr: 'Français' };
-  let current = 'en';
-
-  switcher.addEventListener('click', e => {
-    switcher.classList.toggle('open');
-    e.stopPropagation();
-  });
-
-  document.querySelectorAll('.lang-opt').forEach(opt => {
-    opt.addEventListener('click', e => {
-      current = opt.dataset.lang;
-      label.textContent = langs[current];
-      document.querySelectorAll('.lang-opt').forEach(o => o.classList.remove('active'));
-      opt.classList.add('active');
-      switcher.classList.remove('open');
-      e.stopPropagation();
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        g.setAttribute('data-active', tab.dataset.fi);
+        tabs.forEach(function (x) { x.classList.toggle('is-active', x === tab); });
+        if (vp) vp.scrollTo({ left: 0, behavior: 'smooth' });
+      });
     });
-  });
 
-  document.addEventListener('click', () => switcher.classList.remove('open'));
+    function step() { return vp ? Math.max(vp.clientWidth * 0.8, 200) : 200; }
+    if (prev && vp) prev.addEventListener('click', function () { vp.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    if (next && vp) next.addEventListener('click', function () { vp.scrollBy({ left: step(), behavior: 'smooth' }); });
+  });
 })();
 
-// ── Scroll fade-up reveal ──
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      fadeObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
+// ── Continuous connector line: rounded C-bulges alternating right↔left,
+//    one flowing curve down the whole page that links every section. ──
+(function () {
+  var svg = document.querySelector('.flowline');
+  if (!svg) return;
+  var path = svg.querySelector('path');
 
-document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+  function draw() {
+    var W = document.documentElement.clientWidth;
+    var H = document.documentElement.scrollHeight;
+    if (!W || !H) return;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+    var about = document.getElementById('about');
+    var contact = document.getElementById('contact');
+    if (!about || !contact) return;
+
+    var yStart = about.getBoundingClientRect().top + window.scrollY + 30;
+    var yEnd = contact.getBoundingClientRect().bottom + window.scrollY - 60;
+    var span = yEnd - yStart;
+    if (span < 120) return;
+
+    // wavelength ≈ page width so each bulge is wide AND round (not diagonal, not narrow)
+    var target = W * 0.78;
+    var n = Math.max(3, Math.round(span / target));
+    var seg = span / n;
+
+    var cx = W * 0.5;
+    var amp = W * 0.48;   // swing almost edge-to-edge before turning
+
+    var d = 'M' + cx.toFixed(1) + ',' + yStart.toFixed(1);
+    for (var i = 0; i < n; i++) {
+      var y0 = yStart + i * seg;
+      var y1 = yStart + (i + 1) * seg;
+      var bx = cx + (i % 2 === 0 ? amp : -amp);   // right, then left, then right…
+      d += ' C' + bx.toFixed(1) + ',' + y0.toFixed(1) +
+           ' ' + bx.toFixed(1) + ',' + y1.toFixed(1) +
+           ' ' + cx.toFixed(1) + ',' + y1.toFixed(1);
+    }
+    path.setAttribute('d', d);
+  }
+
+  var t;
+  function schedule() { clearTimeout(t); t = setTimeout(draw, 120); }
+  draw();
+  window.addEventListener('load', draw);
+  window.addEventListener('resize', schedule);
+  setTimeout(draw, 400);
+  setTimeout(draw, 1200);
+})();

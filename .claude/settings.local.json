@@ -48,7 +48,15 @@
       "Bash(pkill -f \"http.server 8099\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8099/100flows.html)",
       "Bash(command -v gh)",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(git check-ignore *)",
+      "Read(//c/Users/Luca/OneDrive/Documents/Personal/Linkedin/**)",
+      "Read(//c/Program Files/LibreOffice/program/**)",
+      "Read(//c/Program Files/Microsoft Office/root/Office16/**)",
+      "Read(//c/Program Files \\\\\\(x86\\\\\\)/Microsoft Office/root/Office16/**)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__get_page_text"
     ]
   }
 }
