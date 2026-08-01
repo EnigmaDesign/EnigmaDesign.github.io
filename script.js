@@ -86,3 +86,13 @@
   setTimeout(draw, 400);
   setTimeout(draw, 1200);
 })();
+
+// ── Respect reduced-motion for the prototype video (pause + expose controls) ──
+(function () {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('video[autoplay]').forEach(function (v) {
+    v.removeAttribute('autoplay');
+    v.setAttribute('controls', '');
+    try { v.pause(); } catch (e) {}
+  });
+})();

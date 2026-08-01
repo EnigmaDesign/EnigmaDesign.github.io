@@ -56,7 +56,10 @@
       "Read(//c/Program Files \\\\\\(x86\\\\\\)/Microsoft Office/root/Office16/**)",
       "mcp__claude-in-chrome__tabs_context_mcp",
       "mcp__claude-in-chrome__navigate",
-      "mcp__claude-in-chrome__get_page_text"
+      "mcp__claude-in-chrome__get_page_text",
+      "Bash(grep -iE '\\\\.\\(mp4|mov|webm|m4v|gif\\)$')",
+      "Bash(/c/Python311/python.exe -m http.server 8753)",
+      "Bash(curl -s -o /dev/null -w \"server: %{http_code} %{content_type} %{size_download}\\\\n\" \"http://localhost:8753/img/groove/Animation.mp4\")"
     ]
   }
 }
